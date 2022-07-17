@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\optimalDb.Interfaces\optimalDb.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
