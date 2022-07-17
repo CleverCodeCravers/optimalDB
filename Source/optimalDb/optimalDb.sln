@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Interfaces", "optimalDb.Interfaces\optimalDb.Interfaces.csproj", "{66478AA5-9717-411E-8DD7-4E8D7B8EAB8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.BL", "optimalDb.BL\optimalDb.BL.csproj", "{F756A0A4-DA47-48B8-B100-3CBCB49CAF1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.BL.Tests", "optimalDb.BL.Tests\optimalDb.BL.Tests.csproj", "{7D685427-C30B-4AD3-A8C9-EBC1F63590C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Infrastructure", "optimalDb.Infrastructure\optimalDb.Infrastructure.csproj", "{18869F09-2A82-4DED-B718-747381750F76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66478AA5-9717-411E-8DD7-4E8D7B8EAB8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66478AA5-9717-411E-8DD7-4E8D7B8EAB8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66478AA5-9717-411E-8DD7-4E8D7B8EAB8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66478AA5-9717-411E-8DD7-4E8D7B8EAB8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F756A0A4-DA47-48B8-B100-3CBCB49CAF1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F756A0A4-DA47-48B8-B100-3CBCB49CAF1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F756A0A4-DA47-48B8-B100-3CBCB49CAF1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F756A0A4-DA47-48B8-B100-3CBCB49CAF1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D685427-C30B-4AD3-A8C9-EBC1F63590C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D685427-C30B-4AD3-A8C9-EBC1F63590C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D685427-C30B-4AD3-A8C9-EBC1F63590C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D685427-C30B-4AD3-A8C9-EBC1F63590C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18869F09-2A82-4DED-B718-747381750F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18869F09-2A82-4DED-B718-747381750F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18869F09-2A82-4DED-B718-747381750F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18869F09-2A82-4DED-B718-747381750F76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
