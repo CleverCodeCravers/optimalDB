@@ -13,17 +13,20 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        public string configFile;
+        protected List<DatabaseConnection> localConnections;
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var content = File.ReadAllText(openFileDialog1.FileName);
-                this.configFile = content;
-                var connections = new List<DatabaseConnection>();
-
                 JArray configArray = JArray.Parse(content);
+
+                if (localConnections == null)
+                {
+                    localConnections = new List<DatabaseConnection>();
+                }
 
                 foreach (JObject item in configArray) 
 
@@ -35,20 +38,19 @@ namespace optimalDb.WinForms
                     {
                         continue;
                     }
-
+                    
                     if (!connectionString.StartsWith("Server"))
                     {
                         continue;
                     }
 
-                    connections.Add(new DatabaseConnection(name, connectionString));
-
+                    localConnections.Add(new DatabaseConnection(name, connectionString));
                 }
 
 
-                for (var i = 0; i < connections.Count; i++)
+                for (var i = 0; i < localConnections.Count; i++)
                 {
-                    connectionsComboBox.Items.Add(connections[i].Name);
+                    connectionsComboBox.Items.Add(localConnections[i].Name);
                 }
 
 
@@ -65,35 +67,30 @@ namespace optimalDb.WinForms
 
             if (selected == "")
             {
-                MessageBox.Show("You have to select a database to test!", "Error: No Databse selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You have to select a database to test!", "No Databse selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+
+            if (localConnections.Count != 0)
+            {
+                connectionString = localConnections.Find(connection => connection.Name.Equals(selected)).ConnectionString;
+            }
+
+            if (connectionString == "")
+            {
+                MessageBox.Show("A SQL Database connection URL was not found for the selected Database, make sure this Database has a valid connection URL", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-                JArray configArray = JArray.Parse(this.configFile);
-
-                foreach (JObject item in configArray)
-
-                {
-                    string propertyName = item.GetValue("Name").ToString();
-                    string urlstring = item.GetValue("ConnectionString").ToString();
-
-                    if (propertyName == selected)
-                    {
-                        connectionString = urlstring;
-                        break;
-                    }
-
-                }
-
-            //var connectionString = "Server = .\\SQLEXPRESS; Database = AdventureWorks2019; Trusted_Connection = True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 var sql = @"
-SELECT t.TABLE_SCHEMA, t.TABLE_NAME
-FROM INFORMATION_SCHEMA.TABLES t
- WHERE t.TABLE_TYPE = 'VIEW'";
+                           SELECT t.TABLE_SCHEMA, t.TABLE_NAME
+                            FROM INFORMATION_SCHEMA.TABLES t
+                            WHERE t.TABLE_TYPE = 'VIEW'";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -110,20 +107,19 @@ FROM INFORMATION_SCHEMA.TABLES t
                 result.Add(
                     new ViewPerformanceTestResult(
                         row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(),
-                        GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString())
+                        GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(), connectionString)
                     ));
             }
 
             dataGridView1.DataSource = result;
         }
 
-        protected decimal GetDurationOfViewExecution(string viewName)
+        protected decimal GetDurationOfViewExecution(string viewName, string connectionString)
         {
             DateTime start = DateTime.Now;
 
             try
             {
-                var connectionString = "Server = .\\SQLEXPRESS; Database = AdventureWorks2019; Trusted_Connection = True;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -148,6 +144,49 @@ FROM INFORMATION_SCHEMA.TABLES t
 
         private void createConfigItem_Click(object sender, EventArgs e)
         {
+            ShowCreateDialog();
+            
+        }
+
+
+        public void ShowCreateDialog()
+        {
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 180,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "Create Config",
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label databaseName = new Label() { Left = 30, Top = 20, Text = "Database Name" };
+            TextBox databasetextBox = new TextBox() { Left = 150, Top = 18, Width = 150 };
+            Label urlString = new Label() { Left = 30, Top = 60, Text = "Database URL" };
+            TextBox urltextbox = new TextBox() { Left = 150, Top = 58, Width = 300 };
+
+            Button confirmation = new Button() { Text = "Save", Left = 350, Width = 100, Top = 100, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(databaseName);
+            prompt.Controls.Add(databasetextBox);
+            prompt.Controls.Add(urlString);
+            prompt.Controls.Add(urltextbox);
+            prompt.Controls.Add(confirmation);
+
+            prompt.AcceptButton = confirmation;
+
+            if (prompt.ShowDialog() == DialogResult.OK )
+
+            {
+
+                if (localConnections == null)
+                {
+                    localConnections = new List<DatabaseConnection>();
+                }
+
+                localConnections.Add(new DatabaseConnection(databasetextBox.Text.ToString(), urltextbox.Text.ToString()));
+                connectionsComboBox.Items.Add(databasetextBox.Text.ToString());
+
+            }
 
         }
 
