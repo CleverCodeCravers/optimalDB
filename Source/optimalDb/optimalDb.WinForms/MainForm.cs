@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using optimalDb.BL;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,14 +13,38 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
+        public string configFile;
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var content = File.ReadAllText(openFileDialog1.FileName);
+                this.configFile = content;
                 var connections = new List<DatabaseConnection>();
-                connections.Add(new DatabaseConnection("Naseif", "https:ASd234f233cv2fasdf"));
-                connections.Add(new DatabaseConnection("Stefan", "https:ASd234f233cv2fasdf"));
+
+                JArray configArray = JArray.Parse(content);
+
+                foreach (JObject item in configArray) 
+
+                {
+                    string name = item.GetValue("Name").ToString();
+                    string connectionString = item.GetValue("ConnectionString").ToString();
+
+                    if (connectionString == null)
+                    {
+                        continue;
+                    }
+
+                    if (!connectionString.StartsWith("Server"))
+                    {
+                        continue;
+                    }
+
+                    connections.Add(new DatabaseConnection(name, connectionString));
+
+                }
+
 
                 for (var i = 0; i < connections.Count; i++)
                 {
@@ -32,14 +58,41 @@ namespace optimalDb.WinForms
         private void testButton_Click(object sender, EventArgs e)
         {
             DataTable alleViews;
-            var connectionString = "Server = .\\SQLEXPRESS; Database = AdventureWorks2019; Trusted_Connection = True;";
+
+            string selected = this.connectionsComboBox.GetItemText(this.connectionsComboBox.SelectedItem);
+            string connectionString = "";
+
+
+            if (selected == "")
+            {
+                MessageBox.Show("You have to select a database to test!", "Error: No Databse selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+                JArray configArray = JArray.Parse(this.configFile);
+
+                foreach (JObject item in configArray)
+
+                {
+                    string propertyName = item.GetValue("Name").ToString();
+                    string urlstring = item.GetValue("ConnectionString").ToString();
+
+                    if (propertyName == selected)
+                    {
+                        connectionString = urlstring;
+                        break;
+                    }
+
+                }
+
+            //var connectionString = "Server = .\\SQLEXPRESS; Database = AdventureWorks2019; Trusted_Connection = True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 var sql = @"
 SELECT t.TABLE_SCHEMA, t.TABLE_NAME
-  FROM INFORMATION_SCHEMA.TABLES t
+FROM INFORMATION_SCHEMA.TABLES t
  WHERE t.TABLE_TYPE = 'VIEW'";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -92,5 +145,11 @@ SELECT t.TABLE_SCHEMA, t.TABLE_NAME
 
             return (decimal)(DateTime.Now - start).TotalSeconds;
         }
+
+        private void createConfigItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
