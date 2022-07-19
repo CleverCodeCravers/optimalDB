@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.konfigurationsdateiLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createConfigItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.testButton = new System.Windows.Forms.Button();
             this.connectionsComboBox = new System.Windows.Forms.ComboBox();
@@ -55,7 +56,8 @@
             // konfigurationsdateiLadenToolStripMenuItem
             // 
             this.konfigurationsdateiLadenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.createConfigItem});
             this.konfigurationsdateiLadenToolStripMenuItem.Name = "konfigurationsdateiLadenToolStripMenuItem";
             this.konfigurationsdateiLadenToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.konfigurationsdateiLadenToolStripMenuItem.Text = "Configuration";
@@ -63,9 +65,16 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // createConfigItem
+            // 
+            this.createConfigItem.Name = "createConfigItem";
+            this.createConfigItem.Size = new System.Drawing.Size(180, 22);
+            this.createConfigItem.Text = "Create";
+            this.createConfigItem.Click += new System.EventHandler(this.createConfigItem_Click);
             // 
             // panel1
             // 
@@ -152,5 +161,6 @@
         private OpenFileDialog openFileDialog1;
         private Button testButton;
         private DataGridView dataGridView1;
+        private ToolStripMenuItem createConfigItem;
     }
 }
