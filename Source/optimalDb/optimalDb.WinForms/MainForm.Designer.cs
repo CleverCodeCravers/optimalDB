@@ -39,6 +39,8 @@
             this.connectionsComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -76,7 +78,8 @@
             // 
             this.konfigurationsdateiLadenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.createConfigItem});
+            this.createConfigItem,
+            this.saveToolStripMenuItem});
             this.konfigurationsdateiLadenToolStripMenuItem.Name = "konfigurationsdateiLadenToolStripMenuItem";
             this.konfigurationsdateiLadenToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.konfigurationsdateiLadenToolStripMenuItem.Text = "Configuration";
@@ -139,6 +142,13 @@
             this.openFileDialog1.DefaultExt = "json";
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -172,5 +182,7 @@
         private Button testButton;
         private DataGridView dataGridView1;
         private ToolStripMenuItem createConfigItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private SaveFileDialog saveFileDialog1;
     }
 }

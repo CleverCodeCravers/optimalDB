@@ -4,6 +4,7 @@ using optimalDb.BL;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace optimalDb.WinForms
 {
     public partial class MainForm : Form
@@ -24,9 +25,19 @@ namespace optimalDb.WinForms
                 JArray configArray = JArray.Parse(content);
 
                 if (localConnections == null)
+
                 {
                     localConnections = new List<DatabaseConnection>();
+                } 
+
+                if (this.localConnections.Count() != 0)
+                {
+                    // We want to clear the connections list in case a new config was imported and update the combobox
+                    this.localConnections.Clear();
+                    connectionsComboBox.Items.Clear();
                 }
+
+
 
                 foreach (JObject item in configArray) 
 
@@ -34,11 +45,12 @@ namespace optimalDb.WinForms
                     string name = item.GetValue("Name").ToString();
                     string connectionString = item.GetValue("ConnectionString").ToString();
 
-                    if (connectionString == null)
+                    if (connectionString == null || connectionString == "")
                     {
                         continue;
                     }
                     
+
                     if (!connectionString.StartsWith("Server"))
                     {
                         continue;
@@ -183,12 +195,29 @@ namespace optimalDb.WinForms
                     localConnections = new List<DatabaseConnection>();
                 }
 
-                localConnections.Add(new DatabaseConnection(databasetextBox.Text.ToString(), urltextbox.Text.ToString()));
+                localConnections.Add(new DatabaseConnection(databasetextBox.Text, urltextbox.Text));
                 connectionsComboBox.Items.Add(databasetextBox.Text.ToString());
 
             }
 
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Config |*.json";
+            saveFileDialog1.Title = "Save Config File";
+            saveFileDialog1.DefaultExt = "json";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != "")
+            {
+                var config = System.Text.Json.JsonSerializer.Serialize(this.localConnections);
+                File.WriteAllText(saveFileDialog1.FileName, config);
+
+            }
+
+        }
     }
 }
