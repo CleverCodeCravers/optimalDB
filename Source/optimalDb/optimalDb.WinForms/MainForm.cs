@@ -126,8 +126,36 @@ namespace optimalDb.WinForms
                     ));
 
             }
-            
             dataGridView1.DataSource = result;
+
+            int columnCount = dataGridView1.Columns.Count;
+            decimal warning = 5;
+            decimal error = 25;
+
+            for (int i = 1; (i - 1) < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < columnCount; j++)
+                {
+                    if (dataGridView1.Rows[i - 1].Cells[j].Value.GetType() == typeof(decimal))
+                    {
+                        decimal value;
+                        if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= warning)
+                        {
+
+                            dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Yellow;
+
+                        } 
+                        else if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= error) 
+                        {
+
+                            dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Red;
+
+                        }
+
+                    }
+                }
+            }
+
 
         }
 
