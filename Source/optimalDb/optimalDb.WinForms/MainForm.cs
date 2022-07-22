@@ -1,9 +1,10 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using optimalDb.BL;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Text;
 
 namespace optimalDb.WinForms
 {
@@ -109,11 +110,13 @@ namespace optimalDb.WinForms
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet dataset = new DataSet();
                     adapter.Fill(dataset);
+                    connection.Close();
                     alleViews = dataset.Tables[0];
                 }
             }
 
             var result = new List<ViewPerformanceTestResult>();
+
             foreach(DataRow row in alleViews.Rows)
             {
                 result.Add(
@@ -121,9 +124,11 @@ namespace optimalDb.WinForms
                         row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(),
                         GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(), connectionString)
                     ));
-            }
 
+            }
+            
             dataGridView1.DataSource = result;
+
         }
 
         protected decimal GetDurationOfViewExecution(string viewName, string connectionString)
@@ -157,7 +162,7 @@ namespace optimalDb.WinForms
         private void createConfigItem_Click(object sender, EventArgs e)
         {
             ShowCreateDialog();
-            
+       
         }
 
 
@@ -219,5 +224,64 @@ namespace optimalDb.WinForms
             }
 
         }
-    }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 0)
+            {
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "CSV (*.csv)|*.csv";
+                saveFile.FileName = "Output.csv";
+                bool fileError = false;
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(saveFile.FileName))
+                    {
+                        try
+                        {
+                            File.Delete(saveFile.FileName);
+                        }
+                        catch (IOException ex)
+                        {
+                            fileError = true;
+                            MessageBox.Show("Could not save the File" + ex.Message);
+                        }
+                    }
+                    if (!fileError)
+                    {
+                        try
+                        {
+                            int columnCount = dataGridView1.Columns.Count;
+                            string columnNames = "";
+                            string[] outputCsv = new string[dataGridView1.Rows.Count + 1];
+                            for (int i = 0; i < columnCount; i++)
+                            {
+                                columnNames += dataGridView1.Columns[i].HeaderText.ToString() + ",";
+                            }
+                            outputCsv[0] += columnNames;
+
+                            for (int i = 1; (i - 1) < dataGridView1.Rows.Count; i++)
+                            {
+                                for (int j = 0; j < columnCount; j++)
+                                {
+                                    outputCsv[i] += dataGridView1.Rows[i - 1].Cells[j].Value.ToString() + ",";
+                                }
+                            }
+
+                            File.WriteAllLines(saveFile.FileName, outputCsv, Encoding.UTF8);
+                            MessageBox.Show("Test Result saved successfully!", "Info");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error :" + ex.Message);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Test Results To Export !!!", "Info");
+            }
+        }
+        }
 }
