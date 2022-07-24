@@ -21,7 +21,7 @@ jobs:
         include:
           - os: windows-latest
             RUNTIMEID: win-x64
-            OUTPUTDIR: spamfilter-win-x64
+            OUTPUTDIR: optimalDb-win-x64
 
     steps:
       - uses: actions/checkout@v2
