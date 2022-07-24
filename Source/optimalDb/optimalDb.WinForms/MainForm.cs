@@ -15,7 +15,7 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        protected List<DatabaseConnection> localConnections;
+        protected List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -23,50 +23,14 @@ namespace optimalDb.WinForms
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var content = File.ReadAllText(openFileDialog1.FileName);
-                JArray configArray = JArray.Parse(content);
 
-                if (localConnections == null)
+                this.localConnections.Clear();
 
-                {
-                    localConnections = new List<DatabaseConnection>();
-                } 
+#pragma warning disable CS8604 // Possible null reference argument.
+                localConnections.AddRange(JsonConvert.DeserializeObject<DatabaseConnection[]>(content));
+#pragma warning restore CS8604 // Possible null reference argument.
 
-                if (this.localConnections.Count() != 0)
-                {
-                    // We want to clear the connections list in case a new config was imported and update the combobox
-                    this.localConnections.Clear();
-                    connectionsComboBox.Items.Clear();
-                }
-
-
-
-                foreach (JObject item in configArray) 
-
-                {
-                    string name = item.GetValue("Name").ToString();
-                    string connectionString = item.GetValue("ConnectionString").ToString();
-
-                    if (connectionString == null || connectionString == "")
-                    {
-                        continue;
-                    }
-                    
-
-                    if (!connectionString.StartsWith("Server"))
-                    {
-                        continue;
-                    }
-
-                    localConnections.Add(new DatabaseConnection(name, connectionString));
-                }
-
-
-                for (var i = 0; i < localConnections.Count; i++)
-                {
-                    connectionsComboBox.Items.Add(localConnections[i].Name);
-                }
-
-
+                UpdateConnectionCombobox();
             }
         }
 
@@ -74,88 +38,81 @@ namespace optimalDb.WinForms
         {
             DataTable alleViews;
 
-            string selected = this.connectionsComboBox.GetItemText(this.connectionsComboBox.SelectedItem);
-            string connectionString = "";
+            var selected = connectionsComboBox.SelectedItem as DatabaseConnection;
 
-
-            if (selected == "")
+            if (selected == null)
             {
-                MessageBox.Show("You have to select a database to test!", "No Databse selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            
-
-            if (localConnections.Count != 0)
-            {
-                connectionString = localConnections.Find(connection => connection.Name.Equals(selected)).ConnectionString;
-            }
-
-            if (connectionString == "")
-            {
-                MessageBox.Show("A SQL Database connection URL was not found for the selected Database, make sure this Database has a valid connection URL", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You have to select a database to test!", "No Database selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
+                using (SqlConnection connection = new SqlConnection(selected.ConnectionString))
+                {
+                    connection.Open();
 
-                var sql = @"
+                    var sql = @"
                            SELECT t.TABLE_SCHEMA, t.TABLE_NAME
                             FROM INFORMATION_SCHEMA.TABLES t
                             WHERE t.TABLE_TYPE = 'VIEW'";
 
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataSet dataset = new DataSet();
-                    adapter.Fill(dataset);
-                    connection.Close();
-                    alleViews = dataset.Tables[0];
-                }
-            }
-
-            var result = new List<ViewPerformanceTestResult>();
-
-            foreach(DataRow row in alleViews.Rows)
-            {
-                result.Add(
-                    new ViewPerformanceTestResult(
-                        row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(),
-                        GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(), connectionString)
-                    ));
-
-            }
-            dataGridView1.DataSource = result;
-
-            int columnCount = dataGridView1.Columns.Count;
-            decimal warning = 5;
-            decimal error = 25;
-
-            for (int i = 1; (i - 1) < dataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < columnCount; j++)
-                {
-                    if (dataGridView1.Rows[i - 1].Cells[j].Value.GetType() == typeof(decimal))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        decimal value;
-                        if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= warning)
-                        {
-
-                            dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Yellow;
-
-                        } 
-                        else if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= error) 
-                        {
-
-                            dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Red;
-
-                        }
-
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataSet dataset = new DataSet();
+                        adapter.Fill(dataset);
+                        connection.Close();
+                        alleViews = dataset.Tables[0];
                     }
                 }
-            }
 
+                var result = new List<ViewPerformanceTestResult>();
+
+                foreach (DataRow row in alleViews.Rows)
+                {
+                    result.Add(
+                        new ViewPerformanceTestResult(
+                            row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(),
+                            GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(), selected.ConnectionString)
+                        ));
+
+                }
+                dataGridView1.DataSource = result;
+
+                int columnCount = dataGridView1.Columns.Count;
+                decimal warning = 5;
+                decimal error = 25;
+
+                for (int i = 1; (i - 1) < dataGridView1.Rows.Count; i++)
+                {
+                    for (int j = 0; j < columnCount; j++)
+                    {
+                        if (dataGridView1.Rows[i - 1].Cells[j].Value.GetType() == typeof(decimal))
+                        {
+                            decimal value;
+                            if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= warning)
+                            {
+
+                                dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Yellow;
+
+                            }
+                            else if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= error)
+                            {
+
+                                dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Red;
+
+                            }
+
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -220,19 +177,17 @@ namespace optimalDb.WinForms
             prompt.AcceptButton = confirmation;
 
             if (prompt.ShowDialog() == DialogResult.OK )
-
             {
-
-                if (localConnections == null)
-                {
-                    localConnections = new List<DatabaseConnection>();
-                }
-
                 localConnections.Add(new DatabaseConnection(databasetextBox.Text, urltextbox.Text));
-                connectionsComboBox.Items.Add(databasetextBox.Text.ToString());
-
+                UpdateConnectionCombobox();
             }
+        }
 
+        private void UpdateConnectionCombobox()
+        {
+            connectionsComboBox.DataSource = localConnections.ToArray();
+            connectionsComboBox.ValueMember = "ConnectionString";
+            connectionsComboBox.DisplayMember = "Name";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
