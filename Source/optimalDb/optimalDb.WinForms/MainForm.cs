@@ -23,18 +23,14 @@ namespace optimalDb.WinForms
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var content = File.ReadAllText(openFileDialog1.FileName);
-                JArray configArray = JArray.Parse(content);
 
                 this.localConnections.Clear();
-                connectionsComboBox.Items.Clear();
 
 #pragma warning disable CS8604 // Possible null reference argument.
                 localConnections.AddRange(JsonConvert.DeserializeObject<DatabaseConnection[]>(content));
 #pragma warning restore CS8604 // Possible null reference argument.
 
-                connectionsComboBox.DataSource = localConnections;
-                connectionsComboBox.ValueMember = "ConnectionString";
-                connectionsComboBox.DisplayMember = "Name";
+                UpdateConnectionCombobox();
             }
         }
 
@@ -181,19 +177,17 @@ namespace optimalDb.WinForms
             prompt.AcceptButton = confirmation;
 
             if (prompt.ShowDialog() == DialogResult.OK )
-
             {
-
-                if (localConnections == null)
-                {
-                    localConnections = new List<DatabaseConnection>();
-                }
-
                 localConnections.Add(new DatabaseConnection(databasetextBox.Text, urltextbox.Text));
-                connectionsComboBox.Items.Add(databasetextBox.Text.ToString());
-
+                UpdateConnectionCombobox();
             }
+        }
 
+        private void UpdateConnectionCombobox()
+        {
+            connectionsComboBox.DataSource = localConnections.ToArray();
+            connectionsComboBox.ValueMember = "ConnectionString";
+            connectionsComboBox.DisplayMember = "Name";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
