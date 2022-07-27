@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using optimalDb.BL;
 using optimalDb.Infrastructure;
+using optimalDb.WinForms.GridExtras;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -62,40 +63,32 @@ namespace optimalDb.WinForms
                         ));
                 }
 
-                dataGridView1.DataSource = result;
+                result = result.OrderByDescending(x => x.DurationInSeconds).ToList();
+                dataGridView1.DataSource = new SortableBindingList<ViewPerformanceTestResult>(result);
+                AutoSizeFix.AutoSizeColumns(dataGridView1);
 
-                int columnCount = dataGridView1.Columns.Count;
-                decimal warning = 5;
-                decimal error = 25;
-
-                for (int i = 1; (i - 1) < dataGridView1.Rows.Count; i++)
-                {
-                    for (int j = 0; j < columnCount; j++)
-                    {
-                        if (dataGridView1.Rows[i - 1].Cells[j].Value.GetType() == typeof(decimal))
-                        {
-                            decimal value;
-                            if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= warning)
-                            {
-
-                                dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Yellow;
-
-                            }
-                            else if (Decimal.TryParse(dataGridView1.Rows[i - 1].Cells[j].Value.ToString(), out value) && value >= error)
-                            {
-
-                                dataGridView1.Rows[i - 1].Cells[j].Style.BackColor = Color.Red;
-
-                            }
-
-                        }
-                    }
-                }
+                ColorTheGrid();
+                EnableSortingInTheGrid();
+                // right align content
+                dataGridView1.Columns["DurationInSeconds"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void EnableSortingInTheGrid()
+        {
+            foreach(DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+        }
+
+        private void ColorTheGrid()
+        {
 
         }
 
@@ -248,5 +241,32 @@ namespace optimalDb.WinForms
                 MessageBox.Show("No Test Results To Export !!!", "Info");
             }
         }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            decimal warning = 2;
+            decimal error = 25;
+
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+            var durationInSeconds = decimal.Parse(row.Cells["DurationInSeconds"].Value.ToString());
+            var color = Color.White;
+            var selectionColor = Color.Blue;
+
+            if (durationInSeconds > warning)
+            {
+                color = Color.Yellow;
+                selectionColor = Color.Orange;
+            }
+
+            if (durationInSeconds > error)
+            {
+                color = Color.Red;
+                selectionColor = Color.Coral;
+            }
+
+            row.DefaultCellStyle.BackColor = color;
+            row.DefaultCellStyle.SelectionBackColor = selectionColor;
         }
+    }
 }
