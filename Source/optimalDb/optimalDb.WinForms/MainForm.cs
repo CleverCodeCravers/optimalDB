@@ -107,7 +107,6 @@ namespace optimalDb.WinForms
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -147,7 +146,6 @@ namespace optimalDb.WinForms
         private void createConfigItem_Click(object sender, EventArgs e)
         {
             ShowCreateDialog();
-       
         }
 
 
