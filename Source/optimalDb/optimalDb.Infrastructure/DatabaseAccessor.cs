@@ -24,7 +24,6 @@ public class DatabaseAccessor
                 command.CommandTimeout = timeoutInSeconds;
 
                 AddParameters(command, parameters);
-                command.Parameters.Add(parameters);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataSet dataset = new DataSet();
@@ -60,6 +59,7 @@ public class DatabaseAccessor
             {
                 command.CommandText = sql;
                 command.CommandTimeout = timeoutInSeconds;
+
                 AddParameters(command, parameters);
 
                 return command.ExecuteNonQuery();
