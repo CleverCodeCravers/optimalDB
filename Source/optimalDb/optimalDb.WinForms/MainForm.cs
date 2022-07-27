@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using optimalDb.BL;
+using optimalDb.Infrastructure;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -48,36 +49,21 @@ namespace optimalDb.WinForms
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(selected.ConnectionString))
-                {
-                    connection.Open();
-
-                    var sql = @"
-                           SELECT t.TABLE_SCHEMA, t.TABLE_NAME
-                            FROM INFORMATION_SCHEMA.TABLES t
-                            WHERE t.TABLE_TYPE = 'VIEW'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        DataSet dataset = new DataSet();
-                        adapter.Fill(dataset);
-                        connection.Close();
-                        alleViews = dataset.Tables[0];
-                    }
-                }
+                var databaseAccessor = new DatabaseAccessor(selected.ConnectionString);
+                var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+                var views = schemaRepository.GetViewList();
 
                 var result = new List<ViewPerformanceTestResult>();
 
-                foreach (DataRow row in alleViews.Rows)
+                foreach (string view in views)
                 {
                     result.Add(
                         new ViewPerformanceTestResult(
-                            row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(),
-                            GetDurationOfViewExecution(row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString(), selected.ConnectionString)
+                            view,
+                            GetDurationOfViewExecution(view, selected.ConnectionString)
                         ));
-
                 }
+
                 dataGridView1.DataSource = result;
 
                 int columnCount = dataGridView1.Columns.Count;
