@@ -37,8 +37,6 @@ namespace optimalDb.WinForms
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            DataTable alleViews;
-
             var selected = connectionsComboBox.SelectedItem as DatabaseConnection;
 
             if (selected == null)

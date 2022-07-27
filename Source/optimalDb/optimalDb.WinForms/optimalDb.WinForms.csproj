@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\optimalDb.BL\optimalDb.BL.csproj" />
+    <ProjectReference Include="..\optimalDb.Infrastructure\optimalDb.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
