@@ -17,7 +17,7 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        protected List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
+        public List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -122,7 +122,10 @@ namespace optimalDb.WinForms
 
         private void createConfigItem_Click(object sender, EventArgs e)
         {
-            ShowCreateDialog();
+            var editForm = new EditConfigForm();
+            editForm.Show();
+            editForm.AddConfigItems(this.localConnections);
+
         }
 
 
