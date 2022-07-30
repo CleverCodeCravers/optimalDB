@@ -13,16 +13,17 @@ namespace optimalDb.WinForms
 {
     public partial class EditConfigForm : Form
     {
-        public EditConfigForm()
+        private MainForm _mainForm;
+        public EditConfigForm(MainForm mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;        
         }
 
-        public void AddConfigItems(List<DatabaseConnection> connections)
+        public void AddConfigItems()
         {
-            if (connections == null) return;
-
-            foreach (DatabaseConnection connection in connections)
+            if (_mainForm.localConnections == null) return;
+            foreach (DatabaseConnection connection in _mainForm.localConnections)
             {
                 var configs = new ListViewItem(new[] { connection.Name, connection.ConnectionString });
                 configList.Items.Add(configs);
@@ -32,8 +33,15 @@ namespace optimalDb.WinForms
 
         private void AddConfigButton_Click(object sender, EventArgs e)
         {
-            var editForm = new AddConfig();
+            var editForm = new AddConfig(_mainForm);
             editForm.Show();
+
         }
+        
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
     }
 }

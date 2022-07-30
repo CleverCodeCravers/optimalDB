@@ -14,9 +14,11 @@ namespace optimalDb.WinForms
     public partial class AddConfig : Form
     {
 
-        public AddConfig()
+        private MainForm _mainform;
+        public AddConfig(MainForm mainform)
         {
             InitializeComponent();
+            _mainform = mainform;
         }
 
         private void SaveConfigButtoon_Click(object sender, EventArgs e)
@@ -24,12 +26,17 @@ namespace optimalDb.WinForms
             if (databaseTextBox.Text == null || databaseTextBox.Text == "")
             {
                 MessageBox.Show("You have to provide a name for the database you want to add!", "Info");
+                return;
             }
 
             if (URLTextBox.Text == null || URLTextBox.Text == "")
             {
                 MessageBox.Show("You have to provide a connection string for the database you want to add!", "Info");
+                return;
             }
+
+            _mainform.localConnections.Add(new DatabaseConnection(databaseTextBox.Text, URLTextBox.Text));
+            Close();
 
         }
     }
