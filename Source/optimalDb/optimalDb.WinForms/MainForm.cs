@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using optimalDb.Interfaces;
 
 namespace optimalDb.WinForms
 {
@@ -46,42 +47,30 @@ namespace optimalDb.WinForms
                 return;
             }
 
-            var bg = new TestProgressBar(AsyncWorker);
-            bg.Show();
-            bg.testButtonClicked(sender, e);
+            var form = new TestProgressBarForm(
+                selected.ConnectionString,
+                OnResultArrival
+                );
+            form.Show();
+            form.Start();
+        }
 
+        private void OnResultArrival(ViewPerformanceTestResult[] resultFromProcessing)
+        {
             try
             {
-                var databaseAccessor = new DatabaseAccessor(selected.ConnectionString);
-                var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-                var views = schemaRepository.GetViewList();
-
-                var result = new List<ViewPerformanceTestResult>();
-
-                foreach (string view in views)
-                {
-                    result.Add(
-                        new ViewPerformanceTestResult(
-                            view,
-                            GetDurationOfViewExecution(view, selected.ConnectionString)
-                        ));
-                }
-
-                result = result.OrderByDescending(x => x.DurationInSeconds).ToList();
-                dataGridView1.DataSource = new SortableBindingList<ViewPerformanceTestResult>(result);
+                dataGridView1.DataSource = new SortableBindingList<ViewPerformanceTestResult>(resultFromProcessing);
                 AutoSizeFix.AutoSizeColumns(dataGridView1);
 
                 ColorTheGrid();
                 EnableSortingInTheGrid();
                 // right align content
                 dataGridView1.Columns["DurationInSeconds"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
-                bg.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void EnableSortingInTheGrid()
@@ -95,34 +84,6 @@ namespace optimalDb.WinForms
         private void ColorTheGrid()
         {
 
-        }
-
-        protected decimal GetDurationOfViewExecution(string viewName, string connectionString)
-        {
-            DateTime start = DateTime.Now;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    var sql = @"SELECT * FROM " + viewName;
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        DataSet dataset = new DataSet();
-                        adapter.Fill(dataset);
-                    }
-                }
-            } 
-            catch (Exception ex)
-            {
-                return 999;
-            }
-
-            return (decimal)(DateTime.Now - start).TotalSeconds;
         }
 
         private void createConfigItem_Click(object sender, EventArgs e)

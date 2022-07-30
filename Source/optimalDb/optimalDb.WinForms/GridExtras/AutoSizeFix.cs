@@ -12,7 +12,7 @@ namespace optimalDb.WinForms.GridExtras
         {
             foreach (DataGridViewColumn column in dataGridView.Columns)
             {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
 
             var spaltenBreiten = new List<int>();

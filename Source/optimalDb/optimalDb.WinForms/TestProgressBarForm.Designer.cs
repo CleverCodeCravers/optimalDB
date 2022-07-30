@@ -1,6 +1,6 @@
 ﻿namespace optimalDb.WinForms
 {
-    partial class TestProgressBar
+    partial class TestProgressBarForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.PerformanceProgressBar = new System.Windows.Forms.ProgressBar();
-            this.progressValue = new System.Windows.Forms.Label();
+            this.progressValueLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.AsyncWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // PerformanceProgressBar
@@ -40,13 +41,14 @@
             this.PerformanceProgressBar.Size = new System.Drawing.Size(267, 30);
             this.PerformanceProgressBar.TabIndex = 0;
             // 
-            // progressValue
+            // progressValueLabel
             // 
-            this.progressValue.AutoSize = true;
-            this.progressValue.Location = new System.Drawing.Point(174, 60);
-            this.progressValue.Name = "progressValue";
-            this.progressValue.Size = new System.Drawing.Size(0, 15);
-            this.progressValue.TabIndex = 1;
+            this.progressValueLabel.Location = new System.Drawing.Point(12, 61);
+            this.progressValueLabel.Name = "progressValueLabel";
+            this.progressValueLabel.Size = new System.Drawing.Size(382, 15);
+            this.progressValueLabel.TabIndex = 1;
+            this.progressValueLabel.Text = "View";
+            this.progressValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cancelButton
             // 
@@ -58,7 +60,15 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // TestProgressBar
+            // AsyncWorker
+            // 
+            this.AsyncWorker.WorkerReportsProgress = true;
+            this.AsyncWorker.WorkerSupportsCancellation = true;
+            this.AsyncWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.AsyncWorker_DoWork);
+            this.AsyncWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.AsyncWorker_ProgressChanged);
+            this.AsyncWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.AsyncWorker_RunWorkerCompleted_1);
+            // 
+            // TestProgressBarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -66,22 +76,22 @@
             this.ClientSize = new System.Drawing.Size(406, 238);
             this.ControlBox = false;
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.progressValue);
+            this.Controls.Add(this.progressValueLabel);
             this.Controls.Add(this.PerformanceProgressBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TestProgressBar";
+            this.Name = "TestProgressBarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestProgressBar";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private Label progressValue;
+        private Label progressValueLabel;
         public ProgressBar PerformanceProgressBar;
         public Button cancelButton;
+        private System.ComponentModel.BackgroundWorker AsyncWorker;
     }
 }
