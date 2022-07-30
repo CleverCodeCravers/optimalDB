@@ -17,7 +17,7 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        protected List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
+        public List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -46,6 +46,10 @@ namespace optimalDb.WinForms
                 return;
             }
 
+            var bg = new TestProgressBar(AsyncWorker);
+            bg.Show();
+            bg.testButtonClicked(sender, e);
+
             try
             {
                 var databaseAccessor = new DatabaseAccessor(selected.ConnectionString);
@@ -71,6 +75,7 @@ namespace optimalDb.WinForms
                 EnableSortingInTheGrid();
                 // right align content
                 dataGridView1.Columns["DurationInSeconds"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
+                bg.Close();
             }
             catch (Exception ex)
             {
@@ -122,7 +127,9 @@ namespace optimalDb.WinForms
 
         private void createConfigItem_Click(object sender, EventArgs e)
         {
-            ShowCreateDialog();
+            var editForm = new EditConfigForm(this);
+            editForm.Show();
+            editForm.AddConfigItems();
         }
 
 

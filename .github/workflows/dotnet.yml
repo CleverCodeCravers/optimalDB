@@ -50,9 +50,12 @@ jobs:
           files: ./Source/${{ env.SOLUTION_DIR }}/${{matrix.OUTPUTDIR}}/
           dest: ${{ env.SOLUTION_DIR }}/${{matrix.OUTPUTDIR}}.zip
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Create Github Release
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: OptimalDb v1.${{github.run_number}}
           files: |
             ${{ env.SOLUTION_DIR }}/${{matrix.OUTPUTDIR}}.zip
