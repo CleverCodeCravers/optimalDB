@@ -88,9 +88,8 @@ namespace optimalDb.WinForms
 
         private void createConfigItem_Click(object sender, EventArgs e)
         {
-            var editForm = new EditConfigForm(this);
-            editForm.Show();
-            editForm.AddConfigItems();
+            var editForm = new ConfigListForm(localConnections);
+            editForm.ShowDialog();
         }
 
 

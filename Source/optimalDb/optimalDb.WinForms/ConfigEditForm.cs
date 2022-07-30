@@ -1,24 +1,15 @@
 ﻿using optimalDb.BL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace optimalDb.WinForms
 {
-    public partial class AddConfig : Form
+    public partial class ConfigEditForm : Form
     {
-
-        private MainForm _mainform;
-        public AddConfig(MainForm mainform)
+        private readonly DatabaseConnection _connection;
+        public DatabaseConnection Result;
+        public ConfigEditForm(DatabaseConnection connection)
         {
             InitializeComponent();
-            _mainform = mainform;
+            _connection = connection;
         }
 
         private void SaveConfigButtoon_Click(object sender, EventArgs e)
@@ -35,9 +26,8 @@ namespace optimalDb.WinForms
                 return;
             }
 
-            _mainform.localConnections.Add(new DatabaseConnection(databaseTextBox.Text, URLTextBox.Text));
+            Result = new DatabaseConnection(databaseTextBox.Text, URLTextBox.Text);
             Close();
-
         }
     }
 }

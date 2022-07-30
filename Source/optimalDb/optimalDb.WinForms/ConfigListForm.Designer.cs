@@ -1,6 +1,6 @@
 ﻿namespace optimalDb.WinForms
 {
-    partial class EditConfigForm
+    partial class ConfigListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditConfigForm));
-            this.configList = new System.Windows.Forms.ListView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigListForm));
+            this.configListView = new System.Windows.Forms.ListView();
             this.DatabaseName = new System.Windows.Forms.ColumnHeader();
             this.ConnectionString = new System.Windows.Forms.ColumnHeader();
             this.DeleteConfigButtoon = new System.Windows.Forms.Button();
@@ -37,19 +37,20 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // configList
+            // configListView
             // 
-            this.configList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.configListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.DatabaseName,
             this.ConnectionString});
-            this.configList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.configList.GridLines = true;
-            this.configList.Location = new System.Drawing.Point(0, 0);
-            this.configList.Name = "configList";
-            this.configList.Size = new System.Drawing.Size(674, 313);
-            this.configList.TabIndex = 0;
-            this.configList.UseCompatibleStateImageBehavior = false;
-            this.configList.View = System.Windows.Forms.View.Details;
+            this.configListView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.configListView.FullRowSelect = true;
+            this.configListView.GridLines = true;
+            this.configListView.Location = new System.Drawing.Point(0, 0);
+            this.configListView.Name = "configListView";
+            this.configListView.Size = new System.Drawing.Size(674, 313);
+            this.configListView.TabIndex = 0;
+            this.configListView.UseCompatibleStateImageBehavior = false;
+            this.configListView.View = System.Windows.Forms.View.Details;
             // 
             // DatabaseName
             // 
@@ -58,7 +59,7 @@
             // 
             // ConnectionString
             // 
-            this.ConnectionString.Text = "URL";
+            this.ConnectionString.Text = "Connection String";
             this.ConnectionString.Width = 520;
             // 
             // DeleteConfigButtoon
@@ -90,7 +91,7 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // EditConfigForm
+            // ConfigListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,17 +99,18 @@
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.AddConfigButton);
             this.Controls.Add(this.DeleteConfigButtoon);
-            this.Controls.Add(this.configList);
+            this.Controls.Add(this.configListView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "EditConfigForm";
+            this.Name = "ConfigListForm";
             this.Text = "Edit Config";
+            this.Load += new System.EventHandler(this.EditConfigForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private ListView configList;
+        private ListView configListView;
         private Button DeleteConfigButtoon;
         private Button AddConfigButton;
         private Button SaveButton;
