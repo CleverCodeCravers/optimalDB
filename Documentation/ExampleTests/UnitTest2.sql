@@ -1,0 +1,11 @@
+
+CREATE PROCEDURE [dbo].[TEST_ErrorLogMustBeEmpty]
+    AS
+BEGIN
+	SELECT COUNT(*) 
+	  FROM ErrorLog
+	HAVING COUNT(*) > 0
+END
+GO
+
+
