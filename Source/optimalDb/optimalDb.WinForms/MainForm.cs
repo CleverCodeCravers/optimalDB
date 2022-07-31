@@ -216,10 +216,19 @@ namespace optimalDb.WinForms
 
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
-            var durationInSeconds = decimal.Parse(row.Cells["DurationInSeconds"].Value.ToString());
             var color = Color.White;
             var selectionColor = Color.Blue;
 
+            var durationInSecondsValue = row.Cells["DurationInSeconds"].Value;
+            if (durationInSecondsValue == null)
+            {
+                row.DefaultCellStyle.BackColor = Color.BlueViolet;
+                row.DefaultCellStyle.SelectionBackColor = Color.Violet;
+                return;
+            }
+
+            var durationInSeconds = decimal.Parse(durationInSecondsValue.ToString());
+            
             if (durationInSeconds > warning)
             {
                 color = Color.Yellow;

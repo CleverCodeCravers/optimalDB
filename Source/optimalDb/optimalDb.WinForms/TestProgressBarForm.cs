@@ -49,11 +49,23 @@ namespace optimalDb.WinForms
                 int percentProgress = (i * 100) / views.Length;
                 AsyncWorker.ReportProgress(percentProgress, view);
 
-                Result.Add(
-                    new ViewPerformanceTestResult(
-                        view,
-                        GetDurationOfViewExecution(view, _connectionString)
-                    ));
+                try
+                {
+                    Result.Add(
+                        new ViewPerformanceTestResult(
+                            view,
+                            GetDurationOfViewExecution(view, _connectionString)
+                        ));
+                }
+                catch (Exception exception)
+                {
+                    Result.Add(
+                        new ViewPerformanceTestResult(
+                            view,
+                            null,
+                            exception.Message
+                        ));
+                }
             }
 
             Result = Result.OrderByDescending(x => x.DurationInSeconds).ToList();
@@ -63,25 +75,18 @@ namespace optimalDb.WinForms
         {
             DateTime start = DateTime.Now;
 
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                connection.Open();
+
+                var sql = @"SELECT * FROM " + viewName;
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    connection.Open();
-
-                    var sql = @"SELECT * FROM " + viewName;
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        DataSet dataset = new DataSet();
-                        adapter.Fill(dataset);
-                    }
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataSet dataset = new DataSet();
+                    adapter.Fill(dataset);
                 }
-            }
-            catch (Exception ex)
-            {
-                return 999;
             }
 
             return (decimal)(DateTime.Now - start).TotalSeconds;
