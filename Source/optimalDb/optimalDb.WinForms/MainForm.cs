@@ -39,20 +39,31 @@ namespace optimalDb.WinForms
 
         private void testButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var form = new TestProgressBarForm(
+                    GetSelectedConnectionString(),
+                    OnResultArrival
+                );
+                form.Show();
+                form.Start();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "An Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GetSelectedConnectionString()
+        {
             var selected = connectionsComboBox.SelectedItem as DatabaseConnection;
 
             if (selected == null)
             {
-                MessageBox.Show("You have to select a database to test!", "No Database selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                throw new Exception("You have to select a database to test!");
             }
 
-            var form = new TestProgressBarForm(
-                selected.ConnectionString,
-                OnResultArrival
-                );
-            form.Show();
-            form.Start();
+            return selected.ConnectionString;
         }
 
         private void OnResultArrival(ViewPerformanceTestResult[] resultFromProcessing)
@@ -90,39 +101,6 @@ namespace optimalDb.WinForms
         {
             var editForm = new ConfigListForm(localConnections);
             editForm.ShowDialog();
-        }
-
-
-        public void ShowCreateDialog()
-        {
-            Form prompt = new Form()
-            {
-                Width = 500,
-                Height = 180,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "Create Config",
-                StartPosition = FormStartPosition.CenterScreen
-            };
-            Label databaseName = new Label() { Left = 30, Top = 20, Text = "Database Name" };
-            TextBox databasetextBox = new TextBox() { Left = 150, Top = 18, Width = 150 };
-            Label urlString = new Label() { Left = 30, Top = 60, Text = "Database URL" };
-            TextBox urltextbox = new TextBox() { Left = 150, Top = 58, Width = 300 };
-
-            Button confirmation = new Button() { Text = "Save", Left = 350, Width = 100, Top = 100, DialogResult = DialogResult.OK };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
-            prompt.Controls.Add(databaseName);
-            prompt.Controls.Add(databasetextBox);
-            prompt.Controls.Add(urlString);
-            prompt.Controls.Add(urltextbox);
-            prompt.Controls.Add(confirmation);
-
-            prompt.AcceptButton = confirmation;
-
-            if (prompt.ShowDialog() == DialogResult.OK )
-            {
-                localConnections.Add(new DatabaseConnection(databasetextBox.Text, urltextbox.Text));
-                UpdateConnectionCombobox();
-            }
         }
 
         private void UpdateConnectionCombobox()
@@ -227,8 +205,10 @@ namespace optimalDb.WinForms
                 return;
             }
 
+#pragma warning disable CS8604 // Mögliches Nullverweisargument.
             var durationInSeconds = decimal.Parse(durationInSecondsValue.ToString());
-            
+#pragma warning restore CS8604 // Mögliches Nullverweisargument.
+
             if (durationInSeconds > warning)
             {
                 color = Color.Yellow;
@@ -243,6 +223,36 @@ namespace optimalDb.WinForms
 
             row.DefaultCellStyle.BackColor = color;
             row.DefaultCellStyle.SelectionBackColor = selectionColor;
+        }
+
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hti = dataGridView1.HitTest(e.X, e.Y);
+                dataGridView1.ClearSelection();
+                dataGridView1.Rows[hti.RowIndex].Selected = true;
+            }
+        }
+
+        private void viewCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    var selectedRow = dataGridView1.SelectedRows[0].DataBoundItem as ViewPerformanceTestResult;
+                    var accessor = new DatabaseAccessor(GetSelectedConnectionString());
+                    var schemaRepository = new DatabaseSchemaRepository(accessor);
+
+                    var view = new ViewSourceCodeForm(selectedRow.ViewName, schemaRepository.GetCode(selectedRow.ViewName));
+                    view.ShowDialog();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "An Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
