@@ -89,7 +89,8 @@ namespace optimalDb.WinForms
                 }
             }
 
-            return (decimal)(DateTime.Now - start).TotalSeconds;
+            decimal result = (decimal)(DateTime.Now - start).TotalSeconds;
+            return decimal.Round(result, 2);
         }
         private void AsyncWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
