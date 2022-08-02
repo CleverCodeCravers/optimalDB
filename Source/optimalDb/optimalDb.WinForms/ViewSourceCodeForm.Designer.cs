@@ -28,24 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SourceTextBox = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewSourceCodeForm));
             this.ViewSourcePanel = new System.Windows.Forms.Panel();
             this.ViewSourceCloseButton = new System.Windows.Forms.Button();
+            this.SourceTextBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.ViewSourcePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SourceTextBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // SourceTextBox
-            // 
-            this.SourceTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SourceTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SourceTextBox.Location = new System.Drawing.Point(0, 0);
-            this.SourceTextBox.Multiline = true;
-            this.SourceTextBox.Name = "SourceTextBox";
-            this.SourceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.SourceTextBox.Size = new System.Drawing.Size(514, 311);
-            this.SourceTextBox.TabIndex = 0;
-            this.SourceTextBox.Text = "test";
-            this.SourceTextBox.WordWrap = false;
             // 
             // ViewSourcePanel
             // 
@@ -66,6 +56,51 @@
             this.ViewSourceCloseButton.Text = "Close";
             this.ViewSourceCloseButton.UseVisualStyleBackColor = true;
             // 
+            // SourceTextBox
+            // 
+            this.SourceTextBox.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.SourceTextBox.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:" +
+    "]*(?<range>:)\\s*(?<range>[^;]+);\r\n";
+            this.SourceTextBox.AutoScrollMinSize = new System.Drawing.Size(179, 14);
+            this.SourceTextBox.BackBrush = null;
+            this.SourceTextBox.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
+            this.SourceTextBox.CharHeight = 14;
+            this.SourceTextBox.CharWidth = 8;
+            this.SourceTextBox.DefaultMarkerSize = 8;
+            this.SourceTextBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.SourceTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SourceTextBox.FindForm = null;
+            this.SourceTextBox.GoToForm = null;
+            this.SourceTextBox.Hotkeys = resources.GetString("SourceTextBox.Hotkeys");
+            this.SourceTextBox.IsReplaceMode = false;
+            this.SourceTextBox.Language = FastColoredTextBoxNS.Text.Language.SQL;
+            this.SourceTextBox.LeftBracket = '(';
+            this.SourceTextBox.LeftBracket2 = '{';
+            this.SourceTextBox.Location = new System.Drawing.Point(0, 0);
+            this.SourceTextBox.Name = "SourceTextBox";
+            this.SourceTextBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.SourceTextBox.ReadOnly = true;
+            this.SourceTextBox.ReplaceForm = null;
+            this.SourceTextBox.RightBracket = ')';
+            this.SourceTextBox.RightBracket2 = '}';
+            this.SourceTextBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.SourceTextBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("SourceTextBox.ServiceColors")));
+            this.SourceTextBox.Size = new System.Drawing.Size(514, 311);
+            this.SourceTextBox.SourceTextBox = this.SourceTextBox;
+            this.SourceTextBox.TabIndex = 2;
+            this.SourceTextBox.Text = "fastColoredTextBox1";
+            this.SourceTextBox.Zoom = 100;
+            // 
             // ViewSourceCodeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -77,15 +112,14 @@
             this.Text = "Kaputt SQL Code";
             this.Load += new System.EventHandler(this.ViewSourceCodeForm_Load);
             this.ViewSourcePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SourceTextBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private TextBox SourceTextBox;
         private Panel ViewSourcePanel;
         private Button ViewSourceCloseButton;
+        private FastColoredTextBoxNS.FastColoredTextBox SourceTextBox;
     }
 }
