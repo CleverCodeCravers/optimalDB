@@ -66,11 +66,20 @@ namespace optimalDb.WinForms
             return selected.ConnectionString;
         }
 
+        private void UpdateFont()
+        {
+            foreach (DataGridViewColumn c in dataGridView1.Columns)
+            {
+                c.DefaultCellStyle.Font = new Font("Consolas", 12F, GraphicsUnit.Pixel);
+            }
+        }
+
         private void OnResultArrival(ViewPerformanceTestResult[] resultFromProcessing)
         {
             try
             {
                 dataGridView1.DataSource = new SortableBindingList<ViewPerformanceTestResult>(resultFromProcessing);
+                UpdateFont();
                 AutoSizeFix.AutoSizeColumns(dataGridView1);
 
                 ColorTheGrid();
