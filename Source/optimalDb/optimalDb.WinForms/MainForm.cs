@@ -8,11 +8,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using optimalDb.Interfaces;
+using System.Diagnostics;
+using VisualPairCoding.Infrastructure;
 
 namespace optimalDb.WinForms
 {
     public partial class MainForm : Form
     {
+        private readonly string appVersion = "OptimalDb v1.23";
         public MainForm()
         {
             InitializeComponent();
@@ -261,6 +264,50 @@ namespace optimalDb.WinForms
                 {
                     MessageBox.Show(exception.Message, "An Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            AutoUpdater updater = new AutoUpdater(appVersion);
+            updater.RegisterVersionInRegistery();
+            bool NewUpdate = updater.IsUpdateAvailable();
+
+            if (NewUpdate)
+            {
+                DialogResult askFoorUserConsent = MessageBox.Show("There is a new update, Do you want to install it now ?", "New Update", MessageBoxButtons.YesNo);
+
+                if (askFoorUserConsent == DialogResult.Yes)
+                {
+                    updater.Update();
+                    var cwd = Directory.GetCurrentDirectory();
+                    string path = cwd + "\\" + "updater.ps1";
+
+                    var script =
+                    "Set-Location $PSScriptRoot" + Environment.NewLine +
+                    "Expand-Archive -Path \"$pwd\\optimalDb-win-x64.zip\" -DestinationPath $pwd -Force" + Environment.NewLine +
+                    "Invoke-Expression -Command \"$pwd\\optimalDb.WinForms.exe\"" + Environment.NewLine +
+                    "Remove-Item -Path \"$pwd\\optimalDb-win-x64.zip\" -Force" + Environment.NewLine +
+                    "Remove-Item -Path \"$pwd\\updater.ps1\" -Force";
+
+                    File.WriteAllTextAsync("updater.ps1", script);
+                    try
+                    {
+                        var startInfo = new ProcessStartInfo()
+                        {
+                            FileName = "powershell.exe",
+                            Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{path}\"",
+                            UseShellExecute = false
+                        };
+                        Application.Exit();
+                        Process.Start(startInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+
             }
         }
     }

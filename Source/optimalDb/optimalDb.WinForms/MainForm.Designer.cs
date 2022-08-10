@@ -81,12 +81,12 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewCodeToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(131, 26);
             // 
             // viewCodeToolStripMenuItem
             // 
             this.viewCodeToolStripMenuItem.Name = "viewCodeToolStripMenuItem";
-            this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.viewCodeToolStripMenuItem.Text = "View Code";
             this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
             // 
@@ -198,6 +198,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "OptimalDb";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
