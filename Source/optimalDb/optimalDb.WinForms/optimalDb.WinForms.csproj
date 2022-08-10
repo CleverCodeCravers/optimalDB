@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>resources\server.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="resources\server.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dax-FCTB" Version="2.16.26.120" />
