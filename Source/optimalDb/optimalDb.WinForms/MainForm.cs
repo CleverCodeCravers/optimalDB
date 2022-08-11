@@ -15,7 +15,7 @@ namespace optimalDb.WinForms
 {
     public partial class MainForm : Form
     {
-        private readonly string appVersion = "OptimalDb v1.23";
+        private readonly string appVersion = "OptimalDb v1.24";
         public MainForm()
         {
             InitializeComponent();
@@ -290,7 +290,7 @@ namespace optimalDb.WinForms
                     "Remove-Item -Path \"$pwd\\optimalDb-win-x64.zip\" -Force" + Environment.NewLine +
                     "Remove-Item -Path \"$pwd\\updater.ps1\" -Force";
 
-                    File.WriteAllTextAsync("updater.ps1", script);
+                    File.WriteAllText("updater.ps1", script);
                     try
                     {
                         var startInfo = new ProcessStartInfo()
