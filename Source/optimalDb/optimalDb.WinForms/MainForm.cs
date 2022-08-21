@@ -310,5 +310,15 @@ namespace optimalDb.WinForms
 
             }
         }
+
+        private void websiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo psInfo = new ProcessStartInfo
+            {
+                FileName = "https://github.com/stho32/optimalDB",
+                UseShellExecute = true
+            };
+            Process.Start(psInfo);
+        }
     }
 }
