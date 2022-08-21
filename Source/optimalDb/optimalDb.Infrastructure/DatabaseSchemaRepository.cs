@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Text;
+using optimalDb.BL;
+using optimalDb.Interfaces;
 
 namespace optimalDb.Infrastructure
 {
@@ -12,7 +14,7 @@ namespace optimalDb.Infrastructure
             _accessor = accessor;
         }
 
-        public string[] GetViewList()
+        public IViewName[] GetViewList()
         {
             var sql = @"
                 SELECT t.TABLE_SCHEMA, t.TABLE_NAME
@@ -22,7 +24,9 @@ namespace optimalDb.Infrastructure
             var data = _accessor.LoadDataTable(sql);
 
             return data.ToInstancesOf(
-                row => row["TABLE_SCHEMA"].ToString() + "." + row["TABLE_NAME"].ToString()
+                row =>
+                    new ViewName(row["TABLE_SCHEMA"].ToString(),
+                        row["TABLE_NAME"].ToString())
                 );
         }
 

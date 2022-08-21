@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using optimalDb.BL;
 using optimalDb.Infrastructure;
+using optimalDb.Interfaces;
 
 namespace optimalDb.WinForms
 {
@@ -44,7 +45,7 @@ namespace optimalDb.WinForms
                     break;
                 }
 
-                string view = views[i];
+                var view = views[i];
 
                 int percentProgress = (i * 100) / views.Length;
                 AsyncWorker.ReportProgress(percentProgress, view);
@@ -53,22 +54,31 @@ namespace optimalDb.WinForms
                 {
                     Result.Add(
                         new ViewPerformanceTestResult(
-                            view,
-                            GetDurationOfViewExecution(view, _connectionString)
+                            view.Fullname,
+                            GetDurationOfViewExecution(view.Fullname, _connectionString)
                         ));
                 }
                 catch (Exception exception)
                 {
                     Result.Add(
                         new ViewPerformanceTestResult(
-                            view,
+                            view.Fullname,
                             null,
                             exception.Message
                         ));
                 }
             }
 
-            Result = Result.OrderByDescending(x => x.DurationInSeconds).ToList();
+            var maximumDurationInSeconds = Result.Max(x => x.DurationInSeconds);
+            var fakeExceptionDurationInSeconds = (maximumDurationInSeconds??0) +1;
+
+            Result = Result.OrderByDescending(x =>
+            {
+                var orderValue = x.DurationInSeconds;
+                if (!string.IsNullOrWhiteSpace(x.ExceptionMessage))
+                    orderValue = fakeExceptionDurationInSeconds;
+                return orderValue;
+            }).ToList();
         }
 
         protected decimal GetDurationOfViewExecution(string viewName, string connectionString)
@@ -95,9 +105,10 @@ namespace optimalDb.WinForms
         private void AsyncWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             PerformanceProgressBar.Value = e.ProgressPercentage;
-            var viewName = e.UserState?.ToString();
+            IViewName? viewName = e.UserState as IViewName;
             
-            progressValueLabel.Text = viewName;
+            if (viewName != null)
+                progressValueLabel.Text = viewName.Fullname;
             if (e.ProgressPercentage == 100)
             {
                 progressValueLabel.Text = String.Format("Test Completed {0} %", e.ProgressPercentage);
