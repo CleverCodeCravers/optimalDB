@@ -1,75 +1,101 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using optimalDb.BL;
+﻿using Newtonsoft.Json;
+using optimalDb.BL.AutoUpdates;
+using System.Diagnostics;
 using System.Net;
 
-namespace VisualPairCoding.Infrastructure;
+namespace optimalDb.Infrastructure;
 public class AutoUpdater
 {
+    private readonly string _appName;
     private readonly string _appVersion;
-    private WebClient downloadClient = new WebClient();
+    private readonly string _githubUrl;
 
     public AutoUpdater(
-        string appVersion)
+        string appName,
+        string appVersion,
+        string githubUrl)
     {
+        _appName = appName;
         _appVersion = appVersion;
+        _githubUrl = githubUrl;
     }
 
-
-    public GithubAPIResponse[] GetLatestVersion()
+    public GithubAPIResponse[] GetReleaseList()
     {
-
-        var releaseURL = "https://api.github.com/repos/stho32/optimalDB/releases";
-
-        var client = new HttpClient();
-
-        var webRequest = new HttpRequestMessage(HttpMethod.Get, releaseURL);
-        client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0");
-
-        var response = client.Send(webRequest);
-
-        string result = response.Content.ReadAsStringAsync().Result.Trim();
-        GithubAPIResponse[] releases = JsonConvert.DeserializeObject<GithubAPIResponse[]>(result);
-
-        return releases;
-    }
-
-
-    public Boolean RegisterVersionInRegistery()
-    {
-        RegistryKey key;
-
-        var getLocalVersion = Registry.CurrentUser.OpenSubKey("OptimalDb");
-
-        if (getLocalVersion == null)
+        using (var client = new HttpClient())
         {
-            key = Registry.CurrentUser.CreateSubKey("OptimalDb");
-            key.SetValue("version", _appVersion);
-            key.Close();
+            var webRequest = new HttpRequestMessage(HttpMethod.Get, _githubUrl);
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0");
+
+            var response = client.Send(webRequest);
+
+            string result = response.Content.ReadAsStringAsync().Result.Trim();
+
+            GithubAPIResponse[] releases = JsonConvert.DeserializeObject<GithubAPIResponse[]>(result);
+
+            return releases;
         }
-
-        return true;
-
     }
+
 
     public void Update()
     {
-        GithubAPIResponse[] releases = this.GetLatestVersion();
-        bool checkRegistery = this.RegisterVersionInRegistery();
+        GithubAPIResponse[] releases = GetReleaseList();
 
-        if (checkRegistery == false)
+        using (WebClient downloadClient = new WebClient())
         {
-            throw new Exception("Could not add the App to the registery!");
+            downloadClient.DownloadFile(releases[0].Assets[0].Browser_download_url, releases[0].Assets[0].Name);
         }
 
-        downloadClient.DownloadFile(releases[0].Assets[0].Browser_download_url, releases[0].Assets[0].Name);
-        Registry.CurrentUser.OpenSubKey("OptimalDb", true).SetValue("version", releases[0].Name);
+        var cwd = Environment.CurrentDirectory;
+        string path = cwd + "\\" + "updater.ps1";
+
+        var script =
+            @"
+Set-Location $PSScriptRoot
+$ErrorActionPreference = ""Stop""
+Start-Sleep -Seconds 5
+$Successful = $false
+While (-not ($Successful)) {
+    try {
+        Expand-Archive -Path ""$pwd\optimalDb-win-x64.zip"" -DestinationPath $pwd -Force
+        $Successful = $true
+    } catch {
+        Write-Host ""Waiting for application to quit...""
+        Start-Sleep -Seconds 5
+    }
+}
+Start-Process ""optimalDb.WinForms.exe""
+Remove-Item -Path ""$pwd\optimalDb-win-x64.zip"" -Force
+Remove-Item -Path ""$pwd\updater.ps1"" -Force
+";
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, script);
+        }
+
+        try
+        {
+            var startInfo = new ProcessStartInfo()
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{path}\"",
+                UseShellExecute = false
+            };
+
+            Process.Start(startInfo);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public Boolean IsUpdateAvailable()
     {
-        GithubAPIResponse[] releases = this.GetLatestVersion();
-        if (releases[0].Name != Registry.CurrentUser.OpenSubKey("OptimalDb").GetValue("version").ToString())
+        GithubAPIResponse[] releases = this.GetReleaseList();
+        if (releases[0].Name != _appName + " v" + _appVersion)
         {
             return true;
         }

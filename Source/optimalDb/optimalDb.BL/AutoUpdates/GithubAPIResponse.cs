@@ -1,7 +1,6 @@
-﻿
-using optimalDb.Interfaces;
+﻿using optimalDb.Interfaces;
 
-namespace optimalDb.BL;
+namespace optimalDb.BL.AutoUpdates;
 public class GithubAPIResponse : IGithubAPIResponse
 {
 
