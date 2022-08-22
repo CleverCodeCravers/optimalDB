@@ -147,7 +147,7 @@
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
             this.websiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.websiteToolStripMenuItem.Text = "Website";
+            this.websiteToolStripMenuItem.Text = "Info";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
             // panel1

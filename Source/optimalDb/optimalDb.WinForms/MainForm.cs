@@ -3,14 +3,12 @@ using optimalDb.BL;
 using optimalDb.Infrastructure;
 using optimalDb.WinForms.GridExtras;
 using System.Text;
-using System.Diagnostics;
 using optimalDb.BL.AutoUpdates;
 
 namespace optimalDb.WinForms
 {
     public partial class MainForm : Form
     {
-        private readonly string appVersion = "OptimalDb v1.24";
         public MainForm()
         {
             InitializeComponent();
@@ -264,11 +262,8 @@ namespace optimalDb.WinForms
 
         private void websiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("optimalDb, v" + VersionInformation.Version + Environment.NewLine +
-                            Environment.NewLine +
-                            "https://github.com/stho32/optimalDB" + Environment.NewLine +
-                            Environment.NewLine +
-                            "May the code be with you!");
+            var aboutForn = new AboutForm(VersionInformation.Version, "https://github.com/stho32/optimalDB", "optimalDb");
+            aboutForn.ShowDialog();
         }
     }
 }
