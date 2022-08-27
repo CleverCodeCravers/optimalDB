@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Text;
 using optimalDb.Interfaces;
 using System.Diagnostics;
+using optimalDb.BL.ConfigurationFileFormats;
 using VisualPairCoding.Infrastructure;
 
 namespace optimalDb.WinForms
@@ -21,21 +22,37 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        public List<DatabaseConnection> localConnections = new List<DatabaseConnection>();
+        protected List<IDatabaseConnection> LocalConnections = new();
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var availableFormats = ConfigurationFileFormatFactory.GetAllFileFormats();
+
+            openFileDialog1.Filter = availableFormats.FilterForDialogs();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                var content = File.ReadAllText(openFileDialog1.FileName);
+                var format = availableFormats.GetMatchingFormatFor(openFileDialog1.FileName);
 
-                this.localConnections.Clear();
+                if (format == null)
+                {
+                    MessageBox.Show("Sorry, I do not know how to read that format.");
+                    return;
+                }
 
-#pragma warning disable CS8604 // Possible null reference argument.
-                localConnections.AddRange(JsonConvert.DeserializeObject<DatabaseConnection[]>(content));
-#pragma warning restore CS8604 // Possible null reference argument.
+                LocalConnections.Clear();
 
+                try
+                {
+                    var connections = format.Load(openFileDialog1.FileName);
+                    if ( connections != null )
+                        LocalConnections.AddRange(connections);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+                
                 UpdateConnectionCombobox();
             }
         }
@@ -85,7 +102,6 @@ namespace optimalDb.WinForms
                 UpdateFont();
                 AutoSizeFix.AutoSizeColumns(dataGridView1);
 
-                ColorTheGrid();
                 EnableSortingInTheGrid();
                 // right align content
                 dataGridView1.Columns["DurationInSeconds"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopRight;
@@ -104,40 +120,42 @@ namespace optimalDb.WinForms
             }
         }
 
-        private void ColorTheGrid()
-        {
-
-        }
-
         private void createConfigItem_Click(object sender, EventArgs e)
         {
-            var editForm = new ConfigListForm(localConnections);
+            var editForm = new ConfigListForm(LocalConnections);
             editForm.ShowDialog();
         }
 
         private void UpdateConnectionCombobox()
         {
-            connectionsComboBox.DataSource = localConnections.ToArray();
+            connectionsComboBox.DataSource = LocalConnections.ToArray();
             connectionsComboBox.ValueMember = "ConnectionString";
             connectionsComboBox.DisplayMember = "Name";
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var formats = ConfigurationFileFormatFactory.GetAllFileFormats();
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Config |*.json";
-            saveFileDialog1.Title = "Save Config File";
-            saveFileDialog1.DefaultExt = "json";
-            saveFileDialog1.ShowDialog();
-
-            if (saveFileDialog1.FileName != "")
+            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
             {
-                var config = System.Text.Json.JsonSerializer.Serialize(this.localConnections);
-                File.WriteAllText(saveFileDialog1.FileName, config);
+                saveFileDialog1.Filter = formats.FilterForDialogs();
 
+                saveFileDialog1.Title = "Save Config File";
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
+                {
+                    var format = formats.GetMatchingFormatFor(saveFileDialog1.FileName);
+                    if (format == null)
+                    {
+                        MessageBox.Show("I do not know how to save a file of this format.");
+                        return;
+                    }
+
+                    format.Save(saveFileDialog1.FileName, LocalConnections.ToArray());
+                }
             }
-
         }
 
         private void exportButton_Click(object sender, EventArgs e)

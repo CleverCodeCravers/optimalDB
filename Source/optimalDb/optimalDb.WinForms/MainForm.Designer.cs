@@ -47,7 +47,6 @@
             this.connectionsComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -146,7 +145,7 @@
             // websiteToolStripMenuItem
             // 
             this.websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
-            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.websiteToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.websiteToolStripMenuItem.Text = "Website";
             this.websiteToolStripMenuItem.Click += new System.EventHandler(this.websiteToolStripMenuItem_Click);
             // 
@@ -242,7 +241,6 @@
         private DataGridView dataGridView1;
         private ToolStripMenuItem EditConfig;
         private ToolStripMenuItem saveToolStripMenuItem;
-        private SaveFileDialog saveFileDialog1;
         private Button exportButton;
         private ContextMenuStrip contextMenuStrip;
         private ToolStripMenuItem viewCodeToolStripMenuItem;
