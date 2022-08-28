@@ -1,12 +1,13 @@
 ﻿using optimalDb.BL;
+using optimalDb.Interfaces;
 
 namespace optimalDb.WinForms
 {
     public partial class ConfigListForm : Form
     {
-        private readonly List<DatabaseConnection> _databaseConnections;
+        private readonly List<IDatabaseConnection> _databaseConnections;
 
-        public ConfigListForm(List<DatabaseConnection> databaseConnections)
+        public ConfigListForm(List<IDatabaseConnection> databaseConnections)
         {
             _databaseConnections = databaseConnections;
             InitializeComponent();
@@ -17,7 +18,7 @@ namespace optimalDb.WinForms
             if (configListView.Items.Count > 0)
                 configListView.Items.Clear();
 
-            foreach (DatabaseConnection connection in _databaseConnections)
+            foreach (IDatabaseConnection connection in _databaseConnections)
             {
                 var configs = new ListViewItem(new[] { connection.Name, connection.ConnectionString });
                 configListView.Items.Add(configs);
