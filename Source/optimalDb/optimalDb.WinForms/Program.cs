@@ -1,7 +1,11 @@
+using optimalDb.BL.AutoUpdates;
+using optimalDb.Infrastructure;
+
 namespace optimalDb.WinForms
 {
     internal static class Program
     {
+        static bool _autoUpdateTest = false;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -11,7 +15,40 @@ namespace optimalDb.WinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            var args = Environment.GetCommandLineArgs();
+            _autoUpdateTest = args.Length > 1;
+
+            // Only perform auto-updates if not in dev environment
+            if (VersionInformation.Version != "$$VERSION$$" || _autoUpdateTest)
+            {
+                if (AutoUpdate())
+                    return;
+            }
+
+
             Application.Run(new MainForm());
+        }
+
+        private static bool AutoUpdate()
+        {
+            var updater = new AutoUpdater(
+                "optimalDb",
+                VersionInformation.Version,
+                "https://api.github.com/repos/stho32/optimalDB/releases");
+
+            if (updater.IsUpdateAvailable() || _autoUpdateTest)
+            {
+                DialogResult userGivesConsent = MessageBox.Show("There is a new update, do you want to install it now ?", "New Update", MessageBoxButtons.YesNo);
+
+                if (userGivesConsent == DialogResult.Yes)
+                {
+                    updater.Update();
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

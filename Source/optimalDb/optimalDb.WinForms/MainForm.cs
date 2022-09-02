@@ -1,12 +1,9 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using optimalDb.BL;
 using optimalDb.Infrastructure;
 using optimalDb.WinForms.GridExtras;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Text;
+using optimalDb.BL.AutoUpdates;
 using optimalDb.Interfaces;
 using System.Diagnostics;
 using optimalDb.BL.ConfigurationFileFormats;
@@ -16,7 +13,6 @@ namespace optimalDb.WinForms
 {
     public partial class MainForm : Form
     {
-        private readonly string appVersion = "OptimalDb v1.24";
         public MainForm()
         {
             InitializeComponent();
@@ -235,9 +231,9 @@ namespace optimalDb.WinForms
                 return;
             }
 
-#pragma warning disable CS8604 // Mögliches Nullverweisargument.
+#pragma warning disable CS8604 // MÃ¶gliches Nullverweisargument.
             var durationInSeconds = decimal.Parse(durationInSecondsValue.ToString());
-#pragma warning restore CS8604 // Mögliches Nullverweisargument.
+#pragma warning restore CS8604 // MÃ¶gliches Nullverweisargument.
 
             if (durationInSeconds > warning)
             {
@@ -285,58 +281,10 @@ namespace optimalDb.WinForms
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            AutoUpdater updater = new AutoUpdater(appVersion);
-            updater.RegisterVersionInRegistery();
-            bool NewUpdate = updater.IsUpdateAvailable();
-
-            if (NewUpdate)
-            {
-                DialogResult askFoorUserConsent = MessageBox.Show("There is a new update, Do you want to install it now ?", "New Update", MessageBoxButtons.YesNo);
-
-                if (askFoorUserConsent == DialogResult.Yes)
-                {
-                    updater.Update();
-                    var cwd = Directory.GetCurrentDirectory();
-                    string path = cwd + "\\" + "updater.ps1";
-
-                    var script =
-                    "Set-Location $PSScriptRoot" + Environment.NewLine +
-                    "Expand-Archive -Path \"$pwd\\optimalDb-win-x64.zip\" -DestinationPath $pwd -Force" + Environment.NewLine +
-                    "Invoke-Expression -Command \"$pwd\\optimalDb.WinForms.exe\"" + Environment.NewLine +
-                    "Remove-Item -Path \"$pwd\\optimalDb-win-x64.zip\" -Force" + Environment.NewLine +
-                    "Remove-Item -Path \"$pwd\\updater.ps1\" -Force";
-
-                    File.WriteAllText("updater.ps1", script);
-                    try
-                    {
-                        var startInfo = new ProcessStartInfo()
-                        {
-                            FileName = "powershell.exe",
-                            Arguments = $"-NoProfile -ExecutionPolicy ByPass -File \"{path}\"",
-                            UseShellExecute = false
-                        };
-                        Application.Exit();
-                        Process.Start(startInfo);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message);
-                    }
-                }
-
-            }
-        }
-
         private void websiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo psInfo = new ProcessStartInfo
-            {
-                FileName = "https://github.com/stho32/optimalDB",
-                UseShellExecute = true
-            };
-            Process.Start(psInfo);
+            var aboutForn = new AboutForm(VersionInformation.Version, "https://github.com/stho32/optimalDB", "optimalDb");
+            aboutForn.ShowDialog();
         }
     }
 }
