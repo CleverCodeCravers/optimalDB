@@ -1,9 +1,10 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using optimalDb.Interfaces;
 
 namespace optimalDb.Infrastructure;
 
-public class DatabaseAccessor
+public class DatabaseAccessor : IDatabaseAccessor
 {
     private readonly string _connectionString;
 

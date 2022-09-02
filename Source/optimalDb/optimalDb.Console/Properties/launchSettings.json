@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "optimalDb.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "viewperformance --config C:\\Projekte\\Configuration.cfg --connection Adventure"
+    }
+  }
+}

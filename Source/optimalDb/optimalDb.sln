@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.BL.Tests", "optim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.Infrastructure", "optimalDb.Infrastructure\optimalDb.Infrastructure.csproj", "{18869F09-2A82-4DED-B718-747381750F76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.WinForms", "optimalDb.WinForms\optimalDb.WinForms.csproj", "{9FC079D5-8107-4332-9F5B-F6CE6ED50256}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.WinForms", "optimalDb.WinForms\optimalDb.WinForms.csproj", "{9FC079D5-8107-4332-9F5B-F6CE6ED50256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Console", "optimalDb.Console\optimalDb.Console.csproj", "{8A3C4C16-9357-48EA-86B0-620F8AB9BD13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9FC079D5-8107-4332-9F5B-F6CE6ED50256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FC079D5-8107-4332-9F5B-F6CE6ED50256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FC079D5-8107-4332-9F5B-F6CE6ED50256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3C4C16-9357-48EA-86B0-620F8AB9BD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3C4C16-9357-48EA-86B0-620F8AB9BD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3C4C16-9357-48EA-86B0-620F8AB9BD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3C4C16-9357-48EA-86B0-620F8AB9BD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,9 @@ using optimalDb.Interfaces;
 
 namespace optimalDb.Infrastructure
 {
-    public class DatabaseSchemaRepository
+    
+
+    public class DatabaseSchemaRepository : IDatabaseSchemaRepository
     {
         private readonly DatabaseAccessor _accessor;
 
