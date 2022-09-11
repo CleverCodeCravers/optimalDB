@@ -48,12 +48,13 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.DatabaseObjectsTreeView = new System.Windows.Forms.TreeView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
             this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -79,7 +80,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationToolStripMenuItem,
             this.gotoDatabaseObjectToolStripMenuItem,
-            this.scriptsToolStripMenuItem});
+            this.scriptsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1167, 24);
@@ -279,6 +281,16 @@
             this.panel3.Size = new System.Drawing.Size(262, 23);
             this.panel3.TabIndex = 2;
             // 
+            // UpdateDatabaseObjectsButton
+            // 
+            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(185, 0);
+            this.UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
+            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(75, 23);
+            this.UpdateDatabaseObjectsButton.TabIndex = 1;
+            this.UpdateDatabaseObjectsButton.Text = "Update";
+            this.UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
+            this.UpdateDatabaseObjectsButton.Click += new System.EventHandler(this.UpdateDatabaseObjectsButton_Click);
+            // 
             // ObjectsLabel
             // 
             this.ObjectsLabel.AutoSize = true;
@@ -312,6 +324,7 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
+            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
@@ -363,15 +376,13 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Code";
             // 
-            // UpdateDatabaseObjectsButton
+            // aboutToolStripMenuItem
             // 
-            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(185, 0);
-            this.UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
-            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(75, 23);
-            this.UpdateDatabaseObjectsButton.TabIndex = 1;
-            this.UpdateDatabaseObjectsButton.Text = "Update";
-            this.UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
-            this.UpdateDatabaseObjectsButton.Click += new System.EventHandler(this.UpdateDatabaseObjectsButton_Click);
+            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // DatabaseBrowserForm
             // 
@@ -438,5 +449,6 @@
         private ComboBox LanguageComboBox;
         private ToolStripMenuItem selectScriptFolderToolStripMenuItem;
         private Button UpdateDatabaseObjectsButton;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

@@ -3,6 +3,7 @@ using FastColoredTextBoxNS;
 using FastColoredTextBoxNS.Text;
 using FastColoredTextBoxNS.Types;
 using optimalDb.BL;
+using optimalDb.BL.AutoUpdates;
 using optimalDb.BL.ConfigurationFileFormats;
 using optimalDb.Infrastructure;
 using optimalDb.Interfaces;
@@ -393,6 +394,14 @@ namespace optimalDb.WinForms
         private void UpdateDatabaseObjectsButton_Click(object sender, EventArgs e)
         {
             DatabasesListbox_SelectedIndexChanged(null, null);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var aboutForm = new AboutForm(VersionInformation.Version, "https://github.com/stho32/optimalDB", "optimalDb"))
+            {
+                aboutForm.ShowDialog();
+            }
         }
     }
 }
