@@ -11,4 +11,9 @@ public class DatabaseConnection : IDatabaseConnection
         Name = name;
         ConnectionString = connectionString;
     }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

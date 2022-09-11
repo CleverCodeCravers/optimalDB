@@ -1,6 +1,6 @@
 ﻿namespace optimalDb.Interfaces;
 
-public interface IViewName
+public interface IDatabaseObject
 {
     string Schema { get; }
     string Name { get; }

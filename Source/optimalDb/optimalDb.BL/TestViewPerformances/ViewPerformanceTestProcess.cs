@@ -4,28 +4,17 @@ namespace optimalDb.BL.TestViewPerformances;
 
 public class ViewPerformanceTestProcess : Process
 {
-    private readonly IDatabaseSchemaRepository _schemaRepository;
     private readonly IDatabaseAccessor _databaseAccessor;
 
     public ViewPerformanceTestProcess(
-        IDatabaseSchemaRepository schemaRepository,
         IDatabaseAccessor databaseAccessor)
     {
-        _schemaRepository = schemaRepository;
         _databaseAccessor = databaseAccessor;
     }
 
 
     public override void GenerateProcessSteps()
     {
-        Steps = new List<ProcessStep>();
-
-        var views = _schemaRepository.GetViewList();
-
-        foreach (var view in views)
-        {
-            Steps.Add(new MeasureViewPerformanceProcessStep(view, _databaseAccessor));
-        }
     }
 
     public override void Run(Action<string, int> reportProgress, Func<bool> getCancellationPending)

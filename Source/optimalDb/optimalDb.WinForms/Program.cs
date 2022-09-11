@@ -27,7 +27,7 @@ namespace optimalDb.WinForms
             }
 
 
-            Application.Run(new MainForm());
+            Application.Run(new DatabaseBrowserForm());
         }
 
         private static bool AutoUpdate()

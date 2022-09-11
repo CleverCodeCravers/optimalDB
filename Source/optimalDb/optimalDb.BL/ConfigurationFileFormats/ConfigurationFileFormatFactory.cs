@@ -10,8 +10,8 @@ public static class ConfigurationFileFormatFactory
             new ConfigurationFileFormatCollection(
                 new IConfigurationFileFormat?[]
                 {
-                    new JsonConfigurationFileFormat(),
-                    new CfgConfigurationFileFormat()
+                    new CfgConfigurationFileFormat(),
+                    new JsonConfigurationFileFormat()
                 });
     }
 }

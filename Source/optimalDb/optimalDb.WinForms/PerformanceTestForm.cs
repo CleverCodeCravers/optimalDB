@@ -1,19 +1,16 @@
-using Newtonsoft.Json;
 using optimalDb.BL;
 using optimalDb.Infrastructure;
 using optimalDb.WinForms.GridExtras;
 using System.Text;
 using optimalDb.BL.AutoUpdates;
 using optimalDb.Interfaces;
-using System.Diagnostics;
 using optimalDb.BL.ConfigurationFileFormats;
-using VisualPairCoding.Infrastructure;
 
 namespace optimalDb.WinForms
 {
-    public partial class MainForm : Form
+    public partial class PerformanceTestForm : Form
     {
-        public MainForm()
+        public PerformanceTestForm()
         {
             InitializeComponent();
         }

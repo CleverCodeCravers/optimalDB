@@ -35,36 +35,36 @@ namespace optimalDb.WinForms
 
         private void AsyncWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var databaseAccessor = new DatabaseAccessor(_connectionString);
-            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-            var process = new ViewPerformanceTestProcess(
-                schemaRepository,
-                databaseAccessor
-                );
+            //var databaseAccessor = new DatabaseAccessor(_connectionString);
+            //var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+            //var process = new ViewPerformanceTestProcess(
+            //    schemaRepository,
+            //    databaseAccessor
+            //    );
 
-            process.GenerateProcessSteps();
+            //process.GenerateProcessSteps();
 
-            process.Run(
-                (text, percent) => AsyncWorker.ReportProgress(percent, text),
-                 () => AsyncWorker.CancellationPending
-                );
+            //process.Run(
+            //    (text, percent) => AsyncWorker.ReportProgress(percent, text),
+            //     () => AsyncWorker.CancellationPending
+            //    );
 
 
-            Result = process.Results;
+            //Result = process.Results;
 
-            var maximumDurationInSeconds = 
-                Result.Max(x => x.DurationInSeconds);
+            //var maximumDurationInSeconds = 
+            //    Result.Max(x => x.DurationInSeconds);
 
-            var fakeExceptionDurationInSeconds = 
-                (maximumDurationInSeconds??0) +1;
+            //var fakeExceptionDurationInSeconds = 
+            //    (maximumDurationInSeconds??0) +1;
 
-            Result = Result.OrderByDescending(x =>
-            {
-                var orderValue = x.DurationInSeconds;
-                if (!string.IsNullOrWhiteSpace(x.ExceptionMessage))
-                    orderValue = fakeExceptionDurationInSeconds;
-                return orderValue;
-            }).ToList();
+            //Result = Result.OrderByDescending(x =>
+            //{
+            //    var orderValue = x.DurationInSeconds;
+            //    if (!string.IsNullOrWhiteSpace(x.ExceptionMessage))
+            //        orderValue = fakeExceptionDurationInSeconds;
+            //    return orderValue;
+            //}).ToList();
         }
 
         private void AsyncWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

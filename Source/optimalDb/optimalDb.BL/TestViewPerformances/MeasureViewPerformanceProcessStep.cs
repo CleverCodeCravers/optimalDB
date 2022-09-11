@@ -4,15 +4,15 @@ namespace optimalDb.BL.TestViewPerformances;
 
 public class MeasureViewPerformanceProcessStep : ProcessStep
 {
-    private readonly IViewName _viewName;
+    private readonly IDatabaseObject _databaseObject;
     private readonly IDatabaseAccessor _databaseAccessor;
 
     public MeasureViewPerformanceProcessStep(
-        IViewName viewName, 
+        IDatabaseObject databaseObject, 
         IDatabaseAccessor databaseAccessor) : 
-        base($"Measure view performance of {viewName.Fullname}")
+        base($"Measure view performance of {databaseObject.Fullname}")
     {
-        _viewName = viewName;
+        _databaseObject = databaseObject;
         _databaseAccessor = databaseAccessor;
     }
 
@@ -21,16 +21,16 @@ public class MeasureViewPerformanceProcessStep : ProcessStep
         try
         {
             return new ViewPerformanceTestResult(
-                _viewName.Fullname,
+                _databaseObject.Fullname,
                 GetDurationOfViewExecution(
-                    _viewName.Fullname, 
+                    _databaseObject.Fullname, 
                     _databaseAccessor)
             );
         }
         catch (Exception exception)
         {
             return new ViewPerformanceTestResult(
-                _viewName.Fullname,
+                _databaseObject.Fullname,
                 null,
                 exception.Message
             );

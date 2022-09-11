@@ -34,31 +34,31 @@ parser.On(
 
         var databaseAccessor = new DatabaseAccessor(connection.ConnectionString);
         var databaseSchemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-        var viewPerformanceTest = new ViewPerformanceTestProcess(databaseSchemaRepository, databaseAccessor);
+        //var viewPerformanceTest = new ViewPerformanceTestProcess(databaseSchemaRepository, databaseAccessor);
 
-        viewPerformanceTest.GenerateProcessSteps();
-        viewPerformanceTest.Run(
-            (text, percent) => Console.WriteLine($"  - {percent} % - {text}..."),
-            () => false);
+        //viewPerformanceTest.GenerateProcessSteps();
+        //viewPerformanceTest.Run(
+        //    (text, percent) => Console.WriteLine($"  - {percent} % - {text}..."),
+        //    () => false);
 
-        var results = viewPerformanceTest.Results;
+        //var results = viewPerformanceTest.Results;
 
-        if (results == null)
-        {
-            Console.WriteLine("No results available");
-            return;
-        }
+        //if (results == null)
+        //{
+        //    Console.WriteLine("No results available");
+        //    return;
+        //}
 
-        foreach (var result in results)
-        {
-            if (result.DurationInSeconds == null)
-            {
-                Console.WriteLine($" - {result.ViewName}: {result.ExceptionMessage}");
-                continue;
-            }
+        //foreach (var result in results)
+        //{
+        //    if (result.DurationInSeconds == null)
+        //    {
+        //        Console.WriteLine($" - {result.ViewName}: {result.ExceptionMessage}");
+        //        continue;
+        //    }
 
-            Console.WriteLine($" - {result.ViewName}, {result.DurationInSeconds?.ToString("N2")}s ");
-        }
+        //    Console.WriteLine($" - {result.ViewName}, {result.DurationInSeconds?.ToString("N2")}s ");
+        //}
     });
 
 parser.Run();

@@ -7,10 +7,12 @@ namespace optimalDb.Infrastructure;
 public class DatabaseAccessor : IDatabaseAccessor
 {
     private readonly string _connectionString;
+    private readonly string? _database;
 
-    public DatabaseAccessor(string connectionString)
+    public DatabaseAccessor(string connectionString, string? database = "")
     {
         _connectionString = connectionString;
+        _database = database;
     }
 
     public DataTable LoadDataTable(string sql, Dictionary<string, object> parameters = null, int timeoutInSeconds = 15)

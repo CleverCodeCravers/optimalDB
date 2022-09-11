@@ -1,6 +1,6 @@
 ﻿namespace optimalDb.WinForms
 {
-    partial class MainForm
+    partial class PerformanceTestForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerformanceTestForm));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
