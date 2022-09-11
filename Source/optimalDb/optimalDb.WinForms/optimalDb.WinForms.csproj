@@ -24,4 +24,10 @@
     <ProjectReference Include="..\optimalDb.Infrastructure\optimalDb.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="SelectScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

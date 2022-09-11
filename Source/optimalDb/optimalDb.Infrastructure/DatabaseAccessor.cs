@@ -13,6 +13,9 @@ public class DatabaseAccessor : IDatabaseAccessor
     {
         _connectionString = connectionString;
         _database = database;
+
+        var connectionStringModifier = new ConnectionStringModifier(_connectionString);
+        _connectionString = connectionStringModifier.ChangeDatabaseTo(_database);
     }
 
     public DataTable LoadDataTable(string sql, Dictionary<string, object> parameters = null, int timeoutInSeconds = 15)

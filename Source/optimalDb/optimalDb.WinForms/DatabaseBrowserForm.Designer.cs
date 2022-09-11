@@ -33,7 +33,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectScriptFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gotoDatabaseObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.connectionStringListbox = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,6 +51,7 @@
             this.ObjectsLabel = new System.Windows.Forms.Label();
             this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -73,7 +77,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationToolStripMenuItem,
-            this.gotoDatabaseObjectToolStripMenuItem});
+            this.gotoDatabaseObjectToolStripMenuItem,
+            this.scriptsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1167, 24);
@@ -83,7 +88,8 @@
             // configurationToolStripMenuItem
             // 
             this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadConfigurationToolStripMenuItem});
+            this.loadConfigurationToolStripMenuItem,
+            this.selectScriptFolderToolStripMenuItem});
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             this.configurationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.configurationToolStripMenuItem.Text = "Configuration";
@@ -91,9 +97,16 @@
             // loadConfigurationToolStripMenuItem
             // 
             this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
             this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
+            // 
+            // selectScriptFolderToolStripMenuItem
+            // 
+            this.selectScriptFolderToolStripMenuItem.Name = "selectScriptFolderToolStripMenuItem";
+            this.selectScriptFolderToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.selectScriptFolderToolStripMenuItem.Text = "Select Script Folder...";
+            this.selectScriptFolderToolStripMenuItem.Click += new System.EventHandler(this.selectScriptFolderToolStripMenuItem_Click);
             // 
             // gotoDatabaseObjectToolStripMenuItem
             // 
@@ -103,6 +116,22 @@
             this.gotoDatabaseObjectToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
             this.gotoDatabaseObjectToolStripMenuItem.Text = "Goto Database-Object (Ctrl + T)";
             this.gotoDatabaseObjectToolStripMenuItem.Click += new System.EventHandler(this.gotoDatabaseObjectToolStripMenuItem_Click);
+            // 
+            // scriptsToolStripMenuItem
+            // 
+            this.scriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem});
+            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.scriptsToolStripMenuItem.Text = "Scripts";
+            // 
+            // executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem
+            // 
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Name = "executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem";
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object... (Ctrl+E)";
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += new System.EventHandler(this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -272,7 +301,7 @@
         '\'',
         '\''};
             this.CodeTextbox.AutoIndentCharsPatterns = "";
-            this.CodeTextbox.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.CodeTextbox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.CodeTextbox.BackBrush = null;
             this.CodeTextbox.CharHeight = 14;
             this.CodeTextbox.CharWidth = 8;
@@ -281,6 +310,7 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
+            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
@@ -300,12 +330,27 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel4.Controls.Add(this.LanguageComboBox);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(546, 23);
             this.panel4.TabIndex = 3;
+            // 
+            // LanguageComboBox
+            // 
+            this.LanguageComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LanguageComboBox.FormattingEnabled = true;
+            this.LanguageComboBox.Items.AddRange(new object[] {
+            "T-SQL",
+            "C#"});
+            this.LanguageComboBox.Location = new System.Drawing.Point(421, 0);
+            this.LanguageComboBox.Name = "LanguageComboBox";
+            this.LanguageComboBox.Size = new System.Drawing.Size(122, 23);
+            this.LanguageComboBox.TabIndex = 1;
+            this.LanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguageComboBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -327,6 +372,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DatabaseBrowserForm";
             this.Text = "DatabaseBrowserForm";
+            this.Load += new System.EventHandler(this.DatabaseBrowserForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -376,5 +422,9 @@
         private Label label3;
         private FastColoredTextBoxNS.FastColoredTextBox CodeTextbox;
         private ToolStripMenuItem gotoDatabaseObjectToolStripMenuItem;
+        private ToolStripMenuItem scriptsToolStripMenuItem;
+        private ToolStripMenuItem executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem;
+        private ComboBox LanguageComboBox;
+        private ToolStripMenuItem selectScriptFolderToolStripMenuItem;
     }
 }

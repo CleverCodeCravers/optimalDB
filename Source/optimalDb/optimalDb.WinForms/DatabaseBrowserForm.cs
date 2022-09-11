@@ -1,4 +1,7 @@
-﻿using FastColoredTextBoxNS.Types;
+﻿using System.Diagnostics;
+using FastColoredTextBoxNS;
+using FastColoredTextBoxNS.Text;
+using FastColoredTextBoxNS.Types;
 using optimalDb.BL;
 using optimalDb.BL.ConfigurationFileFormats;
 using optimalDb.Infrastructure;
@@ -88,10 +91,10 @@ namespace optimalDb.WinForms
 
         private string? GetSelectedDatabase()
         {
-            if (connectionStringListbox.SelectedItem == null)
+            if (DatabasesListbox.SelectedItem == null)
                 return null;
 
-            return connectionStringListbox.SelectedItem.ToString();
+            return DatabasesListbox.SelectedItem.ToString();
         }
 
         private void connectionStringListbox_SelectedIndexChanged(object sender, EventArgs e)
@@ -139,6 +142,10 @@ namespace optimalDb.WinForms
             AddDatabaseObjectsToTreeview("Views", schemaRepository.GetViewList(), DatabaseObjectsTreeView.Nodes);
             AddDatabaseObjectsToTreeview("Stored Procedures", schemaRepository.GetStoredProcedureList(), DatabaseObjectsTreeView.Nodes);
             AddDatabaseObjectsToTreeview("Functions", schemaRepository.GetFunctionList(), DatabaseObjectsTreeView.Nodes);
+
+            DatabaseObjectsTreeView.ExpandAll();
+            if (DatabaseObjectsTreeView.Nodes.Count > 0)
+                DatabaseObjectsTreeView.Nodes[0].EnsureVisible();
         }
 
         private void AddDatabaseObjectsToTreeview(string sectionName, DatabaseObject[] databaseObjects, TreeNodeCollection nodes)
@@ -259,6 +266,109 @@ namespace optimalDb.WinForms
             else
             {
                 e.DrawDefault = true;
+            }
+        }
+
+        private DirectoryInfo ScriptDirectory = null;
+
+        private void executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ScriptDirectory == null)
+            {
+                MessageBox.Show("No Script-Directory has been selected");
+                return;
+            }
+
+            var node = DatabaseObjectsTreeView.SelectedNode;
+            if (node == null)
+            {
+                MessageBox.Show("No database object selected");
+                return;
+            }
+
+            var databaseObject = node.Tag as DatabaseObject;
+            if (databaseObject == null)
+                return;
+
+            var baseConnectionString = GetSelectedConnectionString();
+            if (baseConnectionString == null)
+                return;
+
+            var database = GetSelectedDatabase();
+            if (database == null)
+                return;
+
+            var modifier = new ConnectionStringModifier(baseConnectionString);
+            var connectionString = modifier.ChangeDatabaseTo(database);
+
+            using (var form = new SelectScriptForm(ScriptDirectory))
+            {
+                form.ShowDialog();
+                if (form.Result != null)
+                {
+                    var resultingText = ExecuteScript(form.Result.FullName, connectionString, database, databaseObject.Schema, databaseObject.Name);
+                    CodeTextbox.Text = resultingText;
+                }
+            }
+        }
+
+        private string ExecuteScript(string scriptFile, string connectionString, string database, string databaseObjectSchema, string databaseObjectName)
+        {
+            var output = "";
+
+            Process process = new Process();
+            process.StartInfo.FileName = "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe";
+            process.StartInfo.Arguments = "-file \"" + scriptFile + "\"" +
+                                          " -ConnectionString \"" + connectionString + "\"" +
+                                          " -Database \"" + database + "\"" +
+                                          " -Schema \"" + databaseObjectSchema + "\"" +
+                                          " -ObjectName \"" + databaseObjectName + "\"";
+
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+
+            process.Start();
+
+            output += process.StandardOutput.ReadToEnd();
+            output += process.StandardError.ReadToEnd();
+
+            process.WaitForExit();
+
+            return output;
+        }
+
+        private void LanguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LanguageComboBox.SelectedItem != null)
+            {
+                if (LanguageComboBox.SelectedText == "C#")
+                {
+                    CodeTextbox.Language = Language.CSharp;
+                }
+                if (LanguageComboBox.SelectedText == "T-SQL")
+                {
+                    CodeTextbox.Language = Language.SQL;
+                }
+            }
+        }
+
+        private void DatabaseBrowserForm_Load(object sender, EventArgs e)
+        {
+            LanguageComboBox.SelectedIndex = 0;
+        }
+
+        private void selectScriptFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                DialogResult result = folderBrowserDialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    ScriptDirectory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+                }
             }
         }
     }
