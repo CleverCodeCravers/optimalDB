@@ -314,29 +314,47 @@ namespace optimalDb.WinForms
 
         private string ExecuteScript(string scriptFile, string connectionString, string database, string databaseObjectSchema, string databaseObjectName)
         {
-            var output = "";
+            Cursor.Current = Cursors.WaitCursor;
 
-            Process process = new Process();
-            process.StartInfo.FileName = "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe";
-            process.StartInfo.Arguments = "-file \"" + scriptFile + "\"" +
-                                          " -ConnectionString \"" + connectionString + "\"" +
-                                          " -Database \"" + database + "\"" +
-                                          " -Schema \"" + databaseObjectSchema + "\"" +
-                                          " -ObjectName \"" + databaseObjectName + "\"";
+            try
+            {
+                var output = "";
 
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.CreateNoWindow = true;
+                Process process = new Process();
+                process.StartInfo.FileName = "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe";
+                process.StartInfo.Arguments = "-file \"" + scriptFile + "\"" +
+                                              " -ConnectionString \"" + connectionString + "\"" +
+                                              " -Database \"" + database + "\"" +
+                                              " -Schema \"" + databaseObjectSchema + "\"" +
+                                              " -ObjectName \"" + databaseObjectName + "\"";
 
-            process.Start();
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.CreateNoWindow = true;
 
-            output += process.StandardOutput.ReadToEnd();
-            output += process.StandardError.ReadToEnd();
+                process.Start();
 
-            process.WaitForExit();
+                output += process.StandardOutput.ReadToEnd();
+                output += process.StandardError.ReadToEnd();
 
-            return output;
+                process.WaitForExit();
+
+                if (output.Contains("###OUTPUTSTARTSHERE###"))
+                {
+                    output = output.Split("###OUTPUTSTARTSHERE###", 2)[1].Trim();
+                }
+
+                return output;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void LanguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
