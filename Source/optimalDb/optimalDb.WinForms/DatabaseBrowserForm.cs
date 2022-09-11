@@ -389,5 +389,10 @@ namespace optimalDb.WinForms
                 }
             }
         }
+
+        private void UpdateDatabaseObjectsButton_Click(object sender, EventArgs e)
+        {
+            DatabasesListbox_SelectedIndexChanged(null, null);
+        }
     }
 }

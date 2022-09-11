@@ -53,6 +53,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -270,6 +271,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel3.Controls.Add(this.UpdateDatabaseObjectsButton);
             this.panel3.Controls.Add(this.ObjectsLabel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -310,7 +312,6 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
-            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
@@ -361,6 +362,16 @@
             this.label3.Size = new System.Drawing.Size(35, 15);
             this.label3.TabIndex = 0;
             this.label3.Text = "Code";
+            // 
+            // UpdateDatabaseObjectsButton
+            // 
+            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(185, 0);
+            this.UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
+            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(75, 23);
+            this.UpdateDatabaseObjectsButton.TabIndex = 1;
+            this.UpdateDatabaseObjectsButton.Text = "Update";
+            this.UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
+            this.UpdateDatabaseObjectsButton.Click += new System.EventHandler(this.UpdateDatabaseObjectsButton_Click);
             // 
             // DatabaseBrowserForm
             // 
@@ -426,5 +437,6 @@
         private ToolStripMenuItem executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem;
         private ComboBox LanguageComboBox;
         private ToolStripMenuItem selectScriptFolderToolStripMenuItem;
+        private Button UpdateDatabaseObjectsButton;
     }
 }
