@@ -343,7 +343,16 @@ namespace optimalDb.WinForms
 
                 if (output.Contains("###OUTPUTSTARTSHERE###"))
                 {
-                    output = output.Split("###OUTPUTSTARTSHERE###", 2)[1].Trim();
+                    output = output.Split("###OUTPUTSTARTSHERE###", 2)[1];
+                    var inRows = new List<string>(output.Split("\n"));
+
+                    for (var i = inRows.Count-1; i >= 0; i--)
+                    {
+                        if (string.IsNullOrWhiteSpace(inRows[i].Trim())) 
+                            inRows.RemoveAt(i);
+                    }
+
+                    return string.Join("\n", inRows.ToArray());
                 }
 
                 return output;
