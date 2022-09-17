@@ -1,370 +1,192 @@
 ﻿using System.Diagnostics;
-using FastColoredTextBoxNS;
 using FastColoredTextBoxNS.Text;
 using FastColoredTextBoxNS.Types;
 using optimalDb.BL;
 using optimalDb.BL.AutoUpdates;
 using optimalDb.BL.ConfigurationFileFormats;
+using optimalDb.BL.Scripting;
 using optimalDb.Infrastructure;
 using optimalDb.Interfaces;
+using optimalDb.WinForms.Properties;
+using optimalDb.WinForms.UiExtensions;
 
 namespace optimalDb.WinForms
 {
     public partial class DatabaseBrowserForm : Form
     {
         protected List<IDatabaseConnection> Connections = new();
+        private DirectoryInfo? _scriptDirectory = null;
 
         public DatabaseBrowserForm()
         {
             InitializeComponent();
         }
 
-        private void PleaseWait(Action action)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-
-            try
-            {
-                action();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            Cursor.Current = Cursors.Default;
-        }
-
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var availableFormats = ConfigurationFileFormatFactory.GetAllFileFormats();
 
-            using (var openFileDialog = new OpenFileDialog())
+            using var openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = availableFormats.FilterForDialogs();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                openFileDialog.Filter = availableFormats.FilterForDialogs();
+                var format = availableFormats.GetMatchingFormatFor(openFileDialog.FileName);
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                if (format == null)
                 {
-                    var format = availableFormats.GetMatchingFormatFor(openFileDialog.FileName);
-
-                    if (format == null)
-                    {
-                        MessageBox.Show("Sorry, I do not know how to read that format.");
-                        return;
-                    }
-
-                    Connections.Clear();
-
-                    try
-                    {
-                        var connections = format.Load(openFileDialog.FileName);
-                        if (connections != null)
-                            Connections.AddRange(connections);
-
-                        Connections.Sort((x,y) => string.CompareOrdinal(x.Name, y.Name));
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show(exception.Message);
-                    }
-
-                    PleaseWait(UpdateConnectionsListView);
+                    MessageBox.Show("Sorry, I do not know how to read that format.");
+                    return;
                 }
+
+                Connections.Clear();
+
+                try
+                {
+                    var connections = format.Load(openFileDialog.FileName);
+                    if (connections != null)
+                        Connections.AddRange(connections);
+
+                    Connections.Sort((x,y) => string.CompareOrdinal(x.Name, y.Name));
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+
+                MouseCursorTools.WithWaitCursor(UpdateConnectionsListView);
             }
         }
 
         private void UpdateConnectionsListView()
         {
-            connectionStringListbox.Items.Clear();
-            connectionStringListbox.Items.AddRange(Connections.ToArray());
+            ConnectionsListbox.Items.Clear();
+            ConnectionsListbox.Items.AddRange(Connections.ToArray());
+
             DatabasesListbox.Items.Clear();
-            DatabaseObjectsTreeView.Nodes.Clear();
-        }
-
-        private string? GetSelectedConnectionString()
-        {
-            var connection = connectionStringListbox.SelectedItem as IDatabaseConnection;
-            if (connection != null)
-                return connection.ConnectionString;
-
-            return null;
-        }
-
-        private string? GetSelectedDatabase()
-        {
-            if (DatabasesListbox.SelectedItem == null)
-                return null;
-
-            return DatabasesListbox.SelectedItem.ToString();
+            DatabaseObjectsListBox.Items.Clear();
         }
 
         private void connectionStringListbox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PleaseWait(UpdateDatabasesListView);
+            MouseCursorTools.WithWaitCursor(UpdateDatabasesListView);
         }
 
         private void UpdateDatabasesListView()
         {
-            var connectionString = GetSelectedConnectionString();
-            if (connectionString == null)
-                return;
+            if (ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
+            {
+                if (connection == null)
+                    return;
 
-            DatabasesListbox.Items.Clear();
+                DatabasesListbox.Items.Clear();
 
-            var databaseAccessor = new DatabaseAccessor(connectionString);
-            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+                var databaseAccessor = new DatabaseAccessor(connection.ConnectionString);
+                var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
-            var databases = schemaRepository.GetDatabaseList();
+                var databases = schemaRepository.GetDatabaseList();
 
-            DatabasesListbox.Items.AddRange(databases);
+                DatabasesListbox.Items.AddRange(databases);
+            }
         }
 
         private void DatabasesListbox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PleaseWait(UpdateDatabaseObjectsTreeView);
+            MouseCursorTools.WithWaitCursor(UpdateDatabaseObjectsTreeView);
         }
 
         private void UpdateDatabaseObjectsTreeView()
         {
-            var connectionString = GetSelectedConnectionString();
-            if (connectionString == null)
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
                 return;
 
-            var database = GetSelectedDatabase();
-            if (database == null)
+            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
 
-            DatabaseObjectsTreeView.Nodes.Clear();
+            DatabaseObjectsListBox.Items.Clear();
 
-            var databaseAccessor = new DatabaseAccessor(connectionString, database);
+            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString??"", database);
             var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
-            AddDatabaseObjectsToTreeview("Tables", schemaRepository.GetTableList(), DatabaseObjectsTreeView.Nodes);
-            AddDatabaseObjectsToTreeview("Views", schemaRepository.GetViewList(), DatabaseObjectsTreeView.Nodes);
-            AddDatabaseObjectsToTreeview("Stored Procedures", schemaRepository.GetStoredProcedureList(), DatabaseObjectsTreeView.Nodes);
-            AddDatabaseObjectsToTreeview("Functions", schemaRepository.GetFunctionList(), DatabaseObjectsTreeView.Nodes);
+            var databaseObjects = new List<DatabaseObject>();
+            databaseObjects.AddRange(schemaRepository.GetTableList());
+            databaseObjects.AddRange(schemaRepository.GetViewList());
+            databaseObjects.AddRange(schemaRepository.GetStoredProcedureList());
+            databaseObjects.AddRange(schemaRepository.GetFunctionList());
 
-            DatabaseObjectsTreeView.ExpandAll();
-            if (DatabaseObjectsTreeView.Nodes.Count > 0)
-                DatabaseObjectsTreeView.Nodes[0].EnsureVisible();
-        }
+            databaseObjects.Sort((x, y) => string.CompareOrdinal(x.Fullname, y.Fullname));
 
-        private void AddDatabaseObjectsToTreeview(string sectionName, DatabaseObject[] databaseObjects, TreeNodeCollection nodes)
-        {
-            var sectionRootNode = new TreeNode(sectionName);
-
-            var schemas = databaseObjects.GroupBy(x => x.Schema);
-
-            foreach (var schema in schemas)
-            {
-                var schemaNode = new TreeNode(schema.Key);
-
-                foreach (var databaseObject in schema)
-                {
-                    var node = new TreeNode(databaseObject.Name);
-                    node.Tag = databaseObject;
-
-                    schemaNode.Nodes.Add(node);
-                }
-
-                sectionRootNode.Nodes.Add(schemaNode);
-            }
-
-            nodes.Add(sectionRootNode);
-        }
-
-        private void DatabaseObjectsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            var node = e.Node;
-            if (node == null)
-                return;
-
-            var databaseObject = node.Tag as DatabaseObject;
-            if (databaseObject == null)
-                return;
-
-            if (databaseObject.Type == DatabaseObjectTypeEnum.Table)
-                return;
-
-            var connectionString = GetSelectedConnectionString();
-            if (connectionString == null)
-                return;
-
-            var database = GetSelectedDatabase();
-            if (database == null)
-                return;
-
-            var databaseAccessor = new DatabaseAccessor(connectionString, database);
-            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-
-            CodeTextbox.Text = schemaRepository.GetCode(databaseObject.Fullname);
-            CodeTextbox.Selection = new TextSelectionRange(CodeTextbox, 0, 0, 0, 0);
+            DatabaseObjectsListBox.Items.AddRange(databaseObjects.ToArray());
         }
 
         private void gotoDatabaseObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var connectionString = GetSelectedConnectionString();
-            if (connectionString == null)
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
                 return;
 
-            var database = GetSelectedDatabase();
-            if (database == null)
+            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
 
-            using (var form = new SelectDatabaseObjectForm(connectionString, database))
+            using var form = new SelectDatabaseObjectForm(connection?.ConnectionString??"", database??"");
+            form.ShowDialog();
+
+            var result = form.Result;
+
+            if (result == null)
+                return;
+
+            foreach (var element in DatabaseObjectsListBox.Items)
             {
-                form.ShowDialog();
-                var result = form.Result;
-
-                if (result == null)
-                    return;
-
-                var nodeToSelect = GetNodeByDatabaseObject(DatabaseObjectsTreeView.Nodes, result);
-                DatabaseObjectsTreeView.SelectedNode = nodeToSelect;
+                var databaseObject = element as DatabaseObject;
+                if (databaseObject?.Fullname == result.Fullname)
+                    DatabaseObjectsListBox.SelectedItem = databaseObject;
             }
         }
 
-        private TreeNode GetNodeByDatabaseObject(TreeNodeCollection nodes, DatabaseObject lookForThis)
-        {
-            foreach (TreeNode? node in nodes)
-            {
-                if (node.Nodes.Count > 0)
-                {
-                    var childNode = GetNodeByDatabaseObject(node.Nodes, lookForThis);
-                    if (childNode != null)
-                        return childNode;
-                }
-                    
-
-                var databaseObject = node.Tag as DatabaseObject;
-                if (databaseObject == null)
-                    continue;
-
-                if (lookForThis.Fullname == databaseObject.Fullname)
-                    return node;
-            }
-
-            return null;
-        }
-
-        private void DatabaseObjectsTreeView_DrawNode(object sender, DrawTreeNodeEventArgs e)
-        {
-            if (e.Node == null) return;
-
-            // if treeview's HideSelection property is "True", 
-            // this will always returns "False" on unfocused treeview
-            var selected = (e.State & TreeNodeStates.Selected) == TreeNodeStates.Selected;
-            var unfocused = !e.Node.TreeView.Focused;
-
-            // we need to do owner drawing only on a selected node
-            // and when the treeview is unfocused, else let the OS do it for us
-            if (selected && unfocused)
-            {
-                var font = e.Node.NodeFont ?? e.Node.TreeView.Font;
-                e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
-                TextRenderer.DrawText(e.Graphics, e.Node.Text, font, e.Bounds, SystemColors.HighlightText, TextFormatFlags.GlyphOverhangPadding);
-            }
-            else
-            {
-                e.DrawDefault = true;
-            }
-        }
-
-        private DirectoryInfo ScriptDirectory = null;
 
         private void executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ScriptDirectory == null)
+            if (_scriptDirectory == null)
             {
                 MessageBox.Show("No Script-Directory has been selected");
                 return;
             }
 
-            var node = DatabaseObjectsTreeView.SelectedNode;
-            if (node == null)
+            if (!DatabaseObjectsListBox.TryGetSelectedItemAs(out DatabaseObject? selectedItem))
             {
                 MessageBox.Show("No database object selected");
                 return;
             }
 
-            var databaseObject = node.Tag as DatabaseObject;
-            if (databaseObject == null)
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? databaseConnection))
                 return;
 
-            var baseConnectionString = GetSelectedConnectionString();
-            if (baseConnectionString == null)
+            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
-
-            var database = GetSelectedDatabase();
-            if (database == null)
-                return;
-
-            var modifier = new ConnectionStringModifier(baseConnectionString);
+            
+            var modifier = new ConnectionStringModifier(databaseConnection?.ConnectionString??"");
             var connectionString = modifier.ChangeDatabaseTo(database);
 
-            using (var form = new SelectScriptForm(ScriptDirectory))
-            {
-                form.ShowDialog();
-                if (form.Result != null)
-                {
-                    var resultingText = ExecuteScript(form.Result.FullName, connectionString, database, databaseObject.Schema, databaseObject.Name);
-                    CodeTextbox.Text = resultingText;
-                }
-            }
-        }
+            using var form = new SelectScriptForm(_scriptDirectory);
+            
+            form.ShowDialog();
 
-        private string ExecuteScript(string scriptFile, string connectionString, string database, string databaseObjectSchema, string databaseObjectName)
-        {
-            Cursor.Current = Cursors.WaitCursor;
+            if (form.Result == null) 
+                return;
 
-            try
-            {
-                var output = "";
+            var fullname = form.Result.FullName;
 
-                Process process = new Process();
-                process.StartInfo.FileName = "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe";
-                process.StartInfo.Arguments = "-file \"" + scriptFile + "\"" +
-                                              " -ConnectionString \"" + connectionString + "\"" +
-                                              " -Database \"" + database + "\"" +
-                                              " -Schema \"" + databaseObjectSchema + "\"" +
-                                              " -ObjectName \"" + databaseObjectName + "\"";
+            var resultingText =
+                MouseCursorTools.WithWaitCursor(
+                    () => PowershellScripting.ExecuteScript(
+                        fullname,
+                        connectionString,
+                        database ?? "",
+                        selectedItem?.Schema ?? "",
+                        selectedItem?.Name ?? ""));
 
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.CreateNoWindow = true;
-
-                process.Start();
-
-                output += process.StandardOutput.ReadToEnd();
-                output += process.StandardError.ReadToEnd();
-
-                process.WaitForExit();
-
-                if (output.Contains("###OUTPUTSTARTSHERE###"))
-                {
-                    output = output.Split("###OUTPUTSTARTSHERE###", 2)[1];
-                    var inRows = new List<string>(output.Split("\n"));
-
-                    for (var i = inRows.Count-1; i >= 0; i--)
-                    {
-                        if (string.IsNullOrWhiteSpace(inRows[i].Trim())) 
-                            inRows.RemoveAt(i);
-                    }
-
-                    return string.Join("\n", inRows.ToArray());
-                }
-
-                return output;
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
+            CodeTextbox.Text = resultingText;
         }
 
         private void LanguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -375,6 +197,7 @@ namespace optimalDb.WinForms
                 {
                     CodeTextbox.Language = Language.CSharp;
                 }
+
                 if (LanguageComboBox.SelectedText == "T-SQL")
                 {
                     CodeTextbox.Language = Language.SQL;
@@ -385,18 +208,25 @@ namespace optimalDb.WinForms
         private void DatabaseBrowserForm_Load(object sender, EventArgs e)
         {
             LanguageComboBox.SelectedIndex = 0;
+
+            System.Resources.ResourceManager resourceManager = 
+                new System.Resources.ResourceManager("optimalDb.WinForms.Properties.Resources", typeof(Resources).Assembly);
+            var updateImageStream = resourceManager.GetObject("Update");
+            
+            UpdateConnectionsButton.Image = updateImageStream as Image;
+            UpdateDatabasesButton.Image = updateImageStream as Image;
+            UpdateDatabaseObjectsButton.Image = updateImageStream as Image;
         }
 
         private void selectScriptFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var folderBrowserDialog = new FolderBrowserDialog())
-            {
-                DialogResult result = folderBrowserDialog.ShowDialog();
+            using var folderBrowserDialog = new FolderBrowserDialog();
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
-                {
-                    ScriptDirectory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
-                }
+            DialogResult result = folderBrowserDialog.ShowDialog();
+
+            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+            {
+                _scriptDirectory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
             }
         }
 
@@ -407,10 +237,30 @@ namespace optimalDb.WinForms
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var aboutForm = new AboutForm(VersionInformation.Version, "https://github.com/stho32/optimalDB", "optimalDb"))
-            {
-                aboutForm.ShowDialog();
-            }
+            using var aboutForm = new AboutForm(VersionInformation.Version, "https://github.com/stho32/optimalDB", "optimalDb");
+
+            aboutForm.ShowDialog();
+        }
+
+        private void DatabaseObjectsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!DatabaseObjectsListBox.TryGetSelectedItemAs(out DatabaseObject? databaseObject))
+                return;
+
+            if (databaseObject?.Type == DatabaseObjectTypeEnum.Table)
+                return;
+
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
+                return;
+
+            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
+                return;
+
+            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString??"", database);
+            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+
+            CodeTextbox.Text = schemaRepository.GetCode(databaseObject?.Fullname??"");
+            CodeTextbox.Selection = new TextSelectionRange(CodeTextbox, 0, 0, 0, 0);
         }
     }
 }

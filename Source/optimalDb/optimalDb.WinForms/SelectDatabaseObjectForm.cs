@@ -31,7 +31,7 @@ namespace optimalDb.WinForms
         }
 
 
-        public DatabaseObject Result { get; private set; }
+        public DatabaseObject? Result { get; private set; }
         protected DatabaseObject[] DatabaseObjects { get; private set; }
 
         private void SelectDatabaseObjectForm_Load(object sender, EventArgs e)

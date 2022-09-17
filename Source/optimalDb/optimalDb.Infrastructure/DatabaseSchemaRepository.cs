@@ -54,7 +54,7 @@ SELECT t.TABLE_SCHEMA, t.TABLE_NAME
             return result.ToString().Trim();
         }
 
-        public string?[] GetDatabaseList()
+        public string[] GetDatabaseList()
         {
             var sql = @"
 SELECT name
@@ -64,7 +64,7 @@ SELECT name
 ";
 
             var data = _accessor.LoadDataTable(sql);
-            var databases = data.ToInstancesOf(row => row["name"].ToString());
+            var databases = data.ToInstancesOf(row => row["name"].ToString()??"");
 
             return databases;
         }

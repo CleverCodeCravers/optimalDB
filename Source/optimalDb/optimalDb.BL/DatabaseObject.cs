@@ -5,6 +5,7 @@ namespace optimalDb.BL;
 
 public enum DatabaseObjectTypeEnum
 {
+    Unknown,
     Table,
     View, 
     Procedure, 

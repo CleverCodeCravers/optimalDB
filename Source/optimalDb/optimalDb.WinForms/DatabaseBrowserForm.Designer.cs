@@ -37,16 +37,25 @@
             this.gotoDatabaseObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.connectionStringListbox = new System.Windows.Forms.ListBox();
+            this.ConnectionsListbox = new System.Windows.Forms.ListBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.UpdateConnectionsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.DatabasesListbox = new System.Windows.Forms.ListBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.UpdateDatabasesButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.DatabaseObjectsTreeView = new System.Windows.Forms.TreeView();
+            this.DatabaseObjectsListBox = new System.Windows.Forms.ListBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
@@ -54,22 +63,25 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).BeginInit();
             this.panel4.SuspendLayout();
@@ -84,7 +96,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1167, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1187, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -136,6 +148,14 @@
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object... (Ctrl+E)";
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += new System.EventHandler(this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -145,36 +165,64 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.connectionStringListbox);
+            this.splitContainer1.Panel1.Controls.Add(this.ConnectionsListbox);
+            this.splitContainer1.Panel1.Controls.Add(this.panel7);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1167, 552);
+            this.splitContainer1.Size = new System.Drawing.Size(1187, 601);
             this.splitContainer1.SplitterDistance = 152;
             this.splitContainer1.TabIndex = 1;
             // 
-            // connectionStringListbox
+            // ConnectionsListbox
             // 
-            this.connectionStringListbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.connectionStringListbox.FormattingEnabled = true;
-            this.connectionStringListbox.ItemHeight = 15;
-            this.connectionStringListbox.Location = new System.Drawing.Point(0, 23);
-            this.connectionStringListbox.Name = "connectionStringListbox";
-            this.connectionStringListbox.Size = new System.Drawing.Size(152, 529);
-            this.connectionStringListbox.TabIndex = 1;
-            this.connectionStringListbox.SelectedIndexChanged += new System.EventHandler(this.connectionStringListbox_SelectedIndexChanged);
+            this.ConnectionsListbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ConnectionsListbox.FormattingEnabled = true;
+            this.ConnectionsListbox.ItemHeight = 15;
+            this.ConnectionsListbox.Location = new System.Drawing.Point(0, 54);
+            this.ConnectionsListbox.Name = "ConnectionsListbox";
+            this.ConnectionsListbox.Size = new System.Drawing.Size(152, 547);
+            this.ConnectionsListbox.TabIndex = 1;
+            this.ConnectionsListbox.SelectedIndexChanged += new System.EventHandler(this.connectionStringListbox_SelectedIndexChanged);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.textBox1);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 27);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(152, 27);
+            this.panel7.TabIndex = 5;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(152, 23);
+            this.textBox1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.UpdateConnectionsButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(152, 23);
+            this.panel1.Size = new System.Drawing.Size(152, 27);
             this.panel1.TabIndex = 0;
+            // 
+            // UpdateConnectionsButton
+            // 
+            this.UpdateConnectionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpdateConnectionsButton.Location = new System.Drawing.Point(121, 1);
+            this.UpdateConnectionsButton.Name = "UpdateConnectionsButton";
+            this.UpdateConnectionsButton.Size = new System.Drawing.Size(30, 25);
+            this.UpdateConnectionsButton.TabIndex = 2;
+            this.UpdateConnectionsButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -196,12 +244,13 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.DatabasesListbox);
+            this.splitContainer2.Panel1.Controls.Add(this.panel6);
             this.splitContainer2.Panel1.Controls.Add(this.panel2);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1011, 552);
+            this.splitContainer2.Size = new System.Drawing.Size(1031, 601);
             this.splitContainer2.SplitterDistance = 195;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -210,21 +259,48 @@
             this.DatabasesListbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DatabasesListbox.FormattingEnabled = true;
             this.DatabasesListbox.ItemHeight = 15;
-            this.DatabasesListbox.Location = new System.Drawing.Point(0, 23);
+            this.DatabasesListbox.Location = new System.Drawing.Point(0, 54);
             this.DatabasesListbox.Name = "DatabasesListbox";
-            this.DatabasesListbox.Size = new System.Drawing.Size(195, 529);
+            this.DatabasesListbox.Size = new System.Drawing.Size(195, 547);
             this.DatabasesListbox.TabIndex = 2;
             this.DatabasesListbox.SelectedIndexChanged += new System.EventHandler(this.DatabasesListbox_SelectedIndexChanged);
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox2);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 27);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(195, 27);
+            this.panel6.TabIndex = 5;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox2.Location = new System.Drawing.Point(0, 0);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(195, 23);
+            this.textBox2.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.Controls.Add(this.UpdateDatabasesButton);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(195, 23);
+            this.panel2.Size = new System.Drawing.Size(195, 27);
             this.panel2.TabIndex = 1;
+            // 
+            // UpdateDatabasesButton
+            // 
+            this.UpdateDatabasesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpdateDatabasesButton.Location = new System.Drawing.Point(164, 1);
+            this.UpdateDatabasesButton.Name = "UpdateDatabasesButton";
+            this.UpdateDatabasesButton.Size = new System.Drawing.Size(30, 25);
+            this.UpdateDatabasesButton.TabIndex = 2;
+            this.UpdateDatabasesButton.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -246,29 +322,45 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.DatabaseObjectsTreeView);
+            this.splitContainer3.Panel1.Controls.Add(this.DatabaseObjectsListBox);
+            this.splitContainer3.Panel1.Controls.Add(this.panel5);
             this.splitContainer3.Panel1.Controls.Add(this.panel3);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.CodeTextbox);
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
-            this.splitContainer3.Size = new System.Drawing.Size(812, 552);
+            this.splitContainer3.Size = new System.Drawing.Size(832, 601);
             this.splitContainer3.SplitterDistance = 262;
             this.splitContainer3.TabIndex = 0;
             // 
-            // DatabaseObjectsTreeView
+            // DatabaseObjectsListBox
             // 
-            this.DatabaseObjectsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DatabaseObjectsTreeView.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.DatabaseObjectsTreeView.FullRowSelect = true;
-            this.DatabaseObjectsTreeView.HideSelection = false;
-            this.DatabaseObjectsTreeView.Location = new System.Drawing.Point(0, 23);
-            this.DatabaseObjectsTreeView.Name = "DatabaseObjectsTreeView";
-            this.DatabaseObjectsTreeView.Size = new System.Drawing.Size(262, 529);
-            this.DatabaseObjectsTreeView.TabIndex = 3;
-            this.DatabaseObjectsTreeView.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.DatabaseObjectsTreeView_DrawNode);
-            this.DatabaseObjectsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DatabaseObjectsTreeView_AfterSelect);
+            this.DatabaseObjectsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseObjectsListBox.FormattingEnabled = true;
+            this.DatabaseObjectsListBox.ItemHeight = 15;
+            this.DatabaseObjectsListBox.Location = new System.Drawing.Point(0, 54);
+            this.DatabaseObjectsListBox.Name = "DatabaseObjectsListBox";
+            this.DatabaseObjectsListBox.Size = new System.Drawing.Size(262, 547);
+            this.DatabaseObjectsListBox.TabIndex = 3;
+            this.DatabaseObjectsListBox.SelectedIndexChanged += new System.EventHandler(this.DatabaseObjectsListBox_SelectedIndexChanged);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 27);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(262, 27);
+            this.panel5.TabIndex = 4;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox3.Location = new System.Drawing.Point(0, 0);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(262, 23);
+            this.textBox3.TabIndex = 1;
             // 
             // panel3
             // 
@@ -278,16 +370,16 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(262, 23);
+            this.panel3.Size = new System.Drawing.Size(262, 27);
             this.panel3.TabIndex = 2;
             // 
             // UpdateDatabaseObjectsButton
             // 
-            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(185, 0);
+            this.UpdateDatabaseObjectsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(231, 1);
             this.UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
-            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(75, 23);
+            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(30, 25);
             this.UpdateDatabaseObjectsButton.TabIndex = 1;
-            this.UpdateDatabaseObjectsButton.Text = "Update";
             this.UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
             this.UpdateDatabaseObjectsButton.Click += new System.EventHandler(this.UpdateDatabaseObjectsButton_Click);
             // 
@@ -337,7 +429,7 @@
             this.CodeTextbox.RightBracket = ')';
             this.CodeTextbox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.CodeTextbox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("CodeTextbox.ServiceColors")));
-            this.CodeTextbox.Size = new System.Drawing.Size(546, 529);
+            this.CodeTextbox.Size = new System.Drawing.Size(566, 578);
             this.CodeTextbox.TabIndex = 0;
             this.CodeTextbox.Zoom = 100;
             // 
@@ -349,7 +441,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(546, 23);
+            this.panel4.Size = new System.Drawing.Size(566, 23);
             this.panel4.TabIndex = 3;
             // 
             // LanguageComboBox
@@ -360,7 +452,7 @@
             this.LanguageComboBox.Items.AddRange(new object[] {
             "T-SQL",
             "C#"});
-            this.LanguageComboBox.Location = new System.Drawing.Point(421, 0);
+            this.LanguageComboBox.Location = new System.Drawing.Point(441, 0);
             this.LanguageComboBox.Name = "LanguageComboBox";
             this.LanguageComboBox.Size = new System.Drawing.Size(122, 23);
             this.LanguageComboBox.TabIndex = 1;
@@ -376,19 +468,17 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Code";
             // 
-            // aboutToolStripMenuItem
+            // imageList1
             // 
-            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1167, 576);
+            this.ClientSize = new System.Drawing.Size(1187, 625);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -401,18 +491,24 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).EndInit();
@@ -437,9 +533,8 @@
         private SplitContainer splitContainer3;
         private Panel panel3;
         private Label ObjectsLabel;
-        private ListBox connectionStringListbox;
+        private ListBox ConnectionsListbox;
         private ListBox DatabasesListbox;
-        private TreeView DatabaseObjectsTreeView;
         private Panel panel4;
         private Label label3;
         private FastColoredTextBoxNS.FastColoredTextBox CodeTextbox;
@@ -450,5 +545,15 @@
         private ToolStripMenuItem selectScriptFolderToolStripMenuItem;
         private Button UpdateDatabaseObjectsButton;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private Panel panel7;
+        private TextBox textBox1;
+        private Button UpdateConnectionsButton;
+        private Panel panel6;
+        private TextBox textBox2;
+        private Button UpdateDatabasesButton;
+        private ListBox DatabaseObjectsListBox;
+        private Panel panel5;
+        private TextBox textBox3;
+        private ImageList imageList1;
     }
 }
