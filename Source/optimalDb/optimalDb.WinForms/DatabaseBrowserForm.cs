@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FastColoredTextBoxNS.Text;
+﻿using FastColoredTextBoxNS.Text;
 using FastColoredTextBoxNS.Types;
 using optimalDb.BL;
 using optimalDb.BL.AutoUpdates;
@@ -14,12 +13,41 @@ namespace optimalDb.WinForms
 {
     public partial class DatabaseBrowserForm : Form
     {
-        protected List<IDatabaseConnection> Connections = new();
+        protected List<DatabaseConnection> Connections = new();
+        protected List<string> Databases = new();
+        protected List<DatabaseObject> DatabaseObjects = new();
+
         private DirectoryInfo? _scriptDirectory = null;
+
+        FulltextSearchableListBoxBehaviour<DatabaseConnection> _searchBehaviourForDatabaseConnections;
+        FulltextSearchableListBoxBehaviour<string> _searchBehaviourForDatabaseNames;
+        FulltextSearchableListBoxBehaviour<DatabaseObject> _searchBehaviourForDatabaseObjects;
 
         public DatabaseBrowserForm()
         {
             InitializeComponent();
+        }
+
+        private void DatabaseBrowserForm_Load(object sender, EventArgs e)
+        {
+            LanguageComboBox.SelectedIndex = 0;
+
+            System.Resources.ResourceManager resourceManager = 
+                new System.Resources.ResourceManager("optimalDb.WinForms.Properties.Resources", typeof(Resources).Assembly);
+            var updateImageStream = resourceManager.GetObject("Update");
+            
+            UpdateConnectionsButton.Image = updateImageStream as Image;
+            UpdateDatabasesButton.Image = updateImageStream as Image;
+            UpdateDatabaseObjectsButton.Image = updateImageStream as Image;
+
+            _searchBehaviourForDatabaseConnections = 
+                new FulltextSearchableListBoxBehaviour<DatabaseConnection>(ConnectionsListbox, ConnectionsSearchTextbox, ref Connections);
+
+            _searchBehaviourForDatabaseNames =
+                new FulltextSearchableListBoxBehaviour<string>(DatabasesListbox, DatabasesSearchTextbox, ref Databases);
+
+            _searchBehaviourForDatabaseObjects = 
+                new FulltextSearchableListBoxBehaviour<DatabaseObject>(DatabaseObjectsListBox, DatabaseObjectsSearchTextbox, ref DatabaseObjects);
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,16 +89,22 @@ namespace optimalDb.WinForms
 
         private void UpdateConnectionsListView()
         {
-            ConnectionsListbox.Items.Clear();
-            ConnectionsListbox.Items.AddRange(Connections.ToArray());
+            Databases.Clear();
+            DatabaseObjects.Clear();
 
-            DatabasesListbox.Items.Clear();
-            DatabaseObjectsListBox.Items.Clear();
+            _searchBehaviourForDatabaseConnections.UpdateView();
+            _searchBehaviourForDatabaseNames.UpdateView();
+            _searchBehaviourForDatabaseObjects.UpdateView();
         }
 
         private void connectionStringListbox_SelectedIndexChanged(object sender, EventArgs e)
         {
             MouseCursorTools.WithWaitCursor(UpdateDatabasesListView);
+        }
+
+        private void DatabasesListbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MouseCursorTools.WithWaitCursor(UpdateDatabaseObjectsTreeView);
         }
 
         private void UpdateDatabasesListView()
@@ -80,20 +114,16 @@ namespace optimalDb.WinForms
                 if (connection == null)
                     return;
 
-                DatabasesListbox.Items.Clear();
+                Databases.Clear();
 
                 var databaseAccessor = new DatabaseAccessor(connection.ConnectionString);
                 var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
                 var databases = schemaRepository.GetDatabaseList();
+                Databases.AddRange(databases);
 
-                DatabasesListbox.Items.AddRange(databases);
+                _searchBehaviourForDatabaseNames.UpdateView();
             }
-        }
-
-        private void DatabasesListbox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MouseCursorTools.WithWaitCursor(UpdateDatabaseObjectsTreeView);
         }
 
         private void UpdateDatabaseObjectsTreeView()
@@ -104,7 +134,7 @@ namespace optimalDb.WinForms
             if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
 
-            DatabaseObjectsListBox.Items.Clear();
+            DatabaseObjects.Clear();
 
             var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString??"", database);
             var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
@@ -117,7 +147,9 @@ namespace optimalDb.WinForms
 
             databaseObjects.Sort((x, y) => string.CompareOrdinal(x.Fullname, y.Fullname));
 
-            DatabaseObjectsListBox.Items.AddRange(databaseObjects.ToArray());
+            DatabaseObjects.AddRange(databaseObjects.ToArray());
+
+            _searchBehaviourForDatabaseObjects.UpdateView();
         }
 
         private void gotoDatabaseObjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,7 +175,6 @@ namespace optimalDb.WinForms
                     DatabaseObjectsListBox.SelectedItem = databaseObject;
             }
         }
-
 
         private void executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -205,18 +236,6 @@ namespace optimalDb.WinForms
             }
         }
 
-        private void DatabaseBrowserForm_Load(object sender, EventArgs e)
-        {
-            LanguageComboBox.SelectedIndex = 0;
-
-            System.Resources.ResourceManager resourceManager = 
-                new System.Resources.ResourceManager("optimalDb.WinForms.Properties.Resources", typeof(Resources).Assembly);
-            var updateImageStream = resourceManager.GetObject("Update");
-            
-            UpdateConnectionsButton.Image = updateImageStream as Image;
-            UpdateDatabasesButton.Image = updateImageStream as Image;
-            UpdateDatabaseObjectsButton.Image = updateImageStream as Image;
-        }
 
         private void selectScriptFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -261,6 +280,22 @@ namespace optimalDb.WinForms
 
             CodeTextbox.Text = schemaRepository.GetCode(databaseObject?.Fullname??"");
             CodeTextbox.Selection = new TextSelectionRange(CodeTextbox, 0, 0, 0, 0);
+        }
+
+        private void ConnectionsSearchTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                DatabasesSearchTextbox.Focus();
+            }
+        }
+
+        private void DatabasesSearchTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                DatabaseObjectsSearchTextbox.Focus();
+            }
         }
     }
 }

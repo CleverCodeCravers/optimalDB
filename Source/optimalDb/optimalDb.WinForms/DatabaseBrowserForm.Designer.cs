@@ -41,21 +41,21 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ConnectionsListbox = new System.Windows.Forms.ListBox();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ConnectionsSearchTextbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.UpdateConnectionsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.DatabasesListbox = new System.Windows.Forms.ListBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.DatabasesSearchTextbox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.UpdateDatabasesButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.DatabaseObjectsListBox = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.DatabaseObjectsSearchTextbox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
@@ -189,20 +189,21 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.textBox1);
+            this.panel7.Controls.Add(this.ConnectionsSearchTextbox);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 27);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(152, 27);
             this.panel7.TabIndex = 5;
             // 
-            // textBox1
+            // ConnectionsSearchTextbox
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(152, 23);
-            this.textBox1.TabIndex = 0;
+            this.ConnectionsSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ConnectionsSearchTextbox.Location = new System.Drawing.Point(0, 0);
+            this.ConnectionsSearchTextbox.Name = "ConnectionsSearchTextbox";
+            this.ConnectionsSearchTextbox.Size = new System.Drawing.Size(152, 23);
+            this.ConnectionsSearchTextbox.TabIndex = 0;
+            this.ConnectionsSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionsSearchTextbox_KeyDown);
             // 
             // panel1
             // 
@@ -267,20 +268,21 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.textBox2);
+            this.panel6.Controls.Add(this.DatabasesSearchTextbox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 27);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(195, 27);
             this.panel6.TabIndex = 5;
             // 
-            // textBox2
+            // DatabasesSearchTextbox
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox2.Location = new System.Drawing.Point(0, 0);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(195, 23);
-            this.textBox2.TabIndex = 1;
+            this.DatabasesSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DatabasesSearchTextbox.Location = new System.Drawing.Point(0, 0);
+            this.DatabasesSearchTextbox.Name = "DatabasesSearchTextbox";
+            this.DatabasesSearchTextbox.Size = new System.Drawing.Size(195, 23);
+            this.DatabasesSearchTextbox.TabIndex = 0;
+            this.DatabasesSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DatabasesSearchTextbox_KeyDown);
             // 
             // panel2
             // 
@@ -347,20 +349,20 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Controls.Add(this.DatabaseObjectsSearchTextbox);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 27);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(262, 27);
             this.panel5.TabIndex = 4;
             // 
-            // textBox3
+            // DatabaseObjectsSearchTextbox
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox3.Location = new System.Drawing.Point(0, 0);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(262, 23);
-            this.textBox3.TabIndex = 1;
+            this.DatabaseObjectsSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DatabaseObjectsSearchTextbox.Location = new System.Drawing.Point(0, 0);
+            this.DatabaseObjectsSearchTextbox.Name = "DatabaseObjectsSearchTextbox";
+            this.DatabaseObjectsSearchTextbox.Size = new System.Drawing.Size(262, 23);
+            this.DatabaseObjectsSearchTextbox.TabIndex = 0;
             // 
             // panel3
             // 
@@ -546,14 +548,14 @@
         private Button UpdateDatabaseObjectsButton;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private Panel panel7;
-        private TextBox textBox1;
+        private TextBox ConnectionsSearchTextbox;
         private Button UpdateConnectionsButton;
         private Panel panel6;
-        private TextBox textBox2;
+        private TextBox DatabasesSearchTextbox;
         private Button UpdateDatabasesButton;
         private ListBox DatabaseObjectsListBox;
         private Panel panel5;
-        private TextBox textBox3;
+        private TextBox DatabaseObjectsSearchTextbox;
         private ImageList imageList1;
     }
 }

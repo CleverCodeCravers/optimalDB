@@ -1,7 +1,4 @@
-﻿using optimalDb.BL;
-using optimalDb.Infrastructure;
-
-namespace optimalDb.WinForms
+﻿namespace optimalDb.WinForms
 {
     public partial class SelectScriptForm : Form
     {
@@ -65,7 +62,6 @@ namespace optimalDb.WinForms
 
             return true;
         }
-
 
         private void SearchTextbox_KeyDown(object sender, KeyEventArgs e)
         {

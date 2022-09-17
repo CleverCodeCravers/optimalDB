@@ -15,7 +15,7 @@ namespace optimalDb.WinForms
             InitializeComponent();
         }
 
-        protected List<IDatabaseConnection> LocalConnections = new();
+        protected List<DatabaseConnection> LocalConnections = new();
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {

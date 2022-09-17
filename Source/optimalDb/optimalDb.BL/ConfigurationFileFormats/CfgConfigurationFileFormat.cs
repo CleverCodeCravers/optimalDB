@@ -6,10 +6,10 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
 {
     public string Name { get; }
     public string FileExtension { get; }
-    public IDatabaseConnection[]? Load(string fileName)
+    public DatabaseConnection[]? Load(string fileName)
     {
         var content = File.ReadAllLines(fileName);
-        var result = new List<IDatabaseConnection>();
+        var result = new List<DatabaseConnection>();
 
         foreach (var line in content)
         {
@@ -29,7 +29,7 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
         return result.ToArray();
     }
 
-    public void Save(string fileName, IDatabaseConnection[] localConnections)
+    public void Save(string fileName, DatabaseConnection[] localConnections)
     {
         throw new Exception("Saving this format is not possible.");
     }

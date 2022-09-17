@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using optimalDb.Interfaces;
 
 namespace optimalDb.BL.ConfigurationFileFormats;
@@ -8,15 +7,14 @@ public class JsonConfigurationFileFormat : IConfigurationFileFormat
 {
     public string Name { get; }
     public string FileExtension { get; }
-    public IDatabaseConnection[]? Load(string fileName)
+    public DatabaseConnection[]? Load(string fileName)
     {
         var content = File.ReadAllText(fileName);
         var data = JsonConvert.DeserializeObject<DatabaseConnection[]>(content);
-        var asInterfaces = data?.Select(x => x as IDatabaseConnection).ToArray();
-        return asInterfaces;
+        return data;
     }
 
-    public void Save(string fileName, IDatabaseConnection[] localConnections)
+    public void Save(string fileName, DatabaseConnection[] localConnections)
     {
         var json = System.Text.Json.JsonSerializer.Serialize(localConnections);
         File.WriteAllText(fileName, json);
