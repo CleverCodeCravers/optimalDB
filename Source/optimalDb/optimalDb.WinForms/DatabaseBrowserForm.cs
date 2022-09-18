@@ -340,5 +340,10 @@ namespace optimalDb.WinForms
 
             CodeTextbox.Text = result.ToString();
         }
+
+        private void performanceOptimizationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Something will happen here");
+        }
     }
 }

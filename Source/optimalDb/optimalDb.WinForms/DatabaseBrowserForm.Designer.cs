@@ -34,10 +34,13 @@
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectScriptFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gotoDatabaseObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.navigateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.performanceOptimizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ConnectionsListbox = new System.Windows.Forms.ListBox();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -60,14 +63,20 @@
             this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.codeActionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.ExecuteButton = new System.Windows.Forms.Button();
-            this.codeActionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.analyseAndOptimizeIndexesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findProblemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -100,9 +109,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationToolStripMenuItem,
-            this.gotoDatabaseObjectToolStripMenuItem,
-            this.scriptsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.navigateToolStripMenuItem,
+            this.scriptsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1187, 24);
@@ -132,31 +141,6 @@
             this.selectScriptFolderToolStripMenuItem.Text = "Select Script Folder...";
             this.selectScriptFolderToolStripMenuItem.Click += new System.EventHandler(this.selectScriptFolderToolStripMenuItem_Click);
             // 
-            // gotoDatabaseObjectToolStripMenuItem
-            // 
-            this.gotoDatabaseObjectToolStripMenuItem.Name = "gotoDatabaseObjectToolStripMenuItem";
-            this.gotoDatabaseObjectToolStripMenuItem.ShortcutKeyDisplayString = "Strg+T";
-            this.gotoDatabaseObjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.gotoDatabaseObjectToolStripMenuItem.Size = new System.Drawing.Size(186, 20);
-            this.gotoDatabaseObjectToolStripMenuItem.Text = "Goto Database-Object (Ctrl + T)";
-            this.gotoDatabaseObjectToolStripMenuItem.Click += new System.EventHandler(this.gotoDatabaseObjectToolStripMenuItem_Click);
-            // 
-            // scriptsToolStripMenuItem
-            // 
-            this.scriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem});
-            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.scriptsToolStripMenuItem.Text = "Scripts";
-            // 
-            // executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem
-            // 
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Name = "executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem";
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Size = new System.Drawing.Size(396, 22);
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object... (Ctrl+E)";
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += new System.EventHandler(this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click);
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -164,6 +148,58 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // navigateToolStripMenuItem
+            // 
+            this.navigateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem});
+            this.navigateToolStripMenuItem.Name = "navigateToolStripMenuItem";
+            this.navigateToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.navigateToolStripMenuItem.Text = "Navigate";
+            // 
+            // gotoDatabaseObjectCtrlTToolStripMenuItem
+            // 
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Name = "gotoDatabaseObjectCtrlTToolStripMenuItem";
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Text = "Goto Database-Object (Ctrl + T)";
+            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Click += new System.EventHandler(this.gotoDatabaseObjectToolStripMenuItem_Click);
+            // 
+            // scriptsToolStripMenuItem
+            // 
+            this.scriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.performanceOptimizationToolStripMenuItem,
+            this.findProblemsToolStripMenuItem});
+            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.scriptsToolStripMenuItem.Text = "Tools";
+            // 
+            // executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem
+            // 
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Name = "executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem";
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object...";
+            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += new System.EventHandler(this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(349, 6);
+            // 
+            // performanceOptimizationToolStripMenuItem
+            // 
+            this.performanceOptimizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem,
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem,
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem,
+            this.analyseAndOptimizeIndexesToolStripMenuItem});
+            this.performanceOptimizationToolStripMenuItem.Name = "performanceOptimizationToolStripMenuItem";
+            this.performanceOptimizationToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.performanceOptimizationToolStripMenuItem.Text = "Optimize Performance";
+            this.performanceOptimizationToolStripMenuItem.Click += new System.EventHandler(this.performanceOptimizationToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -182,7 +218,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1187, 601);
-            this.splitContainer1.SplitterDistance = 152;
+            this.splitContainer1.SplitterDistance = 176;
             this.splitContainer1.TabIndex = 1;
             // 
             // ConnectionsListbox
@@ -192,7 +228,7 @@
             this.ConnectionsListbox.ItemHeight = 15;
             this.ConnectionsListbox.Location = new System.Drawing.Point(0, 54);
             this.ConnectionsListbox.Name = "ConnectionsListbox";
-            this.ConnectionsListbox.Size = new System.Drawing.Size(152, 547);
+            this.ConnectionsListbox.Size = new System.Drawing.Size(176, 547);
             this.ConnectionsListbox.TabIndex = 1;
             this.ConnectionsListbox.SelectedIndexChanged += new System.EventHandler(this.connectionStringListbox_SelectedIndexChanged);
             // 
@@ -202,7 +238,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 27);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(152, 27);
+            this.panel7.Size = new System.Drawing.Size(176, 27);
             this.panel7.TabIndex = 5;
             // 
             // ConnectionsSearchTextbox
@@ -210,7 +246,7 @@
             this.ConnectionsSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
             this.ConnectionsSearchTextbox.Location = new System.Drawing.Point(0, 0);
             this.ConnectionsSearchTextbox.Name = "ConnectionsSearchTextbox";
-            this.ConnectionsSearchTextbox.Size = new System.Drawing.Size(152, 23);
+            this.ConnectionsSearchTextbox.Size = new System.Drawing.Size(176, 23);
             this.ConnectionsSearchTextbox.TabIndex = 0;
             this.ConnectionsSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionsSearchTextbox_KeyDown);
             // 
@@ -222,13 +258,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(152, 27);
+            this.panel1.Size = new System.Drawing.Size(176, 27);
             this.panel1.TabIndex = 0;
             // 
             // UpdateConnectionsButton
             // 
             this.UpdateConnectionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateConnectionsButton.Location = new System.Drawing.Point(121, 1);
+            this.UpdateConnectionsButton.Location = new System.Drawing.Point(145, 1);
             this.UpdateConnectionsButton.Name = "UpdateConnectionsButton";
             this.UpdateConnectionsButton.Size = new System.Drawing.Size(30, 25);
             this.UpdateConnectionsButton.TabIndex = 2;
@@ -260,8 +296,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1031, 601);
-            this.splitContainer2.SplitterDistance = 195;
+            this.splitContainer2.Size = new System.Drawing.Size(1007, 601);
+            this.splitContainer2.SplitterDistance = 211;
             this.splitContainer2.TabIndex = 0;
             // 
             // DatabasesListbox
@@ -271,7 +307,7 @@
             this.DatabasesListbox.ItemHeight = 15;
             this.DatabasesListbox.Location = new System.Drawing.Point(0, 54);
             this.DatabasesListbox.Name = "DatabasesListbox";
-            this.DatabasesListbox.Size = new System.Drawing.Size(195, 547);
+            this.DatabasesListbox.Size = new System.Drawing.Size(211, 547);
             this.DatabasesListbox.TabIndex = 2;
             this.DatabasesListbox.SelectedIndexChanged += new System.EventHandler(this.DatabasesListbox_SelectedIndexChanged);
             // 
@@ -281,7 +317,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 27);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(195, 27);
+            this.panel6.Size = new System.Drawing.Size(211, 27);
             this.panel6.TabIndex = 5;
             // 
             // DatabasesSearchTextbox
@@ -289,7 +325,7 @@
             this.DatabasesSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
             this.DatabasesSearchTextbox.Location = new System.Drawing.Point(0, 0);
             this.DatabasesSearchTextbox.Name = "DatabasesSearchTextbox";
-            this.DatabasesSearchTextbox.Size = new System.Drawing.Size(195, 23);
+            this.DatabasesSearchTextbox.Size = new System.Drawing.Size(211, 23);
             this.DatabasesSearchTextbox.TabIndex = 0;
             this.DatabasesSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DatabasesSearchTextbox_KeyDown);
             // 
@@ -301,13 +337,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(195, 27);
+            this.panel2.Size = new System.Drawing.Size(211, 27);
             this.panel2.TabIndex = 1;
             // 
             // UpdateDatabasesButton
             // 
             this.UpdateDatabasesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateDatabasesButton.Location = new System.Drawing.Point(164, 1);
+            this.UpdateDatabasesButton.Location = new System.Drawing.Point(180, 1);
             this.UpdateDatabasesButton.Name = "UpdateDatabasesButton";
             this.UpdateDatabasesButton.Size = new System.Drawing.Size(30, 25);
             this.UpdateDatabasesButton.TabIndex = 2;
@@ -341,7 +377,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
-            this.splitContainer3.Size = new System.Drawing.Size(832, 601);
+            this.splitContainer3.Size = new System.Drawing.Size(792, 601);
             this.splitContainer3.SplitterDistance = 262;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -420,15 +456,24 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.CodeTextbox);
-            this.splitContainer4.Size = new System.Drawing.Size(566, 578);
+            this.splitContainer4.Size = new System.Drawing.Size(526, 578);
             this.splitContainer4.SplitterDistance = 126;
             this.splitContainer4.TabIndex = 4;
+            // 
+            // codeActionsCheckedListBox
+            // 
+            this.codeActionsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeActionsCheckedListBox.FormattingEnabled = true;
+            this.codeActionsCheckedListBox.Location = new System.Drawing.Point(0, 0);
+            this.codeActionsCheckedListBox.Name = "codeActionsCheckedListBox";
+            this.codeActionsCheckedListBox.Size = new System.Drawing.Size(387, 126);
+            this.codeActionsCheckedListBox.TabIndex = 0;
             // 
             // panel8
             // 
             this.panel8.Controls.Add(this.ExecuteButton);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(427, 0);
+            this.panel8.Location = new System.Drawing.Point(387, 0);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(139, 126);
             this.panel8.TabIndex = 1;
@@ -442,15 +487,6 @@
             this.ExecuteButton.Text = "Execute";
             this.ExecuteButton.UseVisualStyleBackColor = true;
             this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
-            // 
-            // codeActionsCheckedListBox
-            // 
-            this.codeActionsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.codeActionsCheckedListBox.FormattingEnabled = true;
-            this.codeActionsCheckedListBox.Location = new System.Drawing.Point(0, 0);
-            this.codeActionsCheckedListBox.Name = "codeActionsCheckedListBox";
-            this.codeActionsCheckedListBox.Size = new System.Drawing.Size(427, 126);
-            this.codeActionsCheckedListBox.TabIndex = 0;
             // 
             // CodeTextbox
             // 
@@ -475,6 +511,7 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
+            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
@@ -487,7 +524,7 @@
             this.CodeTextbox.RightBracket = ')';
             this.CodeTextbox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.CodeTextbox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("CodeTextbox.ServiceColors")));
-            this.CodeTextbox.Size = new System.Drawing.Size(566, 448);
+            this.CodeTextbox.Size = new System.Drawing.Size(526, 448);
             this.CodeTextbox.TabIndex = 0;
             this.CodeTextbox.Zoom = 100;
             // 
@@ -499,7 +536,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(566, 23);
+            this.panel4.Size = new System.Drawing.Size(526, 23);
             this.panel4.TabIndex = 3;
             // 
             // LanguageComboBox
@@ -510,7 +547,7 @@
             this.LanguageComboBox.Items.AddRange(new object[] {
             "T-SQL",
             "C#"});
-            this.LanguageComboBox.Location = new System.Drawing.Point(441, 0);
+            this.LanguageComboBox.Location = new System.Drawing.Point(401, 0);
             this.LanguageComboBox.Name = "LanguageComboBox";
             this.LanguageComboBox.Size = new System.Drawing.Size(122, 23);
             this.LanguageComboBox.TabIndex = 1;
@@ -531,6 +568,44 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // findProblematicSqlObjectsInTheDatabaseToolStripMenuItem
+            // 
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Name = "findProblematicSqlObjectsInTheDatabaseToolStripMenuItem";
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Text = "Find problematic Sql Objects in the database";
+            // 
+            // startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem
+            // 
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Name = "startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem";
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Text = "Start performance optimization session on this Sql Object";
+            // 
+            // analyseTableSizesAndSpaceTendenciesToolStripMenuItem
+            // 
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Name = "analyseTableSizesAndSpaceTendenciesToolStripMenuItem";
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Text = "Analyse table sizes and space tendencies";
+            // 
+            // analyseAndOptimizeIndexesToolStripMenuItem
+            // 
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Name = "analyseAndOptimizeIndexesToolStripMenuItem";
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Text = "Analyse and optimize indexes";
+            // 
+            // findProblemsToolStripMenuItem
+            // 
+            this.findProblemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem});
+            this.findProblemsToolStripMenuItem.Name = "findProblemsToolStripMenuItem";
+            this.findProblemsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.findProblemsToolStripMenuItem.Text = "Find Problems";
+            // 
+            // findCodeThatSpansMultipleDatabasesToolStripMenuItem
+            // 
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Name = "findCodeThatSpansMultipleDatabasesToolStripMenuItem";
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
             // 
             // DatabaseBrowserForm
             // 
@@ -601,7 +676,6 @@
         private Panel panel4;
         private Label label3;
         private FastColoredTextBoxNS.FastColoredTextBox CodeTextbox;
-        private ToolStripMenuItem gotoDatabaseObjectToolStripMenuItem;
         private ToolStripMenuItem scriptsToolStripMenuItem;
         private ToolStripMenuItem executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem;
         private ComboBox LanguageComboBox;
@@ -622,5 +696,15 @@
         private Panel panel8;
         private Button ExecuteButton;
         private CheckedListBox codeActionsCheckedListBox;
+        private ToolStripMenuItem navigateToolStripMenuItem;
+        private ToolStripMenuItem gotoDatabaseObjectCtrlTToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem1;
+        private ToolStripMenuItem performanceOptimizationToolStripMenuItem;
+        private ToolStripMenuItem findProblematicSqlObjectsInTheDatabaseToolStripMenuItem;
+        private ToolStripMenuItem startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem;
+        private ToolStripMenuItem analyseTableSizesAndSpaceTendenciesToolStripMenuItem;
+        private ToolStripMenuItem analyseAndOptimizeIndexesToolStripMenuItem;
+        private ToolStripMenuItem findProblemsToolStripMenuItem;
+        private ToolStripMenuItem findCodeThatSpansMultipleDatabasesToolStripMenuItem;
     }
 }
