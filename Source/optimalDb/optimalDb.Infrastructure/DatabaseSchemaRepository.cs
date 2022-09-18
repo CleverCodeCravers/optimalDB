@@ -60,6 +60,7 @@ SELECT t.TABLE_SCHEMA, t.TABLE_NAME
 SELECT name
   FROM sys.databases
  WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb')
+   AND HAS_DBACCESS(name) = 1
  ORDER BY name
 ";
 
