@@ -59,6 +59,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.ExecuteButton = new System.Windows.Forms.Button();
+            this.codeActionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
@@ -83,6 +87,11 @@
             this.splitContainer3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -330,7 +339,7 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.CodeTextbox);
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
             this.splitContainer3.Panel2.Controls.Add(this.panel4);
             this.splitContainer3.Size = new System.Drawing.Size(832, 601);
             this.splitContainer3.SplitterDistance = 262;
@@ -395,6 +404,54 @@
             this.ObjectsLabel.TabIndex = 0;
             this.ObjectsLabel.Text = "Database Objects";
             // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 23);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.codeActionsCheckedListBox);
+            this.splitContainer4.Panel1.Controls.Add(this.panel8);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.CodeTextbox);
+            this.splitContainer4.Size = new System.Drawing.Size(566, 578);
+            this.splitContainer4.SplitterDistance = 126;
+            this.splitContainer4.TabIndex = 4;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.ExecuteButton);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel8.Location = new System.Drawing.Point(427, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(139, 126);
+            this.panel8.TabIndex = 1;
+            // 
+            // ExecuteButton
+            // 
+            this.ExecuteButton.Location = new System.Drawing.Point(3, 100);
+            this.ExecuteButton.Name = "ExecuteButton";
+            this.ExecuteButton.Size = new System.Drawing.Size(133, 23);
+            this.ExecuteButton.TabIndex = 0;
+            this.ExecuteButton.Text = "Execute";
+            this.ExecuteButton.UseVisualStyleBackColor = true;
+            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
+            // 
+            // codeActionsCheckedListBox
+            // 
+            this.codeActionsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeActionsCheckedListBox.FormattingEnabled = true;
+            this.codeActionsCheckedListBox.Location = new System.Drawing.Point(0, 0);
+            this.codeActionsCheckedListBox.Name = "codeActionsCheckedListBox";
+            this.codeActionsCheckedListBox.Size = new System.Drawing.Size(427, 126);
+            this.codeActionsCheckedListBox.TabIndex = 0;
+            // 
             // CodeTextbox
             // 
             this.CodeTextbox.AutoCompleteBracketsList = new char[] {
@@ -418,20 +475,19 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
-            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
             this.CodeTextbox.Language = FastColoredTextBoxNS.Text.Language.SQL;
             this.CodeTextbox.LeftBracket = '(';
-            this.CodeTextbox.Location = new System.Drawing.Point(0, 23);
+            this.CodeTextbox.Location = new System.Drawing.Point(0, 0);
             this.CodeTextbox.Name = "CodeTextbox";
             this.CodeTextbox.Paddings = new System.Windows.Forms.Padding(0);
             this.CodeTextbox.ReplaceForm = null;
             this.CodeTextbox.RightBracket = ')';
             this.CodeTextbox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.CodeTextbox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("CodeTextbox.ServiceColors")));
-            this.CodeTextbox.Size = new System.Drawing.Size(566, 578);
+            this.CodeTextbox.Size = new System.Drawing.Size(566, 448);
             this.CodeTextbox.TabIndex = 0;
             this.CodeTextbox.Zoom = 100;
             // 
@@ -513,6 +569,11 @@
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -557,5 +618,9 @@
         private Panel panel5;
         private TextBox DatabaseObjectsSearchTextbox;
         private ImageList imageList1;
+        private SplitContainer splitContainer4;
+        private Panel panel8;
+        private Button ExecuteButton;
+        private CheckedListBox codeActionsCheckedListBox;
     }
 }

@@ -1,10 +1,12 @@
-﻿using FastColoredTextBoxNS.Text;
+﻿using System.Text;
+using FastColoredTextBoxNS.Text;
 using FastColoredTextBoxNS.Types;
 using optimalDb.BL;
 using optimalDb.BL.AutoUpdates;
 using optimalDb.BL.ConfigurationFileFormats;
 using optimalDb.BL.Scripting;
 using optimalDb.Infrastructure;
+using optimalDb.Infrastructure.CodeActions;
 using optimalDb.Interfaces;
 using optimalDb.WinForms.Properties;
 using optimalDb.WinForms.UiExtensions;
@@ -16,6 +18,7 @@ namespace optimalDb.WinForms
         protected List<DatabaseConnection> Connections = new();
         protected List<string> Databases = new();
         protected List<DatabaseObject> DatabaseObjects = new();
+        protected List<CodeAction> CodeActions = new();
 
         private DirectoryInfo? _scriptDirectory = null;
 
@@ -48,6 +51,16 @@ namespace optimalDb.WinForms
 
             _searchBehaviourForDatabaseObjects = 
                 new FulltextSearchableListBoxBehaviour<DatabaseObject>(DatabaseObjectsListBox, DatabaseObjectsSearchTextbox, ref DatabaseObjects);
+
+            CodeActions.Add(new PreviewSourcecodeCodeAction());
+
+            UpdateCodeActionsView();
+        }
+
+        private void UpdateCodeActionsView()
+        {
+            codeActionsCheckedListBox.Items.Clear();
+            codeActionsCheckedListBox.Items.AddRange(CodeActions.ToArray());
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,8 +181,9 @@ namespace optimalDb.WinForms
             if (result == null)
                 return;
 
-            foreach (var element in DatabaseObjectsListBox.Items)
+            for (var i = 0; i < DatabaseObjectsListBox.Items.Count; i++)
             {
+                var element = DatabaseObjectsListBox.Items[i];
                 var databaseObject = element as DatabaseObject;
                 if (databaseObject?.Fullname == result.Fullname)
                     DatabaseObjectsListBox.SelectedItem = databaseObject;
@@ -246,6 +260,15 @@ namespace optimalDb.WinForms
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
             {
                 _scriptDirectory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+                var scriptFolder = new ScriptFolder(_scriptDirectory.FullName);
+                var files = scriptFolder.GetFiles();
+
+                foreach (var file in files)
+                {
+                    CodeActions.Add(new ExecuteScriptCodeAction(file));
+                }
+
+                UpdateCodeActionsView();
             }
         }
 
@@ -263,23 +286,7 @@ namespace optimalDb.WinForms
 
         private void DatabaseObjectsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!DatabaseObjectsListBox.TryGetSelectedItemAs(out DatabaseObject? databaseObject))
-                return;
-
-            if (databaseObject?.Type == DatabaseObjectTypeEnum.Table)
-                return;
-
-            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
-                return;
-
-            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
-                return;
-
-            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString??"", database);
-            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-
-            CodeTextbox.Text = schemaRepository.GetCode(databaseObject?.Fullname??"");
-            CodeTextbox.Selection = new TextSelectionRange(CodeTextbox, 0, 0, 0, 0);
+            ExecuteCodeActions();
         }
 
         private void ConnectionsSearchTextbox_KeyDown(object sender, KeyEventArgs e)
@@ -296,6 +303,42 @@ namespace optimalDb.WinForms
             {
                 DatabaseObjectsSearchTextbox.Focus();
             }
+        }
+
+        private void ExecuteButton_Click(object sender, EventArgs e)
+        {
+            ExecuteCodeActions();
+        }
+
+        private void ExecuteCodeActions()
+        {
+            if (!DatabaseObjectsListBox.TryGetSelectedItemAs(out DatabaseObject? databaseObject))
+                return;
+
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
+                return;
+
+            if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
+                return;
+
+            var result = new StringBuilder();
+
+            for (var i = 0; i < CodeActions.Count; i++)
+            {
+                var codeAction = CodeActions[i];
+                if (codeActionsCheckedListBox.GetItemChecked(i))
+                    result.AppendLine(MouseCursorTools.WithWaitCursor(
+                        () =>
+                            codeAction.Execute(
+                                connection?.ConnectionString ?? "",
+                                database ?? "",
+                                databaseObject?.Schema ?? "",
+                                databaseObject?.Name ?? "",
+                                databaseObject?.Type)
+                    ));
+            }
+
+            CodeTextbox.Text = result.ToString();
         }
     }
 }
