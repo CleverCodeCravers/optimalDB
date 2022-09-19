@@ -56,7 +56,7 @@ public abstract class CSharpCodeAction : CodeAction
             return "DateTime";
         if (datatype == "bigint")
             return "long";
-        if (datatype == "image")
+        if (datatype == "image" || datatype == "varbinary")
             return "byte[]";
 
         return datatype;
