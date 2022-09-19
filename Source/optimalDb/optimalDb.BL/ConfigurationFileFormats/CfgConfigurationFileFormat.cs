@@ -14,7 +14,8 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
         foreach (var line in content)
         {
             var key = "ConnectionString|";
-            if (line.StartsWith(key))
+            // Connection Strings 
+            if (line.StartsWith(key) && IsSqlServerConnectionString(line))
             {
                 var lineWithoutKey = line.Remove(0, key.Length);
                 
@@ -27,6 +28,16 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
         }
 
         return result.ToArray();
+    }
+
+    private bool IsSqlServerConnectionString(string line)
+    {
+        var lowercase = line.ToLower();
+        if (line.Contains("Trusted_Connection".ToLower()))
+            return true;
+        if (line.Contains("user id"))
+            return true;
+        return false;
     }
 
     public void Save(string fileName, DatabaseConnection[] localConnections)
