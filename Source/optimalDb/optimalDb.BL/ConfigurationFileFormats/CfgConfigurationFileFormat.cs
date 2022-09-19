@@ -35,7 +35,7 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
         var lowercase = line.ToLower();
         if (lowercase.Contains("trusted_connection"))
             return true;
-        if (lowercase.Contains("user id"))
+        if (lowercase.Contains("user"))
             return true;
         return false;
     }
