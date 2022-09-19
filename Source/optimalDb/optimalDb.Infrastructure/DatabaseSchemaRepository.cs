@@ -117,5 +117,33 @@ SELECT t.ROUTINE_SCHEMA, t.ROUTINE_NAME, t.ROUTINE_TYPE
                 new DatabaseObject(row["ROUTINE_SCHEMA"].ToString(), row["ROUTINE_NAME"].ToString(), DatabaseObjectTypeEnum.Function)
             );
         }
+
+        public DatabaseColumn[] GetColumnList(string schema, string tableOrView)
+        {
+            var sql = @"
+SELECT COLUMN_NAME, ORDINAL_POSITION, COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH 
+  FROM INFORMATION_SCHEMA.COLUMNS
+ WHERE TABLE_NAME = @name
+   AND TABLE_SCHEMA = @schema
+  ORDER BY ORDINAL_POSITION
+";
+
+            var data = _accessor.LoadDataTable(sql,
+                new Dictionary<string, object>
+                {
+                    {"@schema", schema},
+                    {"@name", tableOrView}
+                });
+
+            return data.ToInstancesOf(row =>
+                new DatabaseColumn(
+                    row["COLUMN_NAME"].ToString()??"",
+                    row["ORDINAL_POSITION"].ToInt(),
+                    row["COLUMN_DEFAULT"].ToString(),
+                    row["IS_NULLABLE"].ToString() != "NO",
+                    row["DATA_TYPE"].ToString()??"",
+                    row["CHARACTER_MAXIMUM_LENGTH"].ToInt()
+                ));
+        }
     }
 }

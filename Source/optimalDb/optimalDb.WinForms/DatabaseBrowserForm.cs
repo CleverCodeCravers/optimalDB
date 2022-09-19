@@ -55,6 +55,7 @@ namespace optimalDb.WinForms
                 new FulltextSearchableListBoxBehaviour<DatabaseObject>(DatabaseObjectsListBox, DatabaseObjectsSearchTextbox, ref DatabaseObjects);
 
             CodeActions.Add(new PreviewSourcecodeCodeAction());
+            CodeActions.Add(new DataTransferObjectCSharpCodeAction());
 
             UpdateCodeActionsView();
         }
@@ -348,7 +349,21 @@ namespace optimalDb.WinForms
                     ));
             }
 
-            CodeTextbox.Text = result.ToString();
+            if (!string.IsNullOrWhiteSpace(result.ToString()))
+            {
+                CodeTextbox.Text = result.ToString();
+
+                if (AutoClipboardCheckbox.Checked)
+                {
+                    try
+                    {
+                        Clipboard.SetDataObject(result.ToString(), true, 10, 100);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
         }
 
         private void performanceOptimizationToolStripMenuItem_Click(object sender, EventArgs e)

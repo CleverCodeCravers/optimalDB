@@ -33,9 +33,9 @@ public class CfgConfigurationFileFormat : IConfigurationFileFormat
     private bool IsSqlServerConnectionString(string line)
     {
         var lowercase = line.ToLower();
-        if (line.Contains("Trusted_Connection".ToLower()))
+        if (lowercase.Contains("trusted_connection"))
             return true;
-        if (line.Contains("user id"))
+        if (lowercase.Contains("user id"))
             return true;
         return false;
     }
