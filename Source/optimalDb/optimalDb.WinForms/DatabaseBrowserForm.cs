@@ -15,6 +15,8 @@ namespace optimalDb.WinForms
 {
     public partial class DatabaseBrowserForm : Form
     {
+        private string _configurationFilePath = null;
+
         protected List<DatabaseConnection> Connections = new();
         protected List<string> Databases = new();
         protected List<DatabaseObject> DatabaseObjects = new();
@@ -81,20 +83,7 @@ namespace optimalDb.WinForms
                     return;
                 }
 
-                Connections.Clear();
-
-                try
-                {
-                    var connections = format.Load(openFileDialog.FileName);
-                    if (connections != null)
-                        Connections.AddRange(connections);
-
-                    Connections.Sort((x,y) => string.CompareOrdinal(x.Name, y.Name));
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
+                _configurationFilePath = openFileDialog.FileName;
 
                 MouseCursorTools.WithWaitCursor(UpdateConnectionsListView);
             }
@@ -102,6 +91,27 @@ namespace optimalDb.WinForms
 
         private void UpdateConnectionsListView()
         {
+            if (string.IsNullOrWhiteSpace(_configurationFilePath))
+                return;
+
+            Connections.Clear();
+
+            try
+            {
+                var availableFormats = ConfigurationFileFormatFactory.GetAllFileFormats();
+                var format = availableFormats.GetMatchingFormatFor(_configurationFilePath);
+
+                var connections = format?.Load(_configurationFilePath);
+                if (connections != null)
+                    Connections.AddRange(connections);
+
+                Connections.Sort((x, y) => string.CompareOrdinal(x.Name, y.Name));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
             Databases.Clear();
             DatabaseObjects.Clear();
 
@@ -344,6 +354,11 @@ namespace optimalDb.WinForms
         private void performanceOptimizationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Something will happen here");
+        }
+
+        private void UpdateConnectionsButton_Click(object sender, EventArgs e)
+        {
+            MouseCursorTools.WithWaitCursor(UpdateConnectionsListView);
         }
     }
 }

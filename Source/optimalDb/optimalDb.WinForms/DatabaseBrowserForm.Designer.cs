@@ -41,6 +41,12 @@
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.performanceOptimizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.analyseAndOptimizeIndexesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findProblemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ConnectionsListbox = new System.Windows.Forms.ListBox();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -71,12 +77,6 @@
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.analyseAndOptimizeIndexesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findProblemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -201,6 +201,44 @@
             this.performanceOptimizationToolStripMenuItem.Text = "Optimize Performance";
             this.performanceOptimizationToolStripMenuItem.Click += new System.EventHandler(this.performanceOptimizationToolStripMenuItem_Click);
             // 
+            // findProblematicSqlObjectsInTheDatabaseToolStripMenuItem
+            // 
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Name = "findProblematicSqlObjectsInTheDatabaseToolStripMenuItem";
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Text = "Find problematic Sql Objects in the database";
+            // 
+            // startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem
+            // 
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Name = "startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem";
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Text = "Start performance optimization session on this Sql Object";
+            // 
+            // analyseTableSizesAndSpaceTendenciesToolStripMenuItem
+            // 
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Name = "analyseTableSizesAndSpaceTendenciesToolStripMenuItem";
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Text = "Analyse table sizes and space tendencies";
+            // 
+            // analyseAndOptimizeIndexesToolStripMenuItem
+            // 
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Name = "analyseAndOptimizeIndexesToolStripMenuItem";
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.analyseAndOptimizeIndexesToolStripMenuItem.Text = "Analyse and optimize indexes";
+            // 
+            // findProblemsToolStripMenuItem
+            // 
+            this.findProblemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem});
+            this.findProblemsToolStripMenuItem.Name = "findProblemsToolStripMenuItem";
+            this.findProblemsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.findProblemsToolStripMenuItem.Text = "Find Problems";
+            // 
+            // findCodeThatSpansMultipleDatabasesToolStripMenuItem
+            // 
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Name = "findCodeThatSpansMultipleDatabasesToolStripMenuItem";
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
+            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -269,6 +307,7 @@
             this.UpdateConnectionsButton.Size = new System.Drawing.Size(30, 25);
             this.UpdateConnectionsButton.TabIndex = 2;
             this.UpdateConnectionsButton.UseVisualStyleBackColor = true;
+            this.UpdateConnectionsButton.Click += new System.EventHandler(this.UpdateConnectionsButton_Click);
             // 
             // label1
             // 
@@ -511,7 +550,6 @@
             this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CodeTextbox.FindForm = null;
-            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CodeTextbox.GoToForm = null;
             this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
             this.CodeTextbox.IsReplaceMode = false;
@@ -568,44 +606,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // findProblematicSqlObjectsInTheDatabaseToolStripMenuItem
-            // 
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Name = "findProblematicSqlObjectsInTheDatabaseToolStripMenuItem";
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Text = "Find problematic Sql Objects in the database";
-            // 
-            // startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem
-            // 
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Name = "startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem";
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Text = "Start performance optimization session on this Sql Object";
-            // 
-            // analyseTableSizesAndSpaceTendenciesToolStripMenuItem
-            // 
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Name = "analyseTableSizesAndSpaceTendenciesToolStripMenuItem";
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Text = "Analyse table sizes and space tendencies";
-            // 
-            // analyseAndOptimizeIndexesToolStripMenuItem
-            // 
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Name = "analyseAndOptimizeIndexesToolStripMenuItem";
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Text = "Analyse and optimize indexes";
-            // 
-            // findProblemsToolStripMenuItem
-            // 
-            this.findProblemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem});
-            this.findProblemsToolStripMenuItem.Name = "findProblemsToolStripMenuItem";
-            this.findProblemsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.findProblemsToolStripMenuItem.Text = "Find Problems";
-            // 
-            // findCodeThatSpansMultipleDatabasesToolStripMenuItem
-            // 
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Name = "findCodeThatSpansMultipleDatabasesToolStripMenuItem";
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
             // 
             // DatabaseBrowserForm
             // 
