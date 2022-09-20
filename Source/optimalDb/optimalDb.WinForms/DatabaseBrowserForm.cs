@@ -63,8 +63,8 @@ namespace optimalDb.WinForms
 
         private void UpdateCodeActionsView()
         {
-            codeActionsCheckedListBox.Items.Clear();
-            codeActionsCheckedListBox.Items.AddRange(CodeActions.ToArray());
+            CodeActionsListBox.Items.Clear();
+            CodeActionsListBox.Items.AddRange(CodeActions.ToArray());
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -335,19 +335,19 @@ namespace optimalDb.WinForms
 
             var result = new StringBuilder();
 
-            for (var i = 0; i < CodeActions.Count; i++)
+            foreach (var codeAction in CodeActionsListBox.SelectedItems)
             {
-                var codeAction = CodeActions[i];
-                if (codeActionsCheckedListBox.GetItemChecked(i))
-                    result.AppendLine(MouseCursorTools.WithWaitCursor(
-                        () =>
-                            codeAction.Execute(
-                                connection?.ConnectionString ?? "",
-                                database ?? "",
-                                databaseObject?.Schema ?? "",
-                                databaseObject?.Name ?? "",
-                                databaseObject?.Type)
-                    ));
+                var actionToExecute = codeAction as CodeAction;
+
+                result.AppendLine(MouseCursorTools.WithWaitCursor(
+                    () =>
+                        actionToExecute?.Execute(
+                            connection?.ConnectionString ?? "",
+                            database ?? "",
+                            databaseObject?.Schema ?? "",
+                            databaseObject?.Name ?? "",
+                            databaseObject?.Type)
+                ));
             }
 
             if (!string.IsNullOrWhiteSpace(result.ToString()))
@@ -375,6 +375,11 @@ namespace optimalDb.WinForms
         private void UpdateConnectionsButton_Click(object sender, EventArgs e)
         {
             MouseCursorTools.WithWaitCursor(UpdateConnectionsListView);
+        }
+
+        private void CodeActionsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ExecuteCodeActions();
         }
     }
 }

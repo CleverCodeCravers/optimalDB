@@ -75,4 +75,9 @@ public abstract class CSharpCodeAction : CodeAction
     {
         return databaseObjectName;
     }
+
+    protected string ConverterToDotNetName(DatabaseColumn databaseColumn)
+    {
+        return "To" + PascalCase(DotNetDataType(databaseColumn)) + "()";
+    }
 }

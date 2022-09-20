@@ -69,15 +69,15 @@
             this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
             this.ObjectsLabel = new System.Windows.Forms.Label();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.codeActionsCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.CodeActionsListBox = new System.Windows.Forms.ListBox();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.AutoClipboardCheckbox = new System.Windows.Forms.CheckBox();
             this.ExecuteButton = new System.Windows.Forms.Button();
             this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LanguageComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.AutoClipboardCheckbox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -490,7 +490,7 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.codeActionsCheckedListBox);
+            this.splitContainer4.Panel1.Controls.Add(this.CodeActionsListBox);
             this.splitContainer4.Panel1.Controls.Add(this.panel8);
             // 
             // splitContainer4.Panel2
@@ -500,14 +500,17 @@
             this.splitContainer4.SplitterDistance = 126;
             this.splitContainer4.TabIndex = 4;
             // 
-            // codeActionsCheckedListBox
+            // CodeActionsListBox
             // 
-            this.codeActionsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.codeActionsCheckedListBox.FormattingEnabled = true;
-            this.codeActionsCheckedListBox.Location = new System.Drawing.Point(0, 0);
-            this.codeActionsCheckedListBox.Name = "codeActionsCheckedListBox";
-            this.codeActionsCheckedListBox.Size = new System.Drawing.Size(387, 126);
-            this.codeActionsCheckedListBox.TabIndex = 0;
+            this.CodeActionsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CodeActionsListBox.FormattingEnabled = true;
+            this.CodeActionsListBox.ItemHeight = 15;
+            this.CodeActionsListBox.Location = new System.Drawing.Point(0, 0);
+            this.CodeActionsListBox.Name = "CodeActionsListBox";
+            this.CodeActionsListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.CodeActionsListBox.Size = new System.Drawing.Size(387, 126);
+            this.CodeActionsListBox.TabIndex = 2;
+            this.CodeActionsListBox.SelectedIndexChanged += new System.EventHandler(this.CodeActionsListBox_SelectedIndexChanged);
             // 
             // panel8
             // 
@@ -518,6 +521,18 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(139, 126);
             this.panel8.TabIndex = 1;
+            // 
+            // AutoClipboardCheckbox
+            // 
+            this.AutoClipboardCheckbox.AutoSize = true;
+            this.AutoClipboardCheckbox.Checked = true;
+            this.AutoClipboardCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AutoClipboardCheckbox.Location = new System.Drawing.Point(6, 74);
+            this.AutoClipboardCheckbox.Name = "AutoClipboardCheckbox";
+            this.AutoClipboardCheckbox.Size = new System.Drawing.Size(109, 19);
+            this.AutoClipboardCheckbox.TabIndex = 1;
+            this.AutoClipboardCheckbox.Text = "Auto-Clipboard";
+            this.AutoClipboardCheckbox.UseVisualStyleBackColor = true;
             // 
             // ExecuteButton
             // 
@@ -610,18 +625,6 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // AutoClipboardCheckbox
-            // 
-            this.AutoClipboardCheckbox.AutoSize = true;
-            this.AutoClipboardCheckbox.Checked = true;
-            this.AutoClipboardCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoClipboardCheckbox.Location = new System.Drawing.Point(6, 74);
-            this.AutoClipboardCheckbox.Name = "AutoClipboardCheckbox";
-            this.AutoClipboardCheckbox.Size = new System.Drawing.Size(109, 19);
-            this.AutoClipboardCheckbox.TabIndex = 1;
-            this.AutoClipboardCheckbox.Text = "Auto-Clipboard";
-            this.AutoClipboardCheckbox.UseVisualStyleBackColor = true;
-            // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -711,7 +714,6 @@
         private SplitContainer splitContainer4;
         private Panel panel8;
         private Button ExecuteButton;
-        private CheckedListBox codeActionsCheckedListBox;
         private ToolStripMenuItem navigateToolStripMenuItem;
         private ToolStripMenuItem gotoDatabaseObjectCtrlTToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
@@ -723,5 +725,6 @@
         private ToolStripMenuItem findProblemsToolStripMenuItem;
         private ToolStripMenuItem findCodeThatSpansMultipleDatabasesToolStripMenuItem;
         private CheckBox AutoClipboardCheckbox;
+        private ListBox CodeActionsListBox;
     }
 }

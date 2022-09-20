@@ -54,7 +54,7 @@ public class RepositoryCSharpCodeAction : CSharpCodeAction
 
 
         var instanciateArguments = string.Join("," + Environment.NewLine,
-            columns.Select(x => "                        row[\"" + x.ColumnName + "\"]." + ConverterToDotNetName(x)));
+            columns.Select(x => "                row[\"" + x.ColumnName + "\"]." + ConverterToDotNetName(x)));
 
         var template = $@"
 public class {className}Repository
@@ -82,16 +82,16 @@ EXEC dbo.{tableName}_Save
 
         _databaseAccessor.ExecuteSql(sql, new Dictionary<string, object>{{
 {saveColumnValues}
-}});
+        }});
 
     }}
 
     public {className}[] GetList() 
     {{
-        var sql = @""""
+        var sql = @""
 SELECT {columnNames}
   FROM {databaseObjectSchema}.{tableName}
-"""";
+"";
 
         var daten = _databaseAccessor.LoadDataTable(sql);
         return daten.ToInstancesOf(Instanciate);
@@ -109,8 +109,5 @@ SELECT {columnNames}
         return template;
     }
 
-    private string ConverterToDotNetName(DatabaseColumn databaseColumn)
-    {
-        return "To" + PascalCase(DotNetDataType(databaseColumn)) + "()";
-    }
+
 }
