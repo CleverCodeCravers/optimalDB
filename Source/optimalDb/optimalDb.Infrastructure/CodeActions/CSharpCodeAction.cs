@@ -44,6 +44,15 @@ public abstract class CSharpCodeAction : CodeAction
         return startsWith + rest;
     }
 
+    protected string PascalCase(string name)
+    {
+        var rest = name;
+        var startsWith = rest[0].ToString().ToUpper();
+        rest = rest.Remove(0, 1);
+
+        return startsWith + rest;
+    }
+
     protected string DotNetDataType(DatabaseColumn databaseColumn)
     {
         var datatype = databaseColumn.DataType.ToLower();

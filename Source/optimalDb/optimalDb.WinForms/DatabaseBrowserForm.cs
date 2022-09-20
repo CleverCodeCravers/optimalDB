@@ -56,6 +56,7 @@ namespace optimalDb.WinForms
 
             CodeActions.Add(new PreviewSourcecodeCodeAction());
             CodeActions.Add(new DataTransferObjectCSharpCodeAction());
+            CodeActions.Add(new RepositoryCSharpCodeAction());
 
             UpdateCodeActionsView();
         }
