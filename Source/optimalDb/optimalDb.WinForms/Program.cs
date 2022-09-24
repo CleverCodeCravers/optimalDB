@@ -12,8 +12,6 @@ namespace optimalDb.WinForms
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
             var args = Environment.GetCommandLineArgs();
@@ -26,14 +24,13 @@ namespace optimalDb.WinForms
                     return;
             }
 
-
             Application.Run(new DatabaseBrowserForm());
         }
 
         private static bool AutoUpdate()
         {
             var updater = new AutoUpdater(
-                "optimalDb",
+                "OptimalDb",
                 VersionInformation.Version,
                 "https://api.github.com/repos/stho32/optimalDB/releases");
 
