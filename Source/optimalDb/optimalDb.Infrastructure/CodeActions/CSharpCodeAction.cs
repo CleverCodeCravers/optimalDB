@@ -59,15 +59,26 @@ public abstract class CSharpCodeAction : CodeAction
 
         if (datatype == "varchar" || datatype == "nvarchar")
             return "string";
+
         if (datatype == "bit")
-            return "bool";
+            return MaybeWithNullable("bool", databaseColumn.IsNullable);
+        
         if (datatype == "datetime")
-            return "DateTime";
+            return MaybeWithNullable("DateTime", databaseColumn.IsNullable);
+
         if (datatype == "bigint")
-            return "long";
+            return MaybeWithNullable("long", databaseColumn.IsNullable);
+
         if (datatype == "image" || datatype == "varbinary")
             return "byte[]";
 
+        return datatype;
+    }
+
+    private string MaybeWithNullable(string datatype, bool isNullable)
+    {
+        if (isNullable)
+            return datatype + "?";
         return datatype;
     }
 
@@ -78,6 +89,10 @@ public abstract class CSharpCodeAction : CodeAction
 
     protected string ConverterToDotNetName(DatabaseColumn databaseColumn)
     {
-        return "To" + PascalCase(DotNetDataType(databaseColumn)) + "()";
+        var nullable = "";
+        if (databaseColumn.IsNullable)
+            nullable = "Nullable";
+
+        return "To" + nullable + PascalCase(DotNetDataType(databaseColumn)) + "()";
     }
 }
