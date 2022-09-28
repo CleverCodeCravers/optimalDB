@@ -39,8 +39,8 @@ public class DataTransferObjectCSharpCodeAction : CSharpCodeAction
             );
 
         var parameterAssignment =
-            string.Join("," + Environment.NewLine,
-                columns.Select(x => "        " + DotNetNamePascalCase(x) + " = " + DotNetNameCamelCase(x))
+            string.Join(Environment.NewLine,
+                columns.Select(x => "        " + DotNetNamePascalCase(x) + " = " + DotNetNameCamelCase(x) + ";")
             );
 
         var template = $@"
