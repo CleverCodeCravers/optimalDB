@@ -2,11 +2,11 @@
 
 namespace optimalDb.Infrastructure.CodeActions;
 
-public class DataTransferObjectCSharpCodeAction : CSharpCodeAction
+public class ViewModelCSharpCodeAction : CSharpCodeAction
 {
 
-    public DataTransferObjectCSharpCodeAction() :
-        base("C# DTO")
+    public ViewModelCSharpCodeAction() :
+        base("C# ViewModel")
     {
     }
 
@@ -44,15 +44,21 @@ public class DataTransferObjectCSharpCodeAction : CSharpCodeAction
             );
 
         var template = $@"
-public class {className}
+public class {className}ViewModel
 {{
 {columnParameters}
+    ValidationMessages ValidationMessages {{ get; }}
 
-    public {className}(
-{columnArguments}
+    public {className}ViewModel(
+{columnArguments},
+        ValidationMessages validationMessages = null
     )
     {{
 {parameterAssignment}
+
+        ValidationMessages = validationMessages;
+        if (ValidationMessages == null)
+            ValidationMessages = new ValidationMessages(Array.Empty<ValidationMessage>());
     }}
 }}
         ";

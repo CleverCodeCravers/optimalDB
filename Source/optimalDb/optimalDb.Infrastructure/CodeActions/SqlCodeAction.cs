@@ -14,4 +14,20 @@ public abstract class SqlCodeAction : CodeAction
         string databaseObjectSchema,
         string databaseObjectName,
         DatabaseObjectTypeEnum? databaseObjectTypeEnum);
+
+    protected string SqlDataType(DatabaseColumn databaseColumn)
+    {
+        if (databaseColumn.DataType.ToLower().Contains("varchar"))
+        {
+            return databaseColumn.DataType + "(" + databaseColumn.CharacterMaximumLength + ")";
+        }
+
+        if (databaseColumn.DataType.ToLower() == "decimal")
+        {
+            return databaseColumn.DataType + "(" + databaseColumn.NumericPrecision + "," + databaseColumn.NumericScale + ")";
+        }
+
+        return databaseColumn.DataType;
+    }
+
 }

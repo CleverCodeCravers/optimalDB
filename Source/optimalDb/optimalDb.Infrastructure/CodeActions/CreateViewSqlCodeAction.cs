@@ -19,12 +19,6 @@ public class CreateViewSqlCodeAction : SqlCodeAction
         var databaseAccessor = new DatabaseAccessor(connectionString, database);
         var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
-        if (databaseObjectTypeEnum != DatabaseObjectTypeEnum.Table &&
-            databaseObjectTypeEnum != DatabaseObjectTypeEnum.View)
-        {
-            return "";
-        }
-
         var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
 
         var columnsAsCommaList = 

@@ -121,7 +121,7 @@ SELECT t.ROUTINE_SCHEMA, t.ROUTINE_NAME, t.ROUTINE_TYPE
         public DatabaseColumn[] GetColumnList(string schema, string tableOrView)
         {
             var sql = @"
- SELECT COLUMN_NAME, ORDINAL_POSITION, COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH 
+ SELECT COLUMN_NAME, ORDINAL_POSITION, COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION, NUMERIC_SCALE 
    FROM INFORMATION_SCHEMA.COLUMNS
   WHERE TABLE_NAME = @name
     AND TABLE_SCHEMA = @schema
@@ -142,7 +142,9 @@ SELECT t.ROUTINE_SCHEMA, t.ROUTINE_NAME, t.ROUTINE_TYPE
                     row["COLUMN_DEFAULT"].ToString(),
                     row["IS_NULLABLE"].ToString() != "NO",
                     row["DATA_TYPE"].ToString()??"",
-                    row["CHARACTER_MAXIMUM_LENGTH"].ToInt()
+                    row["CHARACTER_MAXIMUM_LENGTH"].ToInt(),
+                    row["NUMERIC_PRECISION"].ToInt(),
+                    row["NUMERIC_SCALE"].ToInt()
                 ));
         }
     }

@@ -56,8 +56,12 @@ namespace optimalDb.WinForms
 
             CodeActions.Add(new PreviewSourcecodeCodeAction());
             CodeActions.Add(new DataTransferObjectCSharpCodeAction());
+            CodeActions.Add(new ViewModelCSharpCodeAction());
             CodeActions.Add(new RepositoryCSharpCodeAction());
             CodeActions.Add(new CreateViewSqlCodeAction());
+            CodeActions.Add(new CreateClearStpSqlCodeAction());
+            CodeActions.Add(new SaveStpSqlCodeAction());
+            CodeActions.Add(new DeactivateStpSqlCodeAction());
 
             UpdateCodeActionsView();
         }
