@@ -5,15 +5,15 @@ namespace optimalDb.Infrastructure.CodeActions;
 public class DataTransferObjectCSharpCodeAction : CSharpCodeAction
 {
 
-    public DataTransferObjectCSharpCodeAction() : 
+    public DataTransferObjectCSharpCodeAction() :
         base("C# DTO")
     {
     }
 
     public override string Execute(
-        string connectionString, 
-        string database, 
-        string databaseObjectSchema, 
+        string connectionString,
+        string database,
+        string databaseObjectSchema,
         string databaseObjectName,
         DatabaseObjectTypeEnum? databaseObjectTypeEnum)
     {
@@ -28,13 +28,13 @@ public class DataTransferObjectCSharpCodeAction : CSharpCodeAction
 
         var className = DotNetClassName(databaseObjectName);
         var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
-        
+
         var columnParameters = string.Join(Environment.NewLine,
             columns.Select(x => "    public " + DotNetDataType(x) + " " + DotNetNamePascalCase(x) + " { get; }")
-            );
+        );
 
-        var columnArguments = 
-            string.Join("," + Environment.NewLine, 
+        var columnArguments =
+            string.Join("," + Environment.NewLine,
                 columns.Select(x => "        " + DotNetDataType(x) + " " + DotNetNameCamelCase(x))
             );
 
@@ -60,5 +60,5 @@ public class {className}
         return template;
     }
 
-    
+
 }
