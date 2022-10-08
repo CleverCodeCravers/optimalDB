@@ -1,10 +1,8 @@
-using optimalDb.BL;
-using optimalDb.Infrastructure;
 using optimalDb.WinForms.GridExtras;
 using System.Text;
-using optimalDb.BL.AutoUpdates;
-using optimalDb.Interfaces;
-using optimalDb.BL.ConfigurationFileFormats;
+using optimalDb.Domain;
+using optimalDb.Domain.AutoUpdates;
+using optimalDb.Domain.ConfigurationFileFormats;
 
 namespace optimalDb.WinForms
 {

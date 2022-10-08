@@ -1,5 +1,4 @@
-﻿using optimalDb.BL;
-using optimalDb.Interfaces;
+﻿using optimalDb.Domain;
 
 namespace optimalDb.WinForms
 {

@@ -1,10 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using optimalDb.BL;
-using optimalDb.BL.TestViewPerformances;
-using optimalDb.Infrastructure;
-using optimalDb.Interfaces;
+using optimalDb.Domain;
 
 namespace optimalDb.WinForms
 {

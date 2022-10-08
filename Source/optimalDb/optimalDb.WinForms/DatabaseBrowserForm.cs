@@ -1,13 +1,10 @@
 ﻿using System.Text;
 using FastColoredTextBoxNS.Text;
-using FastColoredTextBoxNS.Types;
-using optimalDb.BL;
-using optimalDb.BL.AutoUpdates;
-using optimalDb.BL.ConfigurationFileFormats;
-using optimalDb.BL.Scripting;
-using optimalDb.Infrastructure;
-using optimalDb.Infrastructure.CodeActions;
-using optimalDb.Interfaces;
+using optimalDb.Domain;
+using optimalDb.Domain.AutoUpdates;
+using optimalDb.Domain.CodeActions;
+using optimalDb.Domain.ConfigurationFileFormats;
+using optimalDb.Domain.Scripting;
 using optimalDb.WinForms.Properties;
 using optimalDb.WinForms.UiExtensions;
 

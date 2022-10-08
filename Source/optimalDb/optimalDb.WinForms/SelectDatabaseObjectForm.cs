@@ -7,9 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using optimalDb.BL;
-using optimalDb.Infrastructure;
-using optimalDb.Interfaces;
+using optimalDb.Domain;
 
 namespace optimalDb.WinForms
 {
