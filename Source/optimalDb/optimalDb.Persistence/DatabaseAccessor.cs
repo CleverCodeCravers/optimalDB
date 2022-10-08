@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using optimalDb.Contracts;
 
-namespace optimalDb.Domain;
+namespace optimalDb.Persistence;
 
 public class DatabaseAccessor : IDatabaseAccessor
 {

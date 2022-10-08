@@ -5,6 +5,7 @@ using optimalDb.Domain.AutoUpdates;
 using optimalDb.Domain.CodeActions;
 using optimalDb.Domain.ConfigurationFileFormats;
 using optimalDb.Domain.Scripting;
+using optimalDb.Persistence;
 using optimalDb.WinForms.Properties;
 using optimalDb.WinForms.UiExtensions;
 
@@ -341,9 +342,13 @@ namespace optimalDb.WinForms
             {
                 var actionToExecute = codeAction as CodeAction;
 
+                var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString ?? "",
+                    database ?? "");
+                
                 result.AppendLine(MouseCursorTools.WithWaitCursor(
                     () =>
                         actionToExecute?.Execute(
+                            databaseAccessor,
                             connection?.ConnectionString ?? "",
                             database ?? "",
                             databaseObject?.Schema ?? "",

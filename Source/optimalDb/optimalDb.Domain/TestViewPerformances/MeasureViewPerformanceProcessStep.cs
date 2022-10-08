@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain.TestViewPerformances;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain.TestViewPerformances;
 
 public class MeasureViewPerformanceProcessStep : ProcessStep
 {

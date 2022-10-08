@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain.CodeActions;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain.CodeActions;
 
 public class SaveStpSqlCodeAction : SqlCodeAction
 {
@@ -8,13 +10,13 @@ public class SaveStpSqlCodeAction : SqlCodeAction
     }
 
     public override string Execute(
+        IDatabaseAccessor databaseAccessor,
         string connectionString,
         string database,
         string databaseObjectSchema,
         string databaseObjectName,
         DatabaseObjectTypeEnum? databaseObjectTypeEnum)
     {
-        var databaseAccessor = new DatabaseAccessor(connectionString, database);
         var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
         var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);

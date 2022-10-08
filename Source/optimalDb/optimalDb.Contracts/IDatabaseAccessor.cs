@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace optimalDb.Domain;
+namespace optimalDb.Contracts;
 
 public interface IDatabaseAccessor
 {

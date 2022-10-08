@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain.CodeActions;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain.CodeActions;
 
 public class CreateClearStpSqlCodeAction : SqlCodeAction
 {
@@ -8,6 +10,7 @@ public class CreateClearStpSqlCodeAction : SqlCodeAction
     }
 
     public override string Execute(
+        IDatabaseAccessor databaseAccessor,
         string connectionString,
         string database,
         string databaseObjectSchema,

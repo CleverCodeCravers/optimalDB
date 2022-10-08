@@ -1,15 +1,14 @@
 ﻿using System.Data;
 using System.Text;
+using optimalDb.Contracts;
 
 namespace optimalDb.Domain
 {
-    
-
     public class DatabaseSchemaRepository
     {
-        private readonly DatabaseAccessor _accessor;
+        private readonly IDatabaseAccessor _accessor;
 
-        public DatabaseSchemaRepository(DatabaseAccessor accessor)
+        public DatabaseSchemaRepository(IDatabaseAccessor accessor)
         {
             _accessor = accessor;
         }

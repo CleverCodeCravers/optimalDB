@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using optimalDb.Domain;
+using optimalDb.Persistence;
 
 namespace optimalDb.WinForms
 {

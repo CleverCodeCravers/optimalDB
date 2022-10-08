@@ -1,6 +1,7 @@
 ﻿using optimalDb.Console.CommandLineParsing;
 using optimalDb.Domain;
 using optimalDb.Domain.ConfigurationFileFormats;
+using optimalDb.Persistence;
 
 var parser = new CommandLineParser(
     args,

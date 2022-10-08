@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\optimalDb.Domain\optimalDb.Domain.csproj" />
+    <ProjectReference Include="..\optimalDb.Persistence\optimalDb.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

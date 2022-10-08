@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain.CodeActions;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain.CodeActions;
 
 public abstract class CodeAction
 {
@@ -9,10 +11,13 @@ public abstract class CodeAction
         Name = name;
     }
 
-    public abstract string Execute(string connectionString,
+    public abstract string Execute(
+        IDatabaseAccessor databaseAccessor,
+        string connectionString,
         string database,
         string databaseObjectSchema,
-        string databaseObjectName, DatabaseObjectTypeEnum? databaseObjectTypeEnum);
+        string databaseObjectName, 
+        DatabaseObjectTypeEnum? databaseObjectTypeEnum);
 
     public override string ToString()
     {

@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\optimalDb.BL\optimalDb.BL.csproj" />
     <ProjectReference Include="..\optimalDb.Domain\optimalDb.Domain.csproj" />
+    <ProjectReference Include="..\optimalDb.Persistence\optimalDb.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using System.Text;
 using optimalDb.Domain;
 using optimalDb.Domain.AutoUpdates;
 using optimalDb.Domain.ConfigurationFileFormats;
+using optimalDb.Persistence;
 
 namespace optimalDb.WinForms
 {

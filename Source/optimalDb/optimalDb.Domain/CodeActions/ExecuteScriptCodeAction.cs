@@ -1,4 +1,5 @@
-﻿using optimalDb.Domain.Scripting;
+﻿using optimalDb.Contracts;
+using optimalDb.Domain.Scripting;
 
 namespace optimalDb.Domain.CodeActions;
 
@@ -11,8 +12,13 @@ public class ExecuteScriptCodeAction : CodeAction
         _filename = filename;
     }
 
-    public override string Execute(string connectionString, string database, string databaseObjectSchema,
-        string databaseObjectName, DatabaseObjectTypeEnum? databaseObjectTypeEnum)
+    public override string Execute(
+        IDatabaseAccessor databaseAccessor,
+        string connectionString, 
+        string database,
+        string databaseObjectSchema,
+        string databaseObjectName, 
+        DatabaseObjectTypeEnum? databaseObjectTypeEnum)
     {
         return PowershellScripting.ExecuteScript(
             _filename,
