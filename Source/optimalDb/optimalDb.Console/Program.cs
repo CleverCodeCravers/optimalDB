@@ -1,7 +1,6 @@
-﻿using optimalDb.BL.ConfigurationFileFormats;
-using optimalDb.BL.TestViewPerformances;
-using optimalDb.Console.CommandLineParsing;
-using optimalDb.Infrastructure;
+﻿using optimalDb.Console.CommandLineParsing;
+using optimalDb.Domain;
+using optimalDb.Domain.ConfigurationFileFormats;
 
 var parser = new CommandLineParser(
     args,

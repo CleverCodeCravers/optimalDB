@@ -1,5 +1,5 @@
-using optimalDb.BL.AutoUpdates;
-using optimalDb.Infrastructure;
+using optimalDb.Domain;
+using optimalDb.Domain.AutoUpdates;
 
 namespace optimalDb.WinForms
 {

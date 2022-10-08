@@ -20,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\optimalDb.BL\optimalDb.BL.csproj" />
-    <ProjectReference Include="..\optimalDb.Infrastructure\optimalDb.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="SelectScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -32,6 +27,10 @@
 
   <ItemGroup>
     <Folder Include="UiExtensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\optimalDb.Domain\optimalDb.Domain.csproj" />
   </ItemGroup>
 
 </Project>
