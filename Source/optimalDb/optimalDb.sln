@@ -11,13 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{333B064B-7A6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bibliotheken-CCD", "Bibliotheken-CCD", "{024A0961-D2B3-457E-846E-554C75146253}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Interactors", "optimalDb.Interactors\optimalDb.Interactors.csproj", "{85746C72-B950-4627-8706-0B84C710745D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.Interactors", "optimalDb.Interactors\optimalDb.Interactors.csproj", "{85746C72-B950-4627-8706-0B84C710745D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Contracts", "optimalDb.Contracts\optimalDb.Contracts.csproj", "{DE248152-3116-4B32-8579-B5AB8F7E6F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.Contracts", "optimalDb.Contracts\optimalDb.Contracts.csproj", "{DE248152-3116-4B32-8579-B5AB8F7E6F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Persistence", "optimalDb.Persistence\optimalDb.Persistence.csproj", "{B06C0E89-08E4-4914-A4DF-E95F59E54DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.Persistence", "optimalDb.Persistence\optimalDb.Persistence.csproj", "{B06C0E89-08E4-4914-A4DF-E95F59E54DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Domain", "optimalDb.Domain\optimalDb.Domain.csproj", "{8733EC0E-E68D-483D-B2B6-91E7364CA8FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "optimalDb.Domain", "optimalDb.Domain\optimalDb.Domain.csproj", "{8733EC0E-E68D-483D-B2B6-91E7364CA8FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "optimalDb.Interactors.Tests", "optimalDb.Interactors.Tests\optimalDb.Interactors.Tests.csproj", "{48AFA220-50DF-418F-AB66-D5C3292CF939}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{8733EC0E-E68D-483D-B2B6-91E7364CA8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8733EC0E-E68D-483D-B2B6-91E7364CA8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8733EC0E-E68D-483D-B2B6-91E7364CA8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48AFA220-50DF-418F-AB66-D5C3292CF939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48AFA220-50DF-418F-AB66-D5C3292CF939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48AFA220-50DF-418F-AB66-D5C3292CF939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48AFA220-50DF-418F-AB66-D5C3292CF939}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{DE248152-3116-4B32-8579-B5AB8F7E6F57} = {024A0961-D2B3-457E-846E-554C75146253}
 		{B06C0E89-08E4-4914-A4DF-E95F59E54DB7} = {024A0961-D2B3-457E-846E-554C75146253}
 		{8733EC0E-E68D-483D-B2B6-91E7364CA8FA} = {024A0961-D2B3-457E-846E-554C75146253}
+		{48AFA220-50DF-418F-AB66-D5C3292CF939} = {024A0961-D2B3-457E-846E-554C75146253}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FAAE4D2C-F89F-42F3-9D1F-7CC2E1D414BD}
