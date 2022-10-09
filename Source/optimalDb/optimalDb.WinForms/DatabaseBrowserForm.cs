@@ -1,10 +1,12 @@
 ﻿using System.Text;
 using FastColoredTextBoxNS.Text;
+using optimalDb.Contracts;
 using optimalDb.Domain;
 using optimalDb.Domain.AutoUpdates;
 using optimalDb.Domain.CodeActions;
 using optimalDb.Domain.ConfigurationFileFormats;
 using optimalDb.Domain.Scripting;
+using optimalDb.Interactors;
 using optimalDb.Persistence;
 using optimalDb.WinForms.Properties;
 using optimalDb.WinForms.UiExtensions;
@@ -388,5 +390,30 @@ namespace optimalDb.WinForms
         {
             ExecuteCodeActions();
         }
+
+        private void ConnectionContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var enableMenuItems = ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection);
+            foreach (ToolStripItem item in ConnectionContextMenuStrip.Items)
+            {
+                item.Enabled = enableMenuItems;
+            }
+        }
+
+        private void runUnitTestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!ConnectionsListbox.TryGetSelectedItemAs(out DatabaseConnection? connection))
+                return;
+
+            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString ?? "");
+            var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+            var repository = new UnitTestingRepository(schemaRepository, connection?.ConnectionString??"");
+
+            var unitTestRunnerInteractor = new UnitTestInteractor(repository);
+            UnitTestRunnerForm form = new UnitTestRunnerForm(unitTestRunnerInteractor);
+            form.Show();
+        }
     }
+
+    
 }

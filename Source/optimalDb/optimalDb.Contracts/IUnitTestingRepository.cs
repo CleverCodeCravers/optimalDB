@@ -1,4 +1,4 @@
-﻿namespace optimalDb.Interactors.Tests;
+﻿namespace optimalDb.Contracts;
 
 public interface IUnitTestingRepository
 {

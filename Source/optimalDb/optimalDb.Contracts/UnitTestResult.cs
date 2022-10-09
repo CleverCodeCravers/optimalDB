@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace optimalDb.Interactors.Tests;
+namespace optimalDb.Contracts;
 
 public record UnitTestResult(
     UnitTest UnitTest,

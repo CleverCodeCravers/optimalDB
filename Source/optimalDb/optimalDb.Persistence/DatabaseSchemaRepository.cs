@@ -2,7 +2,7 @@
 using System.Text;
 using optimalDb.Contracts;
 
-namespace optimalDb.Domain
+namespace optimalDb.Persistence
 {
     public class DatabaseSchemaRepository
     {

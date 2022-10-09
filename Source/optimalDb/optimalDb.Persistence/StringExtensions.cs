@@ -1,4 +1,4 @@
-﻿namespace optimalDb.Domain;
+﻿namespace optimalDb.Persistence;
 
 public static class StringExtensions
 {

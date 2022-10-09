@@ -1,4 +1,5 @@
-﻿using optimalDb.Domain;
+﻿using optimalDb.Contracts;
+using optimalDb.Domain;
 
 namespace optimalDb.WinForms
 {

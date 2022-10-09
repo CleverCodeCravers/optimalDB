@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain.ConfigurationFileFormats;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain.ConfigurationFileFormats;
 
 public class CfgConfigurationFileFormat : IConfigurationFileFormat
 {

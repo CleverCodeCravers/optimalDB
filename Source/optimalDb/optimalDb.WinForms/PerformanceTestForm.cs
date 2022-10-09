@@ -1,5 +1,6 @@
 using optimalDb.WinForms.GridExtras;
 using System.Text;
+using optimalDb.Contracts;
 using optimalDb.Domain;
 using optimalDb.Domain.AutoUpdates;
 using optimalDb.Domain.ConfigurationFileFormats;

@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Interactors.Tests;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Interactors.Tests.SqlUnitTests;
 
 public class UnitTestingRepositoryMock : IUnitTestingRepository
 {

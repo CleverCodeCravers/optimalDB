@@ -1,4 +1,6 @@
-﻿namespace optimalDb.Domain;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Domain;
 
 public interface IConfigurationFileFormat
 {

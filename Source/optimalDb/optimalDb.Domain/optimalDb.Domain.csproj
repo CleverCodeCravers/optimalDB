@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\optimalDb.Contracts\optimalDb.Contracts.csproj" />
+    <ProjectReference Include="..\optimalDb.Persistence\optimalDb.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SqlUnitTests\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using optimalDb.Interactors.Tests;
+﻿using optimalDb.Contracts;
+
+namespace optimalDb.Interactors.Tests.SqlUnitTests;
 
 class UnitTestRunnerMock : IUnitTestRunner
 {

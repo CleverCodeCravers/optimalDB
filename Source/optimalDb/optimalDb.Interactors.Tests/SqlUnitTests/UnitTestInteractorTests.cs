@@ -1,14 +1,15 @@
 ﻿using NUnit.Framework;
+using optimalDb.Contracts;
 
-namespace optimalDb.Interactors.Tests
+namespace optimalDb.Interactors.Tests.SqlUnitTests
 {
     [TestFixture]
     public class UnitTestInteractorTests
     {
         private UnitTestInteractor GetTestInteractor()
         {
-            var test1 = new UnitTest(Guid.NewGuid(), "ConnectionString", "dbo", "TEST_What_is_that", "Some code");
-            var test2 = new UnitTest(Guid.NewGuid(), "ConnectionString", "dbo", "TEST_What_is_that2", "Some code");
+            var test1 = new UnitTest(Guid.NewGuid(), "ConnectionString", "dbo", "TEST_What_is_that");
+            var test2 = new UnitTest(Guid.NewGuid(), "ConnectionString", "dbo", "TEST_What_is_that2");
 
             var unitTestingRepository =
                 new UnitTestingRepositoryMock(new[] { test1, test2 });
@@ -28,7 +29,7 @@ namespace optimalDb.Interactors.Tests
             interactor.RunSelectedTests(new UnitTestRunnerMock());
 
             var results = interactor.UnitTestResults;
-            
+
             Assert.AreEqual(1, results.Length);
         }
 
@@ -40,7 +41,7 @@ namespace optimalDb.Interactors.Tests
             Assert.IsEmpty(interactor.UnitTestList);
 
             interactor.Initialize();
-            
+
             Assert.IsNotEmpty(interactor.UnitTestList);
         }
 

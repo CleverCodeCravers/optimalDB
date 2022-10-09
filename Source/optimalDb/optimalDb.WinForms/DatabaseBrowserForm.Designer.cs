@@ -47,8 +47,11 @@
             this.analyseAndOptimizeIndexesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findProblemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findCodeThatSpansMultipleDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ConnectionsListbox = new System.Windows.Forms.ListBox();
+            this.ConnectionContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.runUnitTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel7 = new System.Windows.Forms.Panel();
             this.ConnectionsSearchTextbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -83,6 +86,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.ConnectionContextMenuStrip.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -172,7 +176,8 @@
             this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem,
             this.toolStripMenuItem1,
             this.performanceOptimizationToolStripMenuItem,
-            this.findProblemsToolStripMenuItem});
+            this.findProblemsToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
             this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.scriptsToolStripMenuItem.Text = "Tools";
@@ -240,6 +245,12 @@
             this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -262,6 +273,7 @@
             // 
             // ConnectionsListbox
             // 
+            this.ConnectionsListbox.ContextMenuStrip = this.ConnectionContextMenuStrip;
             this.ConnectionsListbox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConnectionsListbox.FormattingEnabled = true;
             this.ConnectionsListbox.ItemHeight = 15;
@@ -270,6 +282,21 @@
             this.ConnectionsListbox.Size = new System.Drawing.Size(176, 547);
             this.ConnectionsListbox.TabIndex = 1;
             this.ConnectionsListbox.SelectedIndexChanged += new System.EventHandler(this.connectionStringListbox_SelectedIndexChanged);
+            // 
+            // ConnectionContextMenuStrip
+            // 
+            this.ConnectionContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runUnitTestsToolStripMenuItem});
+            this.ConnectionContextMenuStrip.Name = "ConnectionContextMenuStrip";
+            this.ConnectionContextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.ConnectionContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ConnectionContextMenuStrip_Opening);
+            // 
+            // runUnitTestsToolStripMenuItem
+            // 
+            this.runUnitTestsToolStripMenuItem.Name = "runUnitTestsToolStripMenuItem";
+            this.runUnitTestsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.runUnitTestsToolStripMenuItem.Text = "Run Unit-Tests...";
+            this.runUnitTestsToolStripMenuItem.Click += new System.EventHandler(this.runUnitTestsToolStripMenuItem_Click);
             // 
             // panel7
             // 
@@ -642,6 +669,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.ConnectionContextMenuStrip.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -726,5 +754,8 @@
         private ToolStripMenuItem findCodeThatSpansMultipleDatabasesToolStripMenuItem;
         private CheckBox AutoClipboardCheckbox;
         private ListBox CodeActionsListBox;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ContextMenuStrip ConnectionContextMenuStrip;
+        private ToolStripMenuItem runUnitTestsToolStripMenuItem;
     }
 }

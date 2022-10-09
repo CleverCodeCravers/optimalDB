@@ -1,4 +1,4 @@
-﻿namespace optimalDb.Domain;
+﻿namespace optimalDb.Contracts;
 
 public enum DatabaseObjectTypeEnum
 {
