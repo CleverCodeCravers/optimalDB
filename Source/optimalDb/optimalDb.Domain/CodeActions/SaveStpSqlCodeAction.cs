@@ -20,44 +20,44 @@ public class SaveStpSqlCodeAction : SqlCodeAction
     {
         var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
-        var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
+        var allColumns = schemaRepository.GetColumnsIncludingPrimaryKeys(databaseObjectSchema, databaseObjectName);
+        var primaryKeys = schemaRepository.GetPrimaryKeyList(databaseObjectSchema, databaseObjectName);
+        var allColumnsWithoutPrimaryKeys = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
 
-        var columnsAsCommaList =
-            string.Join(", " + Environment.NewLine,
-                columns.Select(x => "           " + x.ColumnName).ToArray());
+        var insertColumnList = allColumnsWithoutPrimaryKeys.AsCommaListWithNewlines();
 
-        var columnsAsParameterCommaList =
-            string.Join(", " + Environment.NewLine,
-                columns.Select(x => "           @" + x.ColumnName).ToArray());
+        var insertColumnListAsParameters = allColumnsWithoutPrimaryKeys.AsParameterListWithNewlines();
+        var primaryKeyName = primaryKeys.AsParameters();
 
-        var updateParameterAssignment =
-            string.Join(", " + Environment.NewLine,
-                columns.Select(x => $"           {x.ColumnName} = @" + x.ColumnName).ToArray()).Trim();
+        var updateParameterAssignment = allColumnsWithoutPrimaryKeys.AsUpdateParameterToColumnAssignmentWithNewlines();
+        var updateWhere = primaryKeys.AsWhereConditions();
 
-        var stpParameters =
-            string.Join(", " + Environment.NewLine,
-                columns.Select(x => "           @" + x.ColumnName + " " + SqlDataType(x).ToUpper()).ToArray());
+        var stpParameters = allColumns.AsStoredProcedureParameters();
 
         var template = $@"
 CREATE PROCEDURE [dbo].[{databaseObjectName}_Save](
-{stpParameters}
+            {stpParameters}
         )
     AS
 BEGIN
-    IF (@Id <= 0)
+    IF ({primaryKeyName} <= 0)
     BEGIN
         INSERT INTO [{databaseObjectSchema}].[{databaseObjectName}] (
-{columnsAsCommaList}
+{insertColumnList}
         ) VALUES (
-{columnsAsParameterCommaList}
+{insertColumnListAsParameters}
         );
+
+        SELECT SCOPE_IDENTITY() AS Id
 
         RETURN
     END
 
     UPDATE [{databaseObjectSchema}].[{databaseObjectName}]
        SET {updateParameterAssignment}
-     WHERE Id = @Id
+     WHERE {updateWhere}
+
+    SELECT {primaryKeyName} AS Id
 END
 ";
 

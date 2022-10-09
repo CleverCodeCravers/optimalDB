@@ -20,7 +20,7 @@ public class CreateViewSqlCodeAction : SqlCodeAction
     {
         var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
-        var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
+        var columns = schemaRepository.GetColumnsIncludingPrimaryKeys(databaseObjectSchema, databaseObjectName);
 
         var columnsAsCommaList = 
             string.Join(", " + Environment.NewLine,

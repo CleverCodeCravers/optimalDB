@@ -1,4 +1,5 @@
 ﻿using optimalDb.Contracts;
+using optimalDb.Persistence;
 
 namespace optimalDb.Domain.CodeActions;
 
@@ -32,6 +33,47 @@ public abstract class SqlCodeAction : CodeAction
         }
 
         return databaseColumn.DataType;
+    }
+
+    protected string GetPrimaryKeysAsStoredProcedureParameters(
+        DatabaseSchemaRepository schemaRepository,
+        string databaseObjectSchema,
+        string databaseObjectName
+    )
+    {
+
+        var columns = schemaRepository.GetPrimaryKeyList(databaseObjectSchema, databaseObjectName);
+
+        var stpParameter =
+            string.Join(", ", columns.Select(x => "@" + x.ColumnName + " " + SqlDataType(x)).ToArray()).Trim();
+
+        return stpParameter;
+    }
+    protected string GetPrimaryKeysAsIfConditions(
+        DatabaseSchemaRepository schemaRepository,
+        string databaseObjectSchema,
+        string databaseObjectName
+    )
+    {
+
+        var columns = schemaRepository.GetPrimaryKeyList(databaseObjectSchema, databaseObjectName);
+
+        var ifAssignments =
+            string.Join(" AND ", columns.Select(x => "@" + x.ColumnName + " <= 0").ToArray()).Trim();
+
+        return ifAssignments;
+    }
+
+    protected string GetPrimaryKeysAsWhereAssignments(
+        DatabaseSchemaRepository schemaRepository,
+        string databaseObjectSchema,
+        string databaseObjectName
+    )
+    {
+
+        var columns = schemaRepository.GetPrimaryKeyList(databaseObjectSchema, databaseObjectName);
+
+        return string.Join(" AND ", columns.Select(x => x.ColumnName + " = @" + x.ColumnName).ToArray()).Trim();
     }
 
 }

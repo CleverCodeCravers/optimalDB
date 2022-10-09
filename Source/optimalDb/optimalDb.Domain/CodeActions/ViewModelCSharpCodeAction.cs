@@ -27,21 +27,21 @@ public class ViewModelCSharpCodeAction : CSharpCodeAction
             return "";
         }
 
-        var className = DotNetClassName(databaseObjectName);
+        var className = NamingHelper.DotNetClassName(databaseObjectName);
         var columns = schemaRepository.GetColumnList(databaseObjectSchema, databaseObjectName);
 
         var columnParameters = string.Join(Environment.NewLine,
-            columns.Select(x => "    public " + DotNetDataType(x) + " " + DotNetNamePascalCase(x) + " { get; }")
+            columns.Select(x => "    public " + NamingHelper.DotNetDataType(x) + " " + NamingHelper.DotNetNamePascalCase(x) + " { get; }")
         );
 
         var columnArguments =
             string.Join("," + Environment.NewLine,
-                columns.Select(x => "        " + DotNetDataType(x) + " " + DotNetNameCamelCase(x))
+                columns.Select(x => "        " + NamingHelper.DotNetDataType(x) + " " + NamingHelper.DotNetNameCamelCase(x))
             );
 
         var parameterAssignment =
             string.Join(Environment.NewLine,
-                columns.Select(x => "        " + DotNetNamePascalCase(x) + " = " + DotNetNameCamelCase(x) + ";")
+                columns.Select(x => "        " + NamingHelper.DotNetNamePascalCase(x) + " = " + NamingHelper.DotNetNameCamelCase(x) + ";")
             );
 
         var template = $@"

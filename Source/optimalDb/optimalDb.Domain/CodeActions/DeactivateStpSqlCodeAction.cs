@@ -1,4 +1,5 @@
 ﻿using optimalDb.Contracts;
+using optimalDb.Persistence;
 
 namespace optimalDb.Domain.CodeActions;
 
@@ -17,18 +18,26 @@ public class DeactivateStpSqlCodeAction : SqlCodeAction
         string databaseObjectName,
         DatabaseObjectTypeEnum? databaseObjectTypeEnum)
     {
+        var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
+
+        var stpParameter = GetPrimaryKeysAsStoredProcedureParameters(schemaRepository, databaseObjectSchema, databaseObjectName);
+
+        var ifAssignments = GetPrimaryKeysAsIfConditions(schemaRepository, databaseObjectSchema, databaseObjectName);
+
+        var whereAssignments = GetPrimaryKeysAsWhereAssignments(schemaRepository, databaseObjectSchema, databaseObjectName);
+
         var template = $@"
-CREATE PROCEDURE [dbo].[{databaseObjectName}_Deactivate](@Id INT)
+CREATE PROCEDURE [dbo].[{databaseObjectName}_Deactivate]({stpParameter})
     AS
 BEGIN
-    IF (@Id <= 0)
+    IF ({ifAssignments})
     BEGIN
         RETURN
     END
 
     UPDATE [{databaseObjectSchema}].[{databaseObjectName}]
        SET IstAktiv = 0
-     WHERE Id = @Id
+     WHERE {whereAssignments}
 END
 ";
 
