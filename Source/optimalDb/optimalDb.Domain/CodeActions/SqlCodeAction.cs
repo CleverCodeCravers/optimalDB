@@ -20,6 +20,9 @@ public abstract class SqlCodeAction : CodeAction
     {
         if (databaseColumn.DataType.ToLower().Contains("varchar"))
         {
+            if ( databaseColumn.CharacterMaximumLength == -1 )
+                return databaseColumn.DataType + "(MAX)";
+
             return databaseColumn.DataType + "(" + databaseColumn.CharacterMaximumLength + ")";
         }
 
