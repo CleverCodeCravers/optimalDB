@@ -104,7 +104,7 @@ SELECT {columnNames}
         var daten = _databaseAccessor.LoadDataTable(sql, new Dictionary<string,object>(
            {{ ""{primaryKeyNameSqlParameter}"", {primaryKeyNameDotNetName} }}
         ));
-        return daten.ToInstancesOf(Instanciate);
+        return daten.ToInstancesOf(Instanciate).FirstOrDefault();
     }}    
 
     private {className} Instanciate(DataRow row) 
