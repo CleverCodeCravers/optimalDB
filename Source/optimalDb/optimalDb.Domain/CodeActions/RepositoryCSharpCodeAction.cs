@@ -93,7 +93,7 @@ SELECT {columnNames}
         return daten.ToInstancesOf(Instanciate);
     }}
 
-    public {className}[] GetById({primaryKeyNameDotNetParameter}) 
+    public {className} GetById({primaryKeyNameDotNetParameter}) 
     {{
         var sql = @""
 SELECT {columnNames}
