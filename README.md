@@ -1,21 +1,13 @@
-# DotNet 6 app repository template
+# optimalDb
 
-The project is based on these [Requirements](Documentation/requirements.md) and is considered https://github.com/stho32/Training .
+optimalDb is a project to help us with sql server based tasks as well as creating c# classes for several problems that we face at our workingplace.
 
-## Badges
+The software loads a list of connection strings and allows for easy access to the databases and database objects within. 
 
-- [ ] Add a badge from the build workflow
-- [ ] Add a badge from https://www.codefactor.io/
-- [ ] Add a badge from sonarcloud
-    - [ ] Code coverage
-    - [ ] Lines of code
-    - [ ] Maintainability rating
-    - [ ] Security rating
-    - [ ] Reliability rating
+Functions include: 
 
-## What is this?
-
-- [ ] add documentation about the usage here
-- [ ] put a few screenshots in between
-
+- [X] the ability to generate a set of sql and c# classes for different use cases based on the selected database objects
+- [X] the ability to run stored procedure based "sql unit tests"
+- [X] the ability to search slow sql views
+- [ ] the ability to search through all available code
 
