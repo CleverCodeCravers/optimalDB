@@ -4,7 +4,20 @@ using optimalDb.Contracts;
 
 namespace optimalDb.Persistence
 {
-    public class DatabaseSchemaRepository
+    public interface IDatabaseSchemaRepository
+    {
+        DatabaseObject[] GetViewList();
+        string GetCode(string name);
+        string[] GetDatabaseList();
+        DatabaseObject[] GetTableList();
+        DatabaseObject[] GetStoredProcedureList();
+        DatabaseObject[] GetFunctionList();
+        DatabaseColumn[] GetPrimaryKeyList(string schema, string tableOrView);
+        DatabaseColumn[] GetColumnsIncludingPrimaryKeys(string schema, string tableOrView);
+        DatabaseColumn[] GetColumnList(string schema, string tableOrView);
+    }
+
+    public class DatabaseSchemaRepository : IDatabaseSchemaRepository
     {
         private readonly IDatabaseAccessor _accessor;
 

@@ -1,7 +1,7 @@
 ﻿using optimalDb.Contracts;
 
 namespace optimalDb.Interactors;
-public delegate void Notify();
+
 public class UnitTestInteractor
 {
     private readonly IUnitTestingRepository _unitTestingRepository;

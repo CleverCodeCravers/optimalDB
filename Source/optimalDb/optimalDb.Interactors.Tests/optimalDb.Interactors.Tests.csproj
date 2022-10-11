@@ -16,4 +16,8 @@
     <ProjectReference Include="..\optimalDb.Interactors\optimalDb.Interactors.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SqlCodeSeachTests\" />
+  </ItemGroup>
+
 </Project>
