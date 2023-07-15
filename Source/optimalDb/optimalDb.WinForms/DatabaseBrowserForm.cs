@@ -37,25 +37,26 @@ namespace optimalDb.WinForms
         {
             LanguageComboBox.SelectedIndex = 0;
 
-            System.Resources.ResourceManager resourceManager = 
+            System.Resources.ResourceManager resourceManager =
                 new System.Resources.ResourceManager("optimalDb.WinForms.Properties.Resources", typeof(Resources).Assembly);
             var updateImageStream = resourceManager.GetObject("Update");
-            
+
             UpdateConnectionsButton.Image = updateImageStream as Image;
             UpdateDatabasesButton.Image = updateImageStream as Image;
             UpdateDatabaseObjectsButton.Image = updateImageStream as Image;
 
-            _searchBehaviourForDatabaseConnections = 
+            _searchBehaviourForDatabaseConnections =
                 new FulltextSearchableListBoxBehaviour<DatabaseConnection>(ConnectionsListbox, ConnectionsSearchTextbox, ref Connections);
 
             _searchBehaviourForDatabaseNames =
                 new FulltextSearchableListBoxBehaviour<string>(DatabasesListbox, DatabasesSearchTextbox, ref Databases);
 
-            _searchBehaviourForDatabaseObjects = 
+            _searchBehaviourForDatabaseObjects =
                 new FulltextSearchableListBoxBehaviour<DatabaseObject>(DatabaseObjectsListBox, DatabaseObjectsSearchTextbox, ref DatabaseObjects);
 
             CodeActions.Add(new PreviewSourcecodeCodeAction());
             CodeActions.Add(new DataTransferObjectCSharpCodeAction());
+            CodeActions.Add(new DataTransferRecordCSharpCodeAction());
             CodeActions.Add(new ViewModelCSharpCodeAction());
             CodeActions.Add(new RepositoryCSharpCodeAction());
             CodeActions.Add(new CreateViewSqlCodeAction());
@@ -166,7 +167,7 @@ namespace optimalDb.WinForms
 
             DatabaseObjects.Clear();
 
-            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString??"", database);
+            var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString ?? "", database);
             var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
 
             var databaseObjects = new List<DatabaseObject>();
@@ -190,7 +191,7 @@ namespace optimalDb.WinForms
             if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
 
-            using var form = new SelectDatabaseObjectForm(connection?.ConnectionString??"", database??"");
+            using var form = new SelectDatabaseObjectForm(connection?.ConnectionString ?? "", database ?? "");
             form.ShowDialog();
 
             var result = form.Result;
@@ -226,15 +227,15 @@ namespace optimalDb.WinForms
 
             if (!DatabasesListbox.TryGetSelectedItemAs(out string? database))
                 return;
-            
-            var modifier = new ConnectionStringModifier(databaseConnection?.ConnectionString??"");
+
+            var modifier = new ConnectionStringModifier(databaseConnection?.ConnectionString ?? "");
             var connectionString = modifier.ChangeDatabaseTo(database);
 
             using var form = new SelectScriptForm(_scriptDirectory);
-            
+
             form.ShowDialog();
 
-            if (form.Result == null) 
+            if (form.Result == null)
                 return;
 
             var fullname = form.Result.FullName;
@@ -346,7 +347,7 @@ namespace optimalDb.WinForms
 
                 var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString ?? "",
                     database ?? "");
-                
+
                 result.AppendLine(MouseCursorTools.WithWaitCursor(
                     () =>
                         actionToExecute?.Execute(
@@ -407,7 +408,7 @@ namespace optimalDb.WinForms
 
             var databaseAccessor = new DatabaseAccessor(connection?.ConnectionString ?? "");
             var schemaRepository = new DatabaseSchemaRepository(databaseAccessor);
-            var repository = new UnitTestingRepository(schemaRepository, connection?.ConnectionString??"");
+            var repository = new UnitTestingRepository(schemaRepository, connection?.ConnectionString ?? "");
 
             var unitTestRunnerInteractor = new UnitTestInteractor(repository);
             UnitTestRunnerForm form = new UnitTestRunnerForm(unitTestRunnerInteractor);
@@ -415,5 +416,5 @@ namespace optimalDb.WinForms
         }
     }
 
-    
+
 }

@@ -28,680 +28,648 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseBrowserForm));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectScriptFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.navigateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.performanceOptimizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.analyseAndOptimizeIndexesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findProblemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.ConnectionsListbox = new System.Windows.Forms.ListBox();
-            this.ConnectionContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.runUnitTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.ConnectionsSearchTextbox = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.UpdateConnectionsButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.DatabasesListbox = new System.Windows.Forms.ListBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.DatabasesSearchTextbox = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.UpdateDatabasesButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.DatabaseObjectsListBox = new System.Windows.Forms.ListBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.DatabaseObjectsSearchTextbox = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.UpdateDatabaseObjectsButton = new System.Windows.Forms.Button();
-            this.ObjectsLabel = new System.Windows.Forms.Label();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.CodeActionsListBox = new System.Windows.Forms.ListBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.AutoClipboardCheckbox = new System.Windows.Forms.CheckBox();
-            this.ExecuteButton = new System.Windows.Forms.Button();
-            this.CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.LanguageComboBox = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.ConnectionContextMenuStrip.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel1.SuspendLayout();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new MenuStrip();
+            configurationToolStripMenuItem = new ToolStripMenuItem();
+            loadConfigurationToolStripMenuItem = new ToolStripMenuItem();
+            selectScriptFolderToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            navigateToolStripMenuItem = new ToolStripMenuItem();
+            gotoDatabaseObjectCtrlTToolStripMenuItem = new ToolStripMenuItem();
+            scriptsToolStripMenuItem = new ToolStripMenuItem();
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripSeparator();
+            performanceOptimizationToolStripMenuItem = new ToolStripMenuItem();
+            findProblematicSqlObjectsInTheDatabaseToolStripMenuItem = new ToolStripMenuItem();
+            startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem = new ToolStripMenuItem();
+            analyseTableSizesAndSpaceTendenciesToolStripMenuItem = new ToolStripMenuItem();
+            analyseAndOptimizeIndexesToolStripMenuItem = new ToolStripMenuItem();
+            findProblemsToolStripMenuItem = new ToolStripMenuItem();
+            findCodeThatSpansMultipleDatabasesToolStripMenuItem = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            splitContainer1 = new SplitContainer();
+            ConnectionsListbox = new ListBox();
+            ConnectionContextMenuStrip = new ContextMenuStrip(components);
+            runUnitTestsToolStripMenuItem = new ToolStripMenuItem();
+            panel7 = new Panel();
+            ConnectionsSearchTextbox = new TextBox();
+            panel1 = new Panel();
+            UpdateConnectionsButton = new Button();
+            label1 = new Label();
+            splitContainer2 = new SplitContainer();
+            DatabasesListbox = new ListBox();
+            panel6 = new Panel();
+            DatabasesSearchTextbox = new TextBox();
+            panel2 = new Panel();
+            UpdateDatabasesButton = new Button();
+            label2 = new Label();
+            splitContainer3 = new SplitContainer();
+            DatabaseObjectsListBox = new ListBox();
+            panel5 = new Panel();
+            DatabaseObjectsSearchTextbox = new TextBox();
+            panel3 = new Panel();
+            UpdateDatabaseObjectsButton = new Button();
+            ObjectsLabel = new Label();
+            splitContainer4 = new SplitContainer();
+            CodeActionsListBox = new ListBox();
+            panel8 = new Panel();
+            AutoClipboardCheckbox = new CheckBox();
+            ExecuteButton = new Button();
+            CodeTextbox = new FastColoredTextBoxNS.FastColoredTextBox();
+            panel4 = new Panel();
+            LanguageComboBox = new ComboBox();
+            label3 = new Label();
+            imageList1 = new ImageList(components);
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ConnectionContextMenuStrip.SuspendLayout();
+            panel7.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            panel6.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
+            panel5.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
+            splitContainer4.Panel1.SuspendLayout();
+            splitContainer4.Panel2.SuspendLayout();
+            splitContainer4.SuspendLayout();
+            panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CodeTextbox).BeginInit();
+            panel4.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configurationToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.navigateToolStripMenuItem,
-            this.scriptsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1187, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.Items.AddRange(new ToolStripItem[] { configurationToolStripMenuItem, aboutToolStripMenuItem, navigateToolStripMenuItem, scriptsToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1187, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // configurationToolStripMenuItem
             // 
-            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadConfigurationToolStripMenuItem,
-            this.selectScriptFolderToolStripMenuItem});
-            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
-            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.configurationToolStripMenuItem.Text = "Configuration";
+            configurationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadConfigurationToolStripMenuItem, selectScriptFolderToolStripMenuItem });
+            configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            configurationToolStripMenuItem.Size = new Size(93, 20);
+            configurationToolStripMenuItem.Text = "Configuration";
             // 
             // loadConfigurationToolStripMenuItem
             // 
-            this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
-            this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
+            loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
+            loadConfigurationToolStripMenuItem.Size = new Size(183, 22);
+            loadConfigurationToolStripMenuItem.Text = "Load Configuration";
+            loadConfigurationToolStripMenuItem.Click += loadConfigurationToolStripMenuItem_Click;
             // 
             // selectScriptFolderToolStripMenuItem
             // 
-            this.selectScriptFolderToolStripMenuItem.Name = "selectScriptFolderToolStripMenuItem";
-            this.selectScriptFolderToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.selectScriptFolderToolStripMenuItem.Text = "Select Script Folder...";
-            this.selectScriptFolderToolStripMenuItem.Click += new System.EventHandler(this.selectScriptFolderToolStripMenuItem_Click);
+            selectScriptFolderToolStripMenuItem.Name = "selectScriptFolderToolStripMenuItem";
+            selectScriptFolderToolStripMenuItem.Size = new Size(183, 22);
+            selectScriptFolderToolStripMenuItem.Text = "Select Script Folder...";
+            selectScriptFolderToolStripMenuItem.Click += selectScriptFolderToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            aboutToolStripMenuItem.Alignment = ToolStripItemAlignment.Right;
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(52, 20);
+            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // navigateToolStripMenuItem
             // 
-            this.navigateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem});
-            this.navigateToolStripMenuItem.Name = "navigateToolStripMenuItem";
-            this.navigateToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.navigateToolStripMenuItem.Text = "Navigate";
+            navigateToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gotoDatabaseObjectCtrlTToolStripMenuItem });
+            navigateToolStripMenuItem.Name = "navigateToolStripMenuItem";
+            navigateToolStripMenuItem.Size = new Size(66, 20);
+            navigateToolStripMenuItem.Text = "Navigate";
             // 
             // gotoDatabaseObjectCtrlTToolStripMenuItem
             // 
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Name = "gotoDatabaseObjectCtrlTToolStripMenuItem";
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Text = "Goto Database-Object (Ctrl + T)";
-            this.gotoDatabaseObjectCtrlTToolStripMenuItem.Click += new System.EventHandler(this.gotoDatabaseObjectToolStripMenuItem_Click);
+            gotoDatabaseObjectCtrlTToolStripMenuItem.Name = "gotoDatabaseObjectCtrlTToolStripMenuItem";
+            gotoDatabaseObjectCtrlTToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.T;
+            gotoDatabaseObjectCtrlTToolStripMenuItem.Size = new Size(281, 22);
+            gotoDatabaseObjectCtrlTToolStripMenuItem.Text = "Goto Database-Object (Ctrl + T)";
+            gotoDatabaseObjectCtrlTToolStripMenuItem.Click += gotoDatabaseObjectToolStripMenuItem_Click;
             // 
             // scriptsToolStripMenuItem
             // 
-            this.scriptsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.performanceOptimizationToolStripMenuItem,
-            this.findProblemsToolStripMenuItem,
-            this.toolsToolStripMenuItem});
-            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.scriptsToolStripMenuItem.Text = "Tools";
+            scriptsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem, toolStripMenuItem1, performanceOptimizationToolStripMenuItem, findProblemsToolStripMenuItem, toolsToolStripMenuItem });
+            scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
+            scriptsToolStripMenuItem.Size = new Size(46, 20);
+            scriptsToolStripMenuItem.Text = "Tools";
             // 
             // executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem
             // 
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Name = "executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem";
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object...";
-            this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += new System.EventHandler(this.executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click);
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Name = "executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem";
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Size = new Size(350, 22);
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Text = "Execute Script on Selected Database Object...";
+            executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem.Click += executeScriptOnSelectedDatabaseObjectCtrlEToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(349, 6);
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(347, 6);
             // 
             // performanceOptimizationToolStripMenuItem
             // 
-            this.performanceOptimizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem,
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem,
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem,
-            this.analyseAndOptimizeIndexesToolStripMenuItem});
-            this.performanceOptimizationToolStripMenuItem.Name = "performanceOptimizationToolStripMenuItem";
-            this.performanceOptimizationToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.performanceOptimizationToolStripMenuItem.Text = "Optimize Performance";
-            this.performanceOptimizationToolStripMenuItem.Click += new System.EventHandler(this.performanceOptimizationToolStripMenuItem_Click);
+            performanceOptimizationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { findProblematicSqlObjectsInTheDatabaseToolStripMenuItem, startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem, analyseTableSizesAndSpaceTendenciesToolStripMenuItem, analyseAndOptimizeIndexesToolStripMenuItem });
+            performanceOptimizationToolStripMenuItem.Name = "performanceOptimizationToolStripMenuItem";
+            performanceOptimizationToolStripMenuItem.Size = new Size(350, 22);
+            performanceOptimizationToolStripMenuItem.Text = "Optimize Performance";
+            performanceOptimizationToolStripMenuItem.Click += performanceOptimizationToolStripMenuItem_Click;
             // 
             // findProblematicSqlObjectsInTheDatabaseToolStripMenuItem
             // 
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Name = "findProblematicSqlObjectsInTheDatabaseToolStripMenuItem";
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Text = "Find problematic Sql Objects in the database";
+            findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Name = "findProblematicSqlObjectsInTheDatabaseToolStripMenuItem";
+            findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Size = new Size(376, 22);
+            findProblematicSqlObjectsInTheDatabaseToolStripMenuItem.Text = "Find problematic Sql Objects in the database";
             // 
             // startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem
             // 
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Name = "startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem";
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Text = "Start performance optimization session on this Sql Object";
+            startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Name = "startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem";
+            startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Size = new Size(376, 22);
+            startPerformanceOptimizationSessionOnThisSqlObjectToolStripMenuItem.Text = "Start performance optimization session on this Sql Object";
             // 
             // analyseTableSizesAndSpaceTendenciesToolStripMenuItem
             // 
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Name = "analyseTableSizesAndSpaceTendenciesToolStripMenuItem";
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Text = "Analyse table sizes and space tendencies";
+            analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Name = "analyseTableSizesAndSpaceTendenciesToolStripMenuItem";
+            analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Size = new Size(376, 22);
+            analyseTableSizesAndSpaceTendenciesToolStripMenuItem.Text = "Analyse table sizes and space tendencies";
             // 
             // analyseAndOptimizeIndexesToolStripMenuItem
             // 
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Name = "analyseAndOptimizeIndexesToolStripMenuItem";
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.analyseAndOptimizeIndexesToolStripMenuItem.Text = "Analyse and optimize indexes";
+            analyseAndOptimizeIndexesToolStripMenuItem.Name = "analyseAndOptimizeIndexesToolStripMenuItem";
+            analyseAndOptimizeIndexesToolStripMenuItem.Size = new Size(376, 22);
+            analyseAndOptimizeIndexesToolStripMenuItem.Text = "Analyse and optimize indexes";
             // 
             // findProblemsToolStripMenuItem
             // 
-            this.findProblemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem});
-            this.findProblemsToolStripMenuItem.Name = "findProblemsToolStripMenuItem";
-            this.findProblemsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.findProblemsToolStripMenuItem.Text = "Find Problems";
+            findProblemsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { findCodeThatSpansMultipleDatabasesToolStripMenuItem });
+            findProblemsToolStripMenuItem.Name = "findProblemsToolStripMenuItem";
+            findProblemsToolStripMenuItem.Size = new Size(350, 22);
+            findProblemsToolStripMenuItem.Text = "Find Problems";
             // 
             // findCodeThatSpansMultipleDatabasesToolStripMenuItem
             // 
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Name = "findCodeThatSpansMultipleDatabasesToolStripMenuItem";
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
-            this.findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
+            findCodeThatSpansMultipleDatabasesToolStripMenuItem.Name = "findCodeThatSpansMultipleDatabasesToolStripMenuItem";
+            findCodeThatSpansMultipleDatabasesToolStripMenuItem.Size = new Size(285, 22);
+            findCodeThatSpansMultipleDatabasesToolStripMenuItem.Text = "Find code that spans multiple databases";
             // 
             // toolsToolStripMenuItem
             // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            toolsToolStripMenuItem.Size = new Size(350, 22);
+            toolsToolStripMenuItem.Text = "Tools";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
-            this.splitContainer1.Name = "splitContainer1";
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.FixedPanel = FixedPanel.Panel1;
+            splitContainer1.Location = new Point(0, 24);
+            splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.ConnectionsListbox);
-            this.splitContainer1.Panel1.Controls.Add(this.panel7);
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            splitContainer1.Panel1.Controls.Add(ConnectionsListbox);
+            splitContainer1.Panel1.Controls.Add(panel7);
+            splitContainer1.Panel1.Controls.Add(panel1);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1187, 601);
-            this.splitContainer1.SplitterDistance = 176;
-            this.splitContainer1.TabIndex = 1;
+            splitContainer1.Panel2.Controls.Add(splitContainer2);
+            splitContainer1.Size = new Size(1187, 601);
+            splitContainer1.SplitterDistance = 176;
+            splitContainer1.TabIndex = 1;
             // 
             // ConnectionsListbox
             // 
-            this.ConnectionsListbox.ContextMenuStrip = this.ConnectionContextMenuStrip;
-            this.ConnectionsListbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConnectionsListbox.FormattingEnabled = true;
-            this.ConnectionsListbox.ItemHeight = 15;
-            this.ConnectionsListbox.Location = new System.Drawing.Point(0, 54);
-            this.ConnectionsListbox.Name = "ConnectionsListbox";
-            this.ConnectionsListbox.Size = new System.Drawing.Size(176, 547);
-            this.ConnectionsListbox.TabIndex = 1;
-            this.ConnectionsListbox.SelectedIndexChanged += new System.EventHandler(this.connectionStringListbox_SelectedIndexChanged);
+            ConnectionsListbox.ContextMenuStrip = ConnectionContextMenuStrip;
+            ConnectionsListbox.Dock = DockStyle.Fill;
+            ConnectionsListbox.FormattingEnabled = true;
+            ConnectionsListbox.ItemHeight = 15;
+            ConnectionsListbox.Location = new Point(0, 54);
+            ConnectionsListbox.Name = "ConnectionsListbox";
+            ConnectionsListbox.Size = new Size(176, 547);
+            ConnectionsListbox.TabIndex = 1;
+            ConnectionsListbox.SelectedIndexChanged += connectionStringListbox_SelectedIndexChanged;
             // 
             // ConnectionContextMenuStrip
             // 
-            this.ConnectionContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runUnitTestsToolStripMenuItem});
-            this.ConnectionContextMenuStrip.Name = "ConnectionContextMenuStrip";
-            this.ConnectionContextMenuStrip.Size = new System.Drawing.Size(181, 48);
-            this.ConnectionContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.ConnectionContextMenuStrip_Opening);
+            ConnectionContextMenuStrip.Items.AddRange(new ToolStripItem[] { runUnitTestsToolStripMenuItem });
+            ConnectionContextMenuStrip.Name = "ConnectionContextMenuStrip";
+            ConnectionContextMenuStrip.Size = new Size(160, 26);
+            ConnectionContextMenuStrip.Opening += ConnectionContextMenuStrip_Opening;
             // 
             // runUnitTestsToolStripMenuItem
             // 
-            this.runUnitTestsToolStripMenuItem.Name = "runUnitTestsToolStripMenuItem";
-            this.runUnitTestsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.runUnitTestsToolStripMenuItem.Text = "Run Unit-Tests...";
-            this.runUnitTestsToolStripMenuItem.Click += new System.EventHandler(this.runUnitTestsToolStripMenuItem_Click);
+            runUnitTestsToolStripMenuItem.Name = "runUnitTestsToolStripMenuItem";
+            runUnitTestsToolStripMenuItem.Size = new Size(159, 22);
+            runUnitTestsToolStripMenuItem.Text = "Run Unit-Tests...";
+            runUnitTestsToolStripMenuItem.Click += runUnitTestsToolStripMenuItem_Click;
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.ConnectionsSearchTextbox);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 27);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(176, 27);
-            this.panel7.TabIndex = 5;
+            panel7.Controls.Add(ConnectionsSearchTextbox);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 27);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(176, 27);
+            panel7.TabIndex = 5;
             // 
             // ConnectionsSearchTextbox
             // 
-            this.ConnectionsSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ConnectionsSearchTextbox.Location = new System.Drawing.Point(0, 0);
-            this.ConnectionsSearchTextbox.Name = "ConnectionsSearchTextbox";
-            this.ConnectionsSearchTextbox.Size = new System.Drawing.Size(176, 23);
-            this.ConnectionsSearchTextbox.TabIndex = 0;
-            this.ConnectionsSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConnectionsSearchTextbox_KeyDown);
+            ConnectionsSearchTextbox.Dock = DockStyle.Top;
+            ConnectionsSearchTextbox.Location = new Point(0, 0);
+            ConnectionsSearchTextbox.Name = "ConnectionsSearchTextbox";
+            ConnectionsSearchTextbox.Size = new Size(176, 23);
+            ConnectionsSearchTextbox.TabIndex = 0;
+            ConnectionsSearchTextbox.KeyDown += ConnectionsSearchTextbox_KeyDown;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.UpdateConnectionsButton);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(176, 27);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = SystemColors.ControlDark;
+            panel1.Controls.Add(UpdateConnectionsButton);
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(176, 27);
+            panel1.TabIndex = 0;
             // 
             // UpdateConnectionsButton
             // 
-            this.UpdateConnectionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateConnectionsButton.Location = new System.Drawing.Point(145, 1);
-            this.UpdateConnectionsButton.Name = "UpdateConnectionsButton";
-            this.UpdateConnectionsButton.Size = new System.Drawing.Size(30, 25);
-            this.UpdateConnectionsButton.TabIndex = 2;
-            this.UpdateConnectionsButton.UseVisualStyleBackColor = true;
-            this.UpdateConnectionsButton.Click += new System.EventHandler(this.UpdateConnectionsButton_Click);
+            UpdateConnectionsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdateConnectionsButton.Location = new Point(145, 1);
+            UpdateConnectionsButton.Name = "UpdateConnectionsButton";
+            UpdateConnectionsButton.Size = new Size(30, 25);
+            UpdateConnectionsButton.TabIndex = 2;
+            UpdateConnectionsButton.UseVisualStyleBackColor = true;
+            UpdateConnectionsButton.Click += UpdateConnectionsButton_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(3, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Connections";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(3, 4);
+            label1.Name = "label1";
+            label1.Size = new Size(75, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Connections";
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer2.FixedPanel = FixedPanel.Panel1;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.DatabasesListbox);
-            this.splitContainer2.Panel1.Controls.Add(this.panel6);
-            this.splitContainer2.Panel1.Controls.Add(this.panel2);
+            splitContainer2.Panel1.Controls.Add(DatabasesListbox);
+            splitContainer2.Panel1.Controls.Add(panel6);
+            splitContainer2.Panel1.Controls.Add(panel2);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1007, 601);
-            this.splitContainer2.SplitterDistance = 211;
-            this.splitContainer2.TabIndex = 0;
+            splitContainer2.Panel2.Controls.Add(splitContainer3);
+            splitContainer2.Size = new Size(1007, 601);
+            splitContainer2.SplitterDistance = 211;
+            splitContainer2.TabIndex = 0;
             // 
             // DatabasesListbox
             // 
-            this.DatabasesListbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DatabasesListbox.FormattingEnabled = true;
-            this.DatabasesListbox.ItemHeight = 15;
-            this.DatabasesListbox.Location = new System.Drawing.Point(0, 54);
-            this.DatabasesListbox.Name = "DatabasesListbox";
-            this.DatabasesListbox.Size = new System.Drawing.Size(211, 547);
-            this.DatabasesListbox.TabIndex = 2;
-            this.DatabasesListbox.SelectedIndexChanged += new System.EventHandler(this.DatabasesListbox_SelectedIndexChanged);
+            DatabasesListbox.Dock = DockStyle.Fill;
+            DatabasesListbox.FormattingEnabled = true;
+            DatabasesListbox.ItemHeight = 15;
+            DatabasesListbox.Location = new Point(0, 54);
+            DatabasesListbox.Name = "DatabasesListbox";
+            DatabasesListbox.Size = new Size(211, 547);
+            DatabasesListbox.TabIndex = 2;
+            DatabasesListbox.SelectedIndexChanged += DatabasesListbox_SelectedIndexChanged;
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.DatabasesSearchTextbox);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 27);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(211, 27);
-            this.panel6.TabIndex = 5;
+            panel6.Controls.Add(DatabasesSearchTextbox);
+            panel6.Dock = DockStyle.Top;
+            panel6.Location = new Point(0, 27);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(211, 27);
+            panel6.TabIndex = 5;
             // 
             // DatabasesSearchTextbox
             // 
-            this.DatabasesSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DatabasesSearchTextbox.Location = new System.Drawing.Point(0, 0);
-            this.DatabasesSearchTextbox.Name = "DatabasesSearchTextbox";
-            this.DatabasesSearchTextbox.Size = new System.Drawing.Size(211, 23);
-            this.DatabasesSearchTextbox.TabIndex = 0;
-            this.DatabasesSearchTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DatabasesSearchTextbox_KeyDown);
+            DatabasesSearchTextbox.Dock = DockStyle.Top;
+            DatabasesSearchTextbox.Location = new Point(0, 0);
+            DatabasesSearchTextbox.Name = "DatabasesSearchTextbox";
+            DatabasesSearchTextbox.Size = new Size(211, 23);
+            DatabasesSearchTextbox.TabIndex = 0;
+            DatabasesSearchTextbox.KeyDown += DatabasesSearchTextbox_KeyDown;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.Controls.Add(this.UpdateDatabasesButton);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(211, 27);
-            this.panel2.TabIndex = 1;
+            panel2.BackColor = SystemColors.ControlDark;
+            panel2.Controls.Add(UpdateDatabasesButton);
+            panel2.Controls.Add(label2);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(211, 27);
+            panel2.TabIndex = 1;
             // 
             // UpdateDatabasesButton
             // 
-            this.UpdateDatabasesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateDatabasesButton.Location = new System.Drawing.Point(180, 1);
-            this.UpdateDatabasesButton.Name = "UpdateDatabasesButton";
-            this.UpdateDatabasesButton.Size = new System.Drawing.Size(30, 25);
-            this.UpdateDatabasesButton.TabIndex = 2;
-            this.UpdateDatabasesButton.UseVisualStyleBackColor = true;
+            UpdateDatabasesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdateDatabasesButton.Location = new Point(180, 1);
+            UpdateDatabasesButton.Name = "UpdateDatabasesButton";
+            UpdateDatabasesButton.Size = new Size(30, 25);
+            UpdateDatabasesButton.TabIndex = 2;
+            UpdateDatabasesButton.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(3, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Databases";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(3, 4);
+            label2.Name = "label2";
+            label2.Size = new Size(63, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Databases";
             // 
             // splitContainer3
             // 
-            this.splitContainer3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
+            splitContainer3.BackColor = SystemColors.ControlLight;
+            splitContainer3.Dock = DockStyle.Fill;
+            splitContainer3.FixedPanel = FixedPanel.Panel1;
+            splitContainer3.Location = new Point(0, 0);
+            splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.DatabaseObjectsListBox);
-            this.splitContainer3.Panel1.Controls.Add(this.panel5);
-            this.splitContainer3.Panel1.Controls.Add(this.panel3);
+            splitContainer3.Panel1.Controls.Add(DatabaseObjectsListBox);
+            splitContainer3.Panel1.Controls.Add(panel5);
+            splitContainer3.Panel1.Controls.Add(panel3);
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Panel2.Controls.Add(this.panel4);
-            this.splitContainer3.Size = new System.Drawing.Size(792, 601);
-            this.splitContainer3.SplitterDistance = 262;
-            this.splitContainer3.TabIndex = 0;
+            splitContainer3.Panel2.Controls.Add(splitContainer4);
+            splitContainer3.Panel2.Controls.Add(panel4);
+            splitContainer3.Size = new Size(792, 601);
+            splitContainer3.SplitterDistance = 262;
+            splitContainer3.TabIndex = 0;
             // 
             // DatabaseObjectsListBox
             // 
-            this.DatabaseObjectsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DatabaseObjectsListBox.FormattingEnabled = true;
-            this.DatabaseObjectsListBox.ItemHeight = 15;
-            this.DatabaseObjectsListBox.Location = new System.Drawing.Point(0, 54);
-            this.DatabaseObjectsListBox.Name = "DatabaseObjectsListBox";
-            this.DatabaseObjectsListBox.Size = new System.Drawing.Size(262, 547);
-            this.DatabaseObjectsListBox.TabIndex = 3;
-            this.DatabaseObjectsListBox.SelectedIndexChanged += new System.EventHandler(this.DatabaseObjectsListBox_SelectedIndexChanged);
+            DatabaseObjectsListBox.Dock = DockStyle.Fill;
+            DatabaseObjectsListBox.FormattingEnabled = true;
+            DatabaseObjectsListBox.ItemHeight = 15;
+            DatabaseObjectsListBox.Location = new Point(0, 54);
+            DatabaseObjectsListBox.Name = "DatabaseObjectsListBox";
+            DatabaseObjectsListBox.Size = new Size(262, 547);
+            DatabaseObjectsListBox.TabIndex = 3;
+            DatabaseObjectsListBox.SelectedIndexChanged += DatabaseObjectsListBox_SelectedIndexChanged;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.DatabaseObjectsSearchTextbox);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 27);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(262, 27);
-            this.panel5.TabIndex = 4;
+            panel5.Controls.Add(DatabaseObjectsSearchTextbox);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 27);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(262, 27);
+            panel5.TabIndex = 4;
             // 
             // DatabaseObjectsSearchTextbox
             // 
-            this.DatabaseObjectsSearchTextbox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DatabaseObjectsSearchTextbox.Location = new System.Drawing.Point(0, 0);
-            this.DatabaseObjectsSearchTextbox.Name = "DatabaseObjectsSearchTextbox";
-            this.DatabaseObjectsSearchTextbox.Size = new System.Drawing.Size(262, 23);
-            this.DatabaseObjectsSearchTextbox.TabIndex = 0;
+            DatabaseObjectsSearchTextbox.Dock = DockStyle.Top;
+            DatabaseObjectsSearchTextbox.Location = new Point(0, 0);
+            DatabaseObjectsSearchTextbox.Name = "DatabaseObjectsSearchTextbox";
+            DatabaseObjectsSearchTextbox.Size = new Size(262, 23);
+            DatabaseObjectsSearchTextbox.TabIndex = 0;
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel3.Controls.Add(this.UpdateDatabaseObjectsButton);
-            this.panel3.Controls.Add(this.ObjectsLabel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(262, 27);
-            this.panel3.TabIndex = 2;
+            panel3.BackColor = SystemColors.ControlDark;
+            panel3.Controls.Add(UpdateDatabaseObjectsButton);
+            panel3.Controls.Add(ObjectsLabel);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(262, 27);
+            panel3.TabIndex = 2;
             // 
             // UpdateDatabaseObjectsButton
             // 
-            this.UpdateDatabaseObjectsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateDatabaseObjectsButton.Location = new System.Drawing.Point(231, 1);
-            this.UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
-            this.UpdateDatabaseObjectsButton.Size = new System.Drawing.Size(30, 25);
-            this.UpdateDatabaseObjectsButton.TabIndex = 1;
-            this.UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
-            this.UpdateDatabaseObjectsButton.Click += new System.EventHandler(this.UpdateDatabaseObjectsButton_Click);
+            UpdateDatabaseObjectsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdateDatabaseObjectsButton.Location = new Point(231, 1);
+            UpdateDatabaseObjectsButton.Name = "UpdateDatabaseObjectsButton";
+            UpdateDatabaseObjectsButton.Size = new Size(30, 25);
+            UpdateDatabaseObjectsButton.TabIndex = 1;
+            UpdateDatabaseObjectsButton.UseVisualStyleBackColor = true;
+            UpdateDatabaseObjectsButton.Click += UpdateDatabaseObjectsButton_Click;
             // 
             // ObjectsLabel
             // 
-            this.ObjectsLabel.AutoSize = true;
-            this.ObjectsLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ObjectsLabel.Location = new System.Drawing.Point(3, 4);
-            this.ObjectsLabel.Name = "ObjectsLabel";
-            this.ObjectsLabel.Size = new System.Drawing.Size(103, 15);
-            this.ObjectsLabel.TabIndex = 0;
-            this.ObjectsLabel.Text = "Database Objects";
+            ObjectsLabel.AutoSize = true;
+            ObjectsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ObjectsLabel.Location = new Point(3, 4);
+            ObjectsLabel.Name = "ObjectsLabel";
+            ObjectsLabel.Size = new Size(103, 15);
+            ObjectsLabel.TabIndex = 0;
+            ObjectsLabel.Text = "Database Objects";
             // 
             // splitContainer4
             // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 23);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            splitContainer4.Dock = DockStyle.Fill;
+            splitContainer4.FixedPanel = FixedPanel.Panel1;
+            splitContainer4.Location = new Point(0, 23);
+            splitContainer4.Name = "splitContainer4";
+            splitContainer4.Orientation = Orientation.Horizontal;
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.CodeActionsListBox);
-            this.splitContainer4.Panel1.Controls.Add(this.panel8);
+            splitContainer4.Panel1.Controls.Add(CodeActionsListBox);
+            splitContainer4.Panel1.Controls.Add(panel8);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.CodeTextbox);
-            this.splitContainer4.Size = new System.Drawing.Size(526, 578);
-            this.splitContainer4.SplitterDistance = 126;
-            this.splitContainer4.TabIndex = 4;
+            splitContainer4.Panel2.Controls.Add(CodeTextbox);
+            splitContainer4.Size = new Size(526, 578);
+            splitContainer4.SplitterDistance = 159;
+            splitContainer4.TabIndex = 4;
             // 
             // CodeActionsListBox
             // 
-            this.CodeActionsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CodeActionsListBox.FormattingEnabled = true;
-            this.CodeActionsListBox.ItemHeight = 15;
-            this.CodeActionsListBox.Location = new System.Drawing.Point(0, 0);
-            this.CodeActionsListBox.Name = "CodeActionsListBox";
-            this.CodeActionsListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.CodeActionsListBox.Size = new System.Drawing.Size(387, 126);
-            this.CodeActionsListBox.TabIndex = 2;
-            this.CodeActionsListBox.SelectedIndexChanged += new System.EventHandler(this.CodeActionsListBox_SelectedIndexChanged);
+            CodeActionsListBox.Dock = DockStyle.Fill;
+            CodeActionsListBox.FormattingEnabled = true;
+            CodeActionsListBox.ItemHeight = 15;
+            CodeActionsListBox.Location = new Point(0, 0);
+            CodeActionsListBox.Name = "CodeActionsListBox";
+            CodeActionsListBox.SelectionMode = SelectionMode.MultiExtended;
+            CodeActionsListBox.Size = new Size(387, 159);
+            CodeActionsListBox.TabIndex = 2;
+            CodeActionsListBox.SelectedIndexChanged += CodeActionsListBox_SelectedIndexChanged;
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.AutoClipboardCheckbox);
-            this.panel8.Controls.Add(this.ExecuteButton);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(387, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(139, 126);
-            this.panel8.TabIndex = 1;
+            panel8.Controls.Add(AutoClipboardCheckbox);
+            panel8.Controls.Add(ExecuteButton);
+            panel8.Dock = DockStyle.Right;
+            panel8.Location = new Point(387, 0);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(139, 159);
+            panel8.TabIndex = 1;
             // 
             // AutoClipboardCheckbox
             // 
-            this.AutoClipboardCheckbox.AutoSize = true;
-            this.AutoClipboardCheckbox.Checked = true;
-            this.AutoClipboardCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoClipboardCheckbox.Location = new System.Drawing.Point(6, 74);
-            this.AutoClipboardCheckbox.Name = "AutoClipboardCheckbox";
-            this.AutoClipboardCheckbox.Size = new System.Drawing.Size(109, 19);
-            this.AutoClipboardCheckbox.TabIndex = 1;
-            this.AutoClipboardCheckbox.Text = "Auto-Clipboard";
-            this.AutoClipboardCheckbox.UseVisualStyleBackColor = true;
+            AutoClipboardCheckbox.AutoSize = true;
+            AutoClipboardCheckbox.Checked = true;
+            AutoClipboardCheckbox.CheckState = CheckState.Checked;
+            AutoClipboardCheckbox.Location = new Point(6, 108);
+            AutoClipboardCheckbox.Name = "AutoClipboardCheckbox";
+            AutoClipboardCheckbox.Size = new Size(109, 19);
+            AutoClipboardCheckbox.TabIndex = 1;
+            AutoClipboardCheckbox.Text = "Auto-Clipboard";
+            AutoClipboardCheckbox.UseVisualStyleBackColor = true;
             // 
             // ExecuteButton
             // 
-            this.ExecuteButton.Location = new System.Drawing.Point(3, 100);
-            this.ExecuteButton.Name = "ExecuteButton";
-            this.ExecuteButton.Size = new System.Drawing.Size(133, 23);
-            this.ExecuteButton.TabIndex = 0;
-            this.ExecuteButton.Text = "Execute";
-            this.ExecuteButton.UseVisualStyleBackColor = true;
-            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
+            ExecuteButton.Location = new Point(3, 133);
+            ExecuteButton.Name = "ExecuteButton";
+            ExecuteButton.Size = new Size(133, 23);
+            ExecuteButton.TabIndex = 0;
+            ExecuteButton.Text = "Execute";
+            ExecuteButton.UseVisualStyleBackColor = true;
+            ExecuteButton.Click += ExecuteButton_Click;
             // 
             // CodeTextbox
             // 
-            this.CodeTextbox.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.CodeTextbox.AutoIndentCharsPatterns = "";
-            this.CodeTextbox.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            this.CodeTextbox.BackBrush = null;
-            this.CodeTextbox.CharHeight = 14;
-            this.CodeTextbox.CharWidth = 8;
-            this.CodeTextbox.CommentPrefix = "--";
-            this.CodeTextbox.DefaultMarkerSize = 8;
-            this.CodeTextbox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.CodeTextbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CodeTextbox.FindForm = null;
-            this.CodeTextbox.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CodeTextbox.GoToForm = null;
-            this.CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
-            this.CodeTextbox.IsReplaceMode = false;
-            this.CodeTextbox.Language = FastColoredTextBoxNS.Text.Language.SQL;
-            this.CodeTextbox.LeftBracket = '(';
-            this.CodeTextbox.Location = new System.Drawing.Point(0, 0);
-            this.CodeTextbox.Name = "CodeTextbox";
-            this.CodeTextbox.Paddings = new System.Windows.Forms.Padding(0);
-            this.CodeTextbox.ReplaceForm = null;
-            this.CodeTextbox.RightBracket = ')';
-            this.CodeTextbox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.CodeTextbox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("CodeTextbox.ServiceColors")));
-            this.CodeTextbox.Size = new System.Drawing.Size(526, 448);
-            this.CodeTextbox.TabIndex = 0;
-            this.CodeTextbox.Zoom = 100;
+            CodeTextbox.AutoCompleteBracketsList = new char[] { '(', ')', '{', '}', '[', ']', '"', '"', '\'', '\'' };
+            CodeTextbox.AutoIndentCharsPatterns = "";
+            CodeTextbox.AutoScrollMinSize = new Size(27, 14);
+            CodeTextbox.BackBrush = null;
+            CodeTextbox.CharHeight = 14;
+            CodeTextbox.CharWidth = 8;
+            CodeTextbox.CommentPrefix = "--";
+            CodeTextbox.DefaultMarkerSize = 8;
+            CodeTextbox.DisabledColor = Color.FromArgb(100, 180, 180, 180);
+            CodeTextbox.Dock = DockStyle.Fill;
+            CodeTextbox.FindForm = null;
+            CodeTextbox.GoToForm = null;
+            CodeTextbox.Hotkeys = resources.GetString("CodeTextbox.Hotkeys");
+            CodeTextbox.IsReplaceMode = false;
+            CodeTextbox.Language = FastColoredTextBoxNS.Text.Language.SQL;
+            CodeTextbox.LeftBracket = '(';
+            CodeTextbox.Location = new Point(0, 0);
+            CodeTextbox.Name = "CodeTextbox";
+            CodeTextbox.Paddings = new Padding(0);
+            CodeTextbox.ReplaceForm = null;
+            CodeTextbox.RightBracket = ')';
+            CodeTextbox.SelectionColor = Color.FromArgb(60, 0, 0, 255);
+            CodeTextbox.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("CodeTextbox.ServiceColors");
+            CodeTextbox.Size = new Size(526, 415);
+            CodeTextbox.TabIndex = 0;
+            CodeTextbox.Zoom = 100;
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel4.Controls.Add(this.LanguageComboBox);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(526, 23);
-            this.panel4.TabIndex = 3;
+            panel4.BackColor = SystemColors.ControlDark;
+            panel4.Controls.Add(LanguageComboBox);
+            panel4.Controls.Add(label3);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(526, 23);
+            panel4.TabIndex = 3;
             // 
             // LanguageComboBox
             // 
-            this.LanguageComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.LanguageComboBox.FormattingEnabled = true;
-            this.LanguageComboBox.Items.AddRange(new object[] {
-            "T-SQL",
-            "C#"});
-            this.LanguageComboBox.Location = new System.Drawing.Point(401, 0);
-            this.LanguageComboBox.Name = "LanguageComboBox";
-            this.LanguageComboBox.Size = new System.Drawing.Size(122, 23);
-            this.LanguageComboBox.TabIndex = 1;
-            this.LanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguageComboBox_SelectedIndexChanged);
+            LanguageComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            LanguageComboBox.FormattingEnabled = true;
+            LanguageComboBox.Items.AddRange(new object[] { "T-SQL", "C#" });
+            LanguageComboBox.Location = new Point(401, 0);
+            LanguageComboBox.Name = "LanguageComboBox";
+            LanguageComboBox.Size = new Size(122, 23);
+            LanguageComboBox.TabIndex = 1;
+            LanguageComboBox.SelectedIndexChanged += LanguageComboBox_SelectedIndexChanged;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(3, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Code";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(3, 4);
+            label3.Name = "label3";
+            label3.Size = new Size(35, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Code";
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            imageList1.ColorDepth = ColorDepth.Depth8Bit;
+            imageList1.ImageSize = new Size(16, 16);
+            imageList1.TransparentColor = Color.Transparent;
             // 
             // DatabaseBrowserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 625);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "DatabaseBrowserForm";
-            this.Text = "DatabaseBrowserForm";
-            this.Load += new System.EventHandler(this.DatabaseBrowserForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.ConnectionContextMenuStrip.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.splitContainer4.Panel1.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CodeTextbox)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1187, 625);
+            Controls.Add(splitContainer1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "DatabaseBrowserForm";
+            Text = "DatabaseBrowserForm";
+            Load += DatabaseBrowserForm_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ConnectionContextMenuStrip.ResumeLayout(false);
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            splitContainer4.Panel1.ResumeLayout(false);
+            splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
+            splitContainer4.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CodeTextbox).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
