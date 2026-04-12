@@ -22,7 +22,7 @@ jobs:
             OUTPUTDIR: optimalDb-win-x64
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v5
         with:
